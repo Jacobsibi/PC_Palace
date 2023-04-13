@@ -1,6 +1,6 @@
 import React from 'react';
 
-function search() {
+function search(query) {
 
 }
 
