@@ -1,13 +1,19 @@
 import React from 'react';
 import '@/styles/globals.css'
+import { StateContext } from '../context/StateContext';
+import { Toaster } from 'react-hot-toast';
 
 import { Layout } from '../components';
 
-function myApp({Component, pageProps}) {
+function myApp({ Component, pageProps }) {
   return (
-    <Layout>
-      <Component {...pageProps}/>
-    </Layout>
+    //pass data from stateContext to every component 
+    <StateContext>
+      <Layout>
+        <Toaster />
+        <Component {...pageProps} />
+      </Layout>
+    </StateContext>
   )
 }
 
