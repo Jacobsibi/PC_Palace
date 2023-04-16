@@ -20,13 +20,59 @@ const Navbar = () => {
 	const { showCart, totalQuantities } = useStateContext();
 	return (<>
 		<div className={styles.navbar}>
-			<SearchBar />
-			<CartButton itemAmount={totalQuantities} />
+			<div className={styles.pages}>
+				<p>
+					<Link href={"/"}>
+						{/*<img className="logo" />*/}
+						home(logo)
+					</Link>
+				</p>
+
+				<p>
+					<Link href={"/buildcomputer"}>
+						Computer Builder
+					</Link>
+				</p>
+
+
+				<p>
+					<Link href={""}>
+						Hardware
+					</Link>
+				</p>
+
+				<p>
+					<Link href={""}>
+						Peripherals
+					</Link>
+				</p>
+
+				<p>
+					<Link href={""}>
+							Specials
+					</Link>
+				</p>
+
+				<p>
+					<Link href={""}>
+							Brands
+					</Link>
+				</p>
+
+				<p>
+					<Link href={"/about"}>
+							About us
+					</Link>
+				</p>
+			</div>
+			
+			<div className={styles.functionality}>
+				<SearchBar />
+				<CartButton itemAmount={totalQuantities} />
+			</div>
 		</div>
 		{showCart && <Cart />}
 	</>);
 }
-
-
 
 export default Navbar;

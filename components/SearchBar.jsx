@@ -18,7 +18,7 @@ export default function SearchBar() {
                     }
                 }}
             />
-            <button className="searchButton" onClick={() => search()} />
+            <button className="searchButton" onClick={() => search(query)} />
         </div>
     );
 }
