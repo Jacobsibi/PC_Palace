@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { AiOutlineShopping } from 'react-icons/ai'
+import { AiOutlineShopping, AiOutlineUser } from 'react-icons/ai'
 import SearchBar from "./SearchBar.jsx";
 import styles from "../styles/Navbar.module.css";
 import { Cart } from './';
@@ -16,58 +16,73 @@ const CartButton = (props) => {
 	</>);
 }
 
+const Account = () => {
+	return (<>
+		<button className={styles.accountButton} onClick={console.log("Add an account drop-down similar to the cart")}>
+			<AiOutlineUser />
+		</button>
+	</>);
+}
+
 const Navbar = () => {
 	const { showCart, totalQuantities } = useStateContext();
 	return (<>
 		<div className={styles.navbar}>
 			<div className={styles.pages}>
-				<p>
+				<div>
 					<Link href={"/"}>
 						{/*<img className="logo" />*/}
 						home(logo)
 					</Link>
-				</p>
+				</div>
 
-				<p>
+				<div>
 					<Link href={"/buildcomputer"}>
 						Computer Builder
 					</Link>
-				</p>
+				</div>
 
 
-				<p>
+				<div>
 					<Link href={""}>
 						Hardware
 					</Link>
-				</p>
+				</div>
 
-				<p>
+				<div>
 					<Link href={""}>
 						Peripherals
 					</Link>
-				</p>
+				</div>
 
-				<p>
+				<div>
 					<Link href={""}>
-							Specials
+						Specials
 					</Link>
-				</p>
+				</div>
 
-				<p>
+				<div>
 					<Link href={""}>
-							Brands
+						Brands
 					</Link>
-				</p>
+				</div>
 
-				<p>
+				<div>
+					<Link href={"/support"}>
+						Support
+					</Link>
+				</div>
+
+				<div>
 					<Link href={"/about"}>
-							About us
+						About us
 					</Link>
-				</p>
+				</div>
 			</div>
 			
 			<div className={styles.functionality}>
 				<SearchBar />
+				<Account />
 				<CartButton itemAmount={totalQuantities} />
 			</div>
 		</div>

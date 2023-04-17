@@ -1,0 +1,30 @@
+.searchButton {
+    font-size: 25px;
+    color: gray;
+    cursor: pointer;
+    position: relative;
+    transition: transform .4s ease;
+    border: none;
+    background-color: transparent;
+}
+
+.searchButton:hover {
+    transform: scale(1.1,1.1);
+}
+
+.searchBoxHolder {
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+
+.searchBox {
+    border: none;
+    background-color: #b0e6ff;
+    width: 100%;
+    padding: 1% 10%;
+}
+
+.searchBox:focus {
+    outline: none;
+}

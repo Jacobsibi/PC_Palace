@@ -1,15 +1,17 @@
 import React from 'react';
+import styles from "../styles/SearchBar.module.css";
+import { AiOutlineSearch } from 'react-icons/ai'
 
 function search(query) {
 
 }
 
-export default function SearchBar() {
-    let [ query, setQuery ] = React.useState("");
+const SearchBox = () => {
+    const [ query, setQuery ] = React.useState("");
 
     return (
-        <div className="searchbar">
-            <input className="searchbox-input" type="text" 
+        <div className={styles.searchBoxHolder}>
+            <input className={styles.searchBox} type="text" placeholder="Search"
                 onKeyDown={e => {
                     setQuery(e.target.value);
 
@@ -18,7 +20,19 @@ export default function SearchBar() {
                     }
                 }}
             />
-            <button className="searchButton" onClick={() => search(query)} />
         </div>
+    );
+}
+
+export default function SearchBar() {
+    const [ haveSearchBar, setHaveSearchBar ] = React.useState(false);
+
+    return (
+        <>
+            {haveSearchBar && <SearchBox />}
+            <button className={styles.searchButton} onClick={() => setHaveSearchBar(true)}>
+			    <AiOutlineSearch />
+            </button>
+        </>
     );
 }
