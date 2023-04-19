@@ -41,7 +41,7 @@ export const StateContext = ({ children }) => {
     foundProduct = cartItems.find((item) => item._id === product._id);
     const newCartItems = cartItems.filter((item) => item._id !== product._id);
 
-    setTotalPrice((prevTotalPrice) => prevTotalPrice -foundProduct.price * foundProduct.quantity);
+    setTotalPrice((prevTotalPrice) => prevTotalPrice - foundProduct.price * foundProduct.quantity);
     setTotalQuantities(prevTotalQuantities => prevTotalQuantities - foundProduct.quantity);
     setCartItems(newCartItems);
   }
@@ -51,18 +51,30 @@ export const StateContext = ({ children }) => {
       if (item._id === id) {
         const updatedItem = { ...item };
         updatedItem.quantity += value === 'inc' ? 1 : -1;
+        if (updatedItem.quantity < 1) {
+          updatedItem.quantity = 1;
+        }
         return updatedItem;
+
       }
       return item;
     });
-  
-    setCartItems(updatedCartItems);
     
+    setCartItems(updatedCartItems);
+
     const foundProduct = cartItems.find((item) => item._id === id);
     const itemPrice = foundProduct.price;
     const itemQuantity = foundProduct.quantity + (value === 'inc' ? 1 : -1);
-  
-    setTotalPrice((prevTotalPrice) => prevTotalPrice + (value === 'inc' ? itemPrice : -itemPrice));
+    if (itemQuantity < 1) {
+      return;
+    }
+    setTotalPrice((prevTotalPrice) => {
+      let newPrice = prevTotalPrice + (value === 'inc' ? itemPrice : -itemPrice);
+      if (newPrice < 0) {
+        newPrice = 0;
+      }
+      return newPrice;
+    });
     setTotalQuantities((prevTotalQuantities) => prevTotalQuantities + (value === 'inc' ? 1 : -1));
   };
 
