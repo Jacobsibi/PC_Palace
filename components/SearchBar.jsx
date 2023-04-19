@@ -25,12 +25,10 @@ const SearchBox = () => {
 }
 
 export default function SearchBar() {
-    const [ haveSearchBar, setHaveSearchBar ] = React.useState(false);
-
     return (
         <>
-            {haveSearchBar && <SearchBox />}
-            <button className={styles.searchButton} onClick={() => setHaveSearchBar(true)}>
+            <SearchBox />
+            <button className={styles.searchButton} onClick={() => {}}>
 			    <AiOutlineSearch />
             </button>
         </>
