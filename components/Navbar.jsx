@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import { AiOutlineShopping, AiOutlineUser } from 'react-icons/ai'
 import SearchBar from "./SearchBar.jsx";
