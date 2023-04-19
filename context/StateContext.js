@@ -4,6 +4,7 @@ import { toast } from 'react-hot-toast';
 const Context = createContext();
 
 export const StateContext = ({ children }) => {
+  const [showAccount, setShowAccount] = useState(false); //i added this 'setAccount'
   const [showCart, setShowCart] = useState(false);
   const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);

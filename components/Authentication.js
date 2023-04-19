@@ -1,4 +1,4 @@
-import {auth, authGoogle} from "../config/firebase"; //pass in authentication objects from Firabase Configuration
+import {auth, authGoogle} from "../configuration/Firebase"; //pass in authentication objects from Firebase Configuration
 import { createUserWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth"; //the preamde functions stuff
 import { useState} from "react";
 
@@ -52,7 +52,7 @@ export const Auth = () => {
             />
             <button onClick = {signIn}> Sign In </button>
             <button onClick = {signInWithGoogle}> Sign with Google </button>
-            <button onClick = {logout}> Log Out </button>        
+            <button onClick = {logout}> Log Out </button>   
         
         </div>
     )
