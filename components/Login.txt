@@ -1,0 +1,204 @@
+import React, { useRef } from "react";
+import Link from "next/link";
+import { AiOutlineLeft, AiOutlineLogin } from "react-icons/ai";
+import { useStateContext } from "../context/StateContext";
+import { urlFor } from "../LIB/client";
+import { auth, authGoogle } from "../configurations/Firebase";
+import {
+  createUserWithEmailAndPassword,
+  signInWithPopup,
+  signOut,
+} from "firebase/auth";
+import { useState } from "react";
+
+const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  //just for fun
+  console.log(auth?.currentUser?.email);
+
+  const signIn = async () => {
+    try {
+      if (){
+
+      }
+      await createUserWithEmailAndPassword(auth, email, password);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const signInGoogle = async () => {
+    try {
+      await signInWithPopup(auth, authGoogle);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const logOut = async () => {
+    try {
+      await signOut(auth);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const loginRef = useRef();
+  
+  return (
+    <div className="login-wrapper" ref={loginRef}>
+      <div className="login-container">
+        {/*The back button hiding as a text */}
+        <button
+          type="button"
+          className="cart-heading"
+          onClick={() => setShowCart(false)}
+        >
+          <AiOutlineLeft />
+          <span className="heading">Back</span>
+        </button>
+
+        {/*The space where user will type in information*/}
+        {
+          <div className="input-space">
+            <AiOutlineLogin size={100} />
+            <pre>
+              <input
+                placeholder="Email..."
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </pre>
+
+            <input
+              placeholder="Password..."
+              type="password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+        }
+
+        {/*The main body and icon  */}
+        {/*maybe check if no one is logged in then show this*/}
+        {
+          <div className="authentication-cart">
+            <h3>Welcome to PC Palace</h3>
+
+            <button className="btn" type="button" onClick={signIn}>
+              Sign In
+            </button>
+            <button className="btn" type="button" onClick={signInGoogle}>
+              Sign In with Google
+            </button>
+            <button className="btn" type="button" onClick={logOut}>
+              Sign Out
+            </button>
+          </div>
+        }
+      </div>
+    </div>
+  );
+};
+
+export default Login;
+import React, { useRef } from "react";
+import Link from "next/link";
+import { AiOutlineLeft, AiOutlineLogin } from "react-icons/ai";
+import { useStateContext } from "../context/StateContext";
+import { urlFor } from "../LIB/client";
+import { auth, authGoogle } from "../configurations/Firebase";
+import {
+  createUserWithEmailAndPassword,
+  signInWithPopup,
+  signOut,
+} from "firebase/auth";
+import { useState } from "react";
+
+const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  //just for fun
+  console.log(auth?.currentUser?.email);
+
+  const signIn = async () => {
+    try {
+      if (){
+
+      }
+      await createUserWithEmailAndPassword(auth, email, password);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const signInGoogle = async () => {
+    try {
+      await signInWithPopup(auth, authGoogle);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const logOut = async () => {
+    try {
+      await signOut(auth);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const loginRef = useRef();
+  
+  return (
+    <div className="login-wrapper" ref={loginRef}>
+      <div className="login-container">
+        {/*The back button hiding as a text */}
+        <button
+          type="button"
+          className="cart-heading"
+          onClick={() => setShowCart(false)}
+        >
+          <AiOutlineLeft />
+          <span className="heading">Back</span>
+        </button>
+
+        {/*The space where user will type in information*/}
+        {
+          <div className="input-space">
+            <AiOutlineLogin size={100} />
+            <pre>
+              <input
+                placeholder="Email..."
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </pre>
+
+            <input
+              placeholder="Password..."
+              type="password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+        }
+
+        {/*The main body and icon  */}
+        {/*maybe check if no one is logged in then show this*/}
+        {
+          <div className="authentication-cart">
+            <h3>Welcome to PC Palace</h3>
+
+            <button className="btn" type="button" onClick={signIn}>
+              Sign In
+            </button>
+            <button className="btn" type="button" onClick={signInGoogle}>
+              Sign In with Google
+            </button>
+            <button className="btn" type="button" onClick={logOut}>
+              Sign Out
+            </button>
+          </div>
+        }
+      </div>
+    </div>
+  );
+};
+
+export default Login;
