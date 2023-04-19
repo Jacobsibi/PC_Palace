@@ -1,9 +1,17 @@
+.navbarWrapper {
+    background-color: #ffffff;
+    height: 100px;
+}
+
 .navbar {
     display: flex;
     background-color: #c6edff;
     border-radius: 10px;
     margin-bottom: 0.8%;
     min-height: 60px;
+    min-width: 98.4%;
+    position: fixed;
+    z-index: 99;
 }
 
 .pages {
@@ -52,5 +60,6 @@
 }
 
 .accountButton:hover {
-    transform: scale(1.1,1.1);
+    transform: scale(1.1, 1.1);
+
 }

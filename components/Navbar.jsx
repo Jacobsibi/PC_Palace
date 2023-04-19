@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import { AiOutlineShopping, AiOutlineUser } from 'react-icons/ai'
 import SearchBar from "./SearchBar.jsx";
@@ -27,6 +27,7 @@ const Account = () => {
 const Navbar = () => {
 	const { showCart, totalQuantities } = useStateContext();
 	return (<>
+		<div className={styles.navbarWrapper}>
 		<div className={styles.navbar}>
 			<div className={styles.pages}>
 				<div>
@@ -85,6 +86,7 @@ const Navbar = () => {
 				<Account />
 				<CartButton itemAmount={totalQuantities} />
 			</div>
+		</div>
 		</div>
 		{showCart && <Cart />}
 	</>);

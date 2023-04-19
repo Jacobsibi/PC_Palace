@@ -6,7 +6,7 @@ import { Layout } from '../components';
 
 function myApp({ Component, pageProps }) {
   return (
-    //pass data from stateContext to every component 
+    //pass data from stateContext qto every component 
     <StateContext>
       <Layout>
         <Toaster />
