@@ -43,10 +43,10 @@
 }
 
 .functionality {
-    display: flex;
+    display: inline;
     margin-left: auto;
-    align-items: center;
     padding: 0% 1%;
+    text-align: center;
 }
 
 .accountButton {
