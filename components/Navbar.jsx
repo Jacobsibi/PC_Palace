@@ -97,7 +97,7 @@ const Navbar = () => {
 	const { showCart, totalQuantities } = useStateContext();
 
 	return (<>
-		<ul className={styles.navbar}>
+		{/* <ul className={styles.navbar}>
 			<li><Link href={"/"}>home(logo)</Link></li>
 			<li><Link href={""}>Hardware</Link></li>
 			<li><Link href={""}>Peripherals</Link></li>
@@ -105,7 +105,19 @@ const Navbar = () => {
 			<li><Link href={""}>Brands</Link></li>
 			<li><Link href={"/support"}>Support</Link></li>
 			<li><Link href={"/about"}>About us</Link></li>
-		</ul>
+		</ul> */}
+		<div className={styles.navbar}>
+			<span className={styles.pages}><Link href={"/"}>home(logo)</Link></span>
+			<span className={styles.pages}><Link href={"/buildcomputer"}>Computer Builder</Link></span>
+			<span className={styles.pages}><Link href={""}>Peripherals</Link></span>
+			<span className={styles.pages}><Link href={""}>Specials</Link></span>
+			<span className={styles.pages}><Link href={""}>Brands</Link></span>
+			<span className={styles.pages}><Link href={"/support"}>Support</Link></span>
+			<span className={styles.pages}><Link href={"/about"}>About us</Link></span>
+			<div />
+			<Account />
+			<CartButton itemAmount={totalQuantities} />
+		</div>
 		{showCart && <Cart />}
 	</>);
 }

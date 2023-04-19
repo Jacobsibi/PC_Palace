@@ -1,52 +1,29 @@
-.navbarWrapper {
-    background-color: #ffffff;
-    height: 100px;
-}
-
 .navbar {
-    display: flex;
+    display: grid;
+    margin: 0% 1% 2% 0%;
+    padding: 0.6% 2%;
     background-color: #c6edff;
     border-radius: 10px;
-    margin-bottom: 0.8%;
-    min-height: 60px;
-    min-width: 98.4%;
-    position: fixed;
-    z-index: 99;
+    grid-template-columns: repeat(7, 5fr) 10fr repeat(2, 0.5fr);
 }
 
-.pages {
-    padding-left: 1%;
-    display: flex;
-    text-align: center;
-    align-items: center;
-}
-
-.pages div {
-    height: 100%;
-    display: inline;
-    align-items: center;
-    margin: 0% 5%;
-    font-size: small;
-    font-weight: bold;
-    transition: all .2s ease;
-    white-space: nowrap;
-}
-
-.pages div:hover {
+.navbar span:hover {
     color: rgb(194, 26, 166);
 }
 
-.pages a {
-    align-items: center;
-    display: flex;
+.navbar a {
+    display: inline-block;
+    top: 50%;
+    width: 100%;
     height: 100%;
+    text-align: center;
 }
 
-.functionality {
-    display: inline;
-    margin-left: auto;
-    padding: 0% 1%;
-    text-align: center;
+.pages {
+    background-color: #bbacff;
+    border-radius: 10px;    
+    font-weight: bold;
+    transition: all .2s ease;
 }
 
 .accountButton {
@@ -61,5 +38,4 @@
 
 .accountButton:hover {
     transform: scale(1.1, 1.1);
-
 }
