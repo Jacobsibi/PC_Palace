@@ -1,5 +1,3 @@
-//I need to make names into Login not Cart
-//My goal is to make this pop up when click the little man on homepage
 
 import React, { useRef } from 'react';
 import Link from 'next/link';
@@ -45,15 +43,15 @@ const Login = () => {
       await signOut(auth);
     } catch (err) {
       console.log(err);
-    }
+    } alert("You are logged out");
   };
 
   //internal configurations
-  const loginRef = useRef();
+  const loginReg = useRef();
   const {setShowLogin} = useStateContext();
 
   return (
-    <div className="cart-wrapper" ref={loginRef}>
+    <div className="cart-wrapper" ref={loginReg}>
       <div className="cart-container">
       <button
           type="button"
@@ -65,40 +63,40 @@ const Login = () => {
 
         {(
           <div className="empty-cart">
-            <AiOutlineLogin size={150} />
-            <h3>Welcome to PC Palace</h3>
+            <AiOutlineLogin size={100} />
+            <h1>Welcome to PC Palace</h1>
             <Link href="/">
             <input
                 placeholder="Email..."
-                onChange={console.log}
-                //onChange={(e) => setEmail(e.target.value)}
+                //onChange={console.log}
+                onChange={(e) => setEmail(e.target.value)}
               />
                <input
               placeholder="Password..."
               type="password"
-              onChange={(e) => setPassword(e.target.value)}
-               //onChange={(e) => setPassword(e.target.value)}
+              //onChange={console.log}
+               onChange={(e) => setPassword(e.target.value)}
             />
               <button
                 type="button"
-                onClick={() => setShowCart(false)}
-                //onClick={signIn}
+                //onClick={() => setShowLogin(false)}
+                onClick={signIn}
                 className="btn"
               >
                 Sign In
               </button>
               <button
                 type="button"
-                onClick={() => setShowCart(false)}
-                //onClick={signInGoogle}
+                //onClick={() => setShowLogin(false)}
+                onClick={signInGoogle}
                 className="btn"
               >
                 Sign In With Google
               </button>
               <button
                 type="button"
-                onClick={() => setShowCart(false)}
-                //onClick={logOut}
+                //onClick={() => setShowLogin(false)}
+                onClick={logOut}
                 className="btn"
               >
                 Sign Out

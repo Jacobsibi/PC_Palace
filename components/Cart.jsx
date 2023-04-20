@@ -1,60 +1,14 @@
-//README:
-// This is not the right Cart code
-// I am using this working cart to try out the loggins component
-// Original code is in the text file
-
-
 import React, { useRef } from 'react';
 import Link from 'next/link';
-import { AiOutlineLeft, AiOutlineLogin } from 'react-icons/ai';
+import { AiOutlineMinus, AiOutlinePlus, AiOutlineLeft, AiOutlineShopping } from 'react-icons/ai';
 import { TiDeleteOutline } from 'react-icons/ti';
 import toast from 'react-hot-toast';
 import { useStateContext } from '../context/StateContext';
 import { urlFor } from '../LIB/client';
-import { useState } from "react";
-import { auth, authGoogle } from "../configurations/Firebase";
-import {
-  createUserWithEmailAndPassword,
-  signInWithPopup,
-  signOut,
-} from "firebase/auth";
 
 const Cart = () => {
-  
-  //email and password to be used as parameter for Firebase special function
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  //output current user email on console
-  console.log(auth?.currentUser?.email);
-
-  //calling Firebase special functions
-  const signIn = async () => {
-    try {
-      await createUserWithEmailAndPassword(auth, email, password);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-  const signInGoogle = async () => {
-    try {
-      await signInWithPopup(auth, authGoogle);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-  const logOut = async () => {
-    try {
-      await signOut(auth);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  //internal configurations
   const cartRef = useRef();
-  const {setShowCart} = useStateContext();
-
+  const { totalPrice, totalQuantities, cartItems, setShowCart, toggleCartItemQuantity, onRemove} = useStateContext();
   return (
     <div className="cart-wrapper" ref={cartRef}>
       <div className="cart-container">
@@ -63,50 +17,67 @@ const Cart = () => {
           className="cart-heading"
           onClick={() => setShowCart(false)}>
           <AiOutlineLeft />
-          <span className="heading">Back</span>
+          <span className="heading">Your Cart</span>
+          <span className="cart-num-items">({totalQuantities} items)</span>
         </button>
 
-        {(
+        {cartItems.length < 1 && (
           <div className="empty-cart">
-            <AiOutlineLogin size={150} />
-            <h3>Welcome to PC Palace</h3>
+            <AiOutlineShopping size={150} />
+            <h3>Your shopping cart is empty</h3>
             <Link href="/">
-            <input
-                placeholder="Email..."
-                onChange={console.log}
-                //onChange={(e) => setEmail(e.target.value)}
-              />
-               <input
-              placeholder="Password..."
-              type="password"
-              onChange={(e) => setPassword(e.target.value)}
-               //onChange={(e) => setPassword(e.target.value)}
-            />
               <button
                 type="button"
                 onClick={() => setShowCart(false)}
-                //onClick={signIn}
                 className="btn"
               >
-                THIS IS FROM CART COMPO
-              </button>
-              <button
-                type="button"
-                onClick={() => setShowCart(false)}
-                //onClick={signInGoogle}
-                className="btn"
-              >
-                Sign In With Google
-              </button>
-              <button
-                type="button"
-                onClick={() => setShowCart(false)}
-                //onClick={logOut}
-                className="btn"
-              >
-                Sign Out
+                Continue Shopping
               </button>
             </Link>
+          </div>
+        )}
+
+        <div className="product-container">
+          {cartItems.length >= 1 && cartItems.map((item, index) => (
+            <div className="product" key={item._id}>
+              <img src={urlFor(item?.image[0])} className="cart-product-image" />
+              <div className="item-desc">
+                <div className="flex-top">
+                  <h5>{item.name}</h5>
+                  <h4>${item.price}</h4>
+                </div>
+                <div className="flex bottom">
+                  <div>
+                    <p className="quantity-desc">
+                      <span className="minus" onClick={() => toggleCartItemQuantity(item._id, 'dec')}><AiOutlineMinus /></span>
+                      <span className="num" onClick="">{item.quantity}</span>
+                      <span className="plus" onClick={() => toggleCartItemQuantity(item._id, 'inc')}><AiOutlinePlus /></span>
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    className="remove-item"
+                    onClick={() => onRemove(item)}
+                  >
+                    <TiDeleteOutline />
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        {cartItems.length >= 1 && (
+          <div className="cart-bottom">
+            <div className="total">
+              <h3>Subtotal:</h3>
+              <h3>${totalPrice}</h3>
+            </div>
+            <div className="btn-container">
+              <button type="button" className="btn" onClick="">
+                Pay Now!
+              </button>
+            </div>
+
           </div>
         )}
       </div>
