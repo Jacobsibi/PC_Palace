@@ -92,7 +92,7 @@ const Navbar = () => {
 		</div>
 		</div>
 		{showCart && <Cart />}
-		{showLogin && <Login />} //add here: something is wrong with LOGIN
+		{showLogin && <Login />} 
 	</>);
 }
 
