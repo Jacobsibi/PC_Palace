@@ -2,6 +2,7 @@ README-STILL IN DEV
 login component version 2.2.0:
 do not change anything
 the naming is still in Chart convention
+use this code when the login component is tottaly broken
 
 import React, { useRef } from 'react';
 import Link from 'next/link';

@@ -4,7 +4,7 @@ import { AiOutlineShopping, AiOutlineUser } from 'react-icons/ai'
 import SearchBar from "./SearchBar.jsx";
 import styles from "../styles/Navbar.module.css";
 import { Cart } from './';
-import { Login } from './Login.jsx'; 
+import { Login } from './'; 
 import { useStateContext } from '../context/StateContext';
 
 const CartButton = (props) => {
@@ -29,9 +29,10 @@ const Account = (props) => { //add props here
 
 const Navbar = () => {
 	const { showLogin, showCart, totalQuantities } = useStateContext();
-	return (<>
+	return (
+	<>
 		<div className={styles.navbarWrapper}>
-		<div className={styles.navbar}>
+			<div className={styles.navbar}>
 			<div className={styles.pages}>
 				<div>
 					<Link href={"/"}>
@@ -89,7 +90,7 @@ const Navbar = () => {
 				<Account />
 				<CartButton itemAmount={totalQuantities} />
 			</div>
-		</div>
+			</div>
 		</div>
 		{showCart && <Cart />}
 		{showLogin && <Login />} 

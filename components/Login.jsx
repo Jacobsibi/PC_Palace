@@ -20,7 +20,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  //output current user email on console
+  //draft output current user email on console log
   console.log(auth?.currentUser?.email);
 
   //calling Firebase special functions
