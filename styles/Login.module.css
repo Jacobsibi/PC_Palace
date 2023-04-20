@@ -1,0 +1,42 @@
+ .btn-container{
+    width: 400px;
+    margin: auto;
+  }
+  .btn{
+    width: 100%;
+    max-width: 400px;
+    padding: 10px 12px;
+    border-radius: 15px;
+    border: none;
+    font-size: 20px;
+    margin-top: 10px;
+    margin-top: 40px;
+    text-transform: uppercase;
+    background-color: #f02d34;
+    color: #fff;
+    cursor: pointer;
+      transform: scale(1, 1);
+    transition: transform 0.5s ease;
+  }
+  .btn:hover{
+    transform: scale(1.1,1.1);
+  }
+  .input{
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid gray;
+    font-size: 1rem;
+  }
+  .login-wrapper{
+    width: 100vw;
+    background: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 100;
+    /* will-change: transform; */
+    transition: all 1s ease-in-out;
+  
+  }
+  

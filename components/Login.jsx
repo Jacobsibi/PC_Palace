@@ -70,12 +70,14 @@ const Login = () => {
                 placeholder="Email..."
                 //onChange={console.log}
                 onChange={(e) => setEmail(e.target.value)}
+                classnName="input"
               />
                <input
               placeholder="Password..."
               type="password"
               //onChange={console.log}
                onChange={(e) => setPassword(e.target.value)}
+               className="input"
             />
               <button
                 type="button"
