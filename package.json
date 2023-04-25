@@ -12,13 +12,14 @@
     "@babel/core": "^7.17.9",
     "@sanity/client": "^3.4.1",
     "@sanity/image-url": "^1.0.1",
-    "@stripe/stripe-js": "^1.25.0",
+    "@stripe/stripe-js": "^1.52.1",
     "canvas-confetti": "^1.5.1",
     "next": "13.3.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hot-toast": "^2.4.0",
-    "react-icons": "^4.8.0"
+    "react-icons": "^4.8.0",
+    "stripe": "^12.2.0"
   },
   "devDependencies": {
     "@babel/preset-react": "^7.16.7",
