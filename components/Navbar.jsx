@@ -4,7 +4,9 @@ import { AiOutlineShopping, AiOutlineUser } from 'react-icons/ai'
 import SearchBar from "./SearchBar.jsx";
 import styles from "../styles/Navbar.module.css";
 import { Cart } from './';
+import { Login } from './'
 import { useStateContext } from '../context/StateContext';
+
 
 const CartButton = (props) => {
 	const { setShowCart } = useStateContext();
@@ -17,15 +19,16 @@ const CartButton = (props) => {
 }
 
 const Account = () => {
+	const { setShowLogin} = useStateContext();
 	return (<>
-		<button className={styles.accountButton} onClick={console.log("Add an account drop-down similar to the cart")}>
+		<button className={styles.accountButton} onClick={() => setShowLogin(true)}>
 			<AiOutlineUser />
 		</button>
 	</>);
 }
 
 const Navbar = () => {
-	const { showCart, totalQuantities } = useStateContext();
+	const { showLogin, showCart, totalQuantities } = useStateContext();
 	return (<>
 		<div className={styles.navbarWrapper}>
 		<div className={styles.navbar}>
@@ -89,6 +92,7 @@ const Navbar = () => {
 		</div>
 		</div>
 		{showCart && <Cart />}
+		{showLogin && <Login />}
 	</>);
 }
 
