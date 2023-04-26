@@ -2,7 +2,7 @@ import swal from 'sweetalert';
 import styles from '../styles/Login.module.css';
 import React, { useRef } from 'react';
 import Link from 'next/link';
-import { AiOutlineLeft, AiOutlineLogin } from 'react-icons/ai';
+import { AiOutlineLeft } from 'react-icons/ai';
 import { TiDeleteOutline } from 'react-icons/ti';
 import toast from 'react-hot-toast';
 import { useStateContext } from '../context/StateContext';
@@ -102,15 +102,8 @@ const Login = () => {
           //@QUESTION: How to use link redirect to another page? https://tinyurl.com/yc5se6fx
           <div className={styles.emptylogin}>
             <h1>Login</h1>
-            <p>New Member?<Link className={styles.buttonsignuppage} href="/cart"> Sign Up</Link> </p>
+            <p>New Member?<Link className={styles.buttonsignuppage} href="../pages/index.js"> Sign Up</Link> </p>
             <Link href="/">
-              <div class="box">I am a box</div>
-              <label class="checkbox">
-  <input type="checkbox"/>
-  Remember me
-</label>
-
-
 
             <input 
                 placeholder="FirstName..."
