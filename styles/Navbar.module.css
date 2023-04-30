@@ -1,14 +1,13 @@
 .navbar {
     display: grid;
-    margin: 0% 1% 2% 0%;
     padding: 0.6% 2%;
     background-color: #c6edff;
-    border-radius: 10px;
-    grid-template-columns: repeat(7, 5fr) 10fr repeat(2, 0.5fr);
+    grid-template-columns: repeat(6, 5fr) 9fr 6fr repeat(2, 0.5fr);
 }
 
-.navbar span:hover {
-    color: rgb(194, 26, 166);
+.pages:hover {
+    background-color: #9de0ff;
+    color: rgb(26, 71, 194);
 }
 
 .navbar a {
@@ -17,13 +16,17 @@
     width: 100%;
     height: 100%;
     text-align: center;
+    align-items: center;
+    justify-content: center;
+    display: flex;
 }
 
 .pages {
-    background-color: #bbacff;
+    background-color: inherit;
     border-radius: 10px;    
     font-weight: bold;
     transition: all .2s ease;
+    margin: 0% 1.2%;
 }
 
 .accountButton {
@@ -38,4 +41,65 @@
 
 .accountButton:hover {
     transform: scale(1.1, 1.1);
+}
+
+
+
+
+
+.departmentsButton {
+    margin-right: 10%;
+    border: none;
+    background-color: inherit;
+    background-color: #9de0ff;
+    border-radius: 10px;
+    z-index: 50;
+}
+
+.departmentsButton:hover {
+    background-color: #72d2ff;
+}
+
+.departments {
+    position: fixed;
+    z-index: 50;
+    
+    display: grid;
+    grid-template-columns: 13fr 2fr;
+    width: 100%;
+}
+
+.categories {
+    background-color: powderblue;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 2fr repeat(2, 1fr);
+    padding: 2% 2%;
+}
+
+.category {
+    text-align: center;
+}
+
+.category img {
+    max-width: 15vw;
+    height: auto;
+}
+
+.results {
+    display: inline-block;
+    background-color: crimson;
+}
+
+.results li {
+    display: block;
+    list-style-type: none;
+    margin: 12% 3%;
+    user-select: none;
+    transition: all .2s ease;
+}
+
+.results li:hover {
+    cursor: default;
+    color: #ffa2d5;
 }

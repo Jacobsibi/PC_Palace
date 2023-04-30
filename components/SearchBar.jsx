@@ -10,27 +10,27 @@ const SearchBox = () => {
     const [ query, setQuery ] = React.useState("");
 
     return (
-        <div className={styles.searchBoxHolder}>
-            <input className={styles.searchBox} type="text" placeholder="Search"
-                onKeyDown={e => {
-                    setQuery(e.target.value);
+        <input className={styles.searchBox} type="text" placeholder="Search"
+            onKeyDown={e => {
+                setQuery(e.target.value);
 
-                    if (e.key === "Enter") {
-                        search(query);
-                    }
-                }}
-            />
-        </div>
+                if (e.key === "Enter") {
+                    search(query);
+                }
+            }}
+        />
     );
 }
 
-export default function SearchBar() {
+const SearchBar = (props) => {
     return (
-        <>
+        <div className={styles.searchBar}>
             <SearchBox />
             <button className={styles.searchButton} onClick={() => {}}>
 			    <AiOutlineSearch />
             </button>
-        </>
+        </div>
     );
 }
+
+export default SearchBar;

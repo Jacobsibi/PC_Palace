@@ -7,14 +7,11 @@ body, * {
   box-sizing: border-box;
 
 }
-::-webkit-scrollbar {
-  width: 0px;
-}
 
 header {
   position: fixed;
-  z-index: 999;
-  width: 100vw;
+  z-index: 105;
+  width: 100%;
 }
 
 a {
@@ -26,7 +23,7 @@ a {
 max-width: 1400px; 
 margin: auto;
 width: 100%;
-padding-top: 80px;
+padding-top: 6vh;
 
 }
 .layout{
@@ -36,7 +33,6 @@ padding-top: 80px;
 .navbar-container{
   display: flex;
   justify-content: space-between;
-  margin: 6px 18px;
   position: relative;
 }
 .marquee-text{
@@ -90,7 +86,7 @@ padding-top: 80px;
 }
 .cart-item-qty{
   position: absolute;
-  right: -8px;
+  transform: translate(-60%, 0%);
   font-size: 12px;
   color: #eee;
   background-color: #f02d34;
