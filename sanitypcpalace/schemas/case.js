@@ -1,7 +1,7 @@
 // export schema, export as object
 export default {
-  name: 'storage',
-  title: 'Storage',
+  name: 'PCcase',
+  title: 'PCCase',
   type: 'document',
   fields: [
     {
@@ -49,10 +49,30 @@ export default {
       type: 'number',
     },
     {
-        name: 'memorysize',
-        title: 'Memory Size',
+        name: 'model',
+        title: 'Model',
         type: 'string',
+    },
+    {
+      name: 'sidewindow',
+      title: 'Side Window',
+      type: 'string',
+    },
+    {
+      name: 'colour',
+      title: 'Colour',
+      type: 'string',
+    },
+    {
+      name: 'bays',
+      title: 'Bays',
+      type: 'number',
+    },
+    {
+      name: 'usbaccess',
+      title: 'USB access',
+      type: 'string',
     }
-
+ 
   ]
 }

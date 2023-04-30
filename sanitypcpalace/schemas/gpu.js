@@ -49,10 +49,30 @@ export default {
       type: 'number',
     },
     {
-        name: 'memorysize',
-        title: 'Memory Size',
+        name: 'model',
+        title: 'Model',
         type: 'string',
+    },
+    {
+      name: 'memorysize',
+      title: 'Memory Size',
+      type: 'string',
+    },
+    {
+      name: 'clockspeed',
+      title: 'Clock Speed',
+      type: 'string',
+    },
+    {
+      name: 'displayports',
+      title: 'Display Ports',
+      type: 'number',
+    },
+    {
+      name: 'hdmiports',
+      title: 'HDMI Ports',
+      type: 'number',
     }
-
+ 
   ]
 }

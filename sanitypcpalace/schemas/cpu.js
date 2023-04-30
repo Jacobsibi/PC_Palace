@@ -1,7 +1,7 @@
 // export schema, export as object
 export default {
-  name: 'gpu',
-  title: 'GPU',
+  name: 'cpu',
+  title: 'CPU',
   type: 'document',
   fields: [
     {
@@ -72,6 +72,11 @@ export default {
       name: 'multithreading',
       title: 'Multithreading',
       type: 'string',
-  },  
+    },
+    {
+      name: 'socket',
+      title: 'Socket',
+      type: 'string',
+    }
   ]
 }
