@@ -38,13 +38,19 @@ export default {
       title: 'Description',
       type: 'string',
     },
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
     { 
       name: 'details',
       title: 'Details',
       type: 'string',
     },
+<<<<<<< HEAD
     
+=======
+>>>>>>> main
     {
       name: 'brand',
       title: 'Brand',
