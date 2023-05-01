@@ -11,7 +11,7 @@ export default {
       of: [{type: 'image'}],
       options: {
         hotspot: true,
-      }
+      },
     },
     {
       name: 'name',
@@ -26,7 +26,7 @@ export default {
       options: {
         source: 'name',
         maxLength: 90,
-      }
+      },
     },
     {
       name: 'price',
@@ -38,19 +38,12 @@ export default {
       title: 'Description',
       type: 'string',
     },
-<<<<<<< HEAD
-
-=======
->>>>>>> main
-    { 
+    {
       name: 'details',
       title: 'Details',
       type: 'string',
     },
-<<<<<<< HEAD
-    
-=======
->>>>>>> main
+
     {
       name: 'brand',
       title: 'Brand',
@@ -60,8 +53,6 @@ export default {
       name: 'rating',
       title: 'Rating',
       type: 'number',
-    }
-
-
-  ]
+    },
+  ],
 }
