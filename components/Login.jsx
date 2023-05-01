@@ -155,7 +155,7 @@ const Login = () => {
             // >>> QUESTION: How to, when click this link, render the page, make SignUp component to show up ?
             <div className={styles.emptylogin}>
               <h1>Login {auth?.currentUser?.displayName}</h1>
-              <p>New Member?<Link className={styles.buttonsignuppage} href="../pages/index.js"> Sign Up</Link> </p>
+              <p>New Member?<Link className={styles.buttonsignuppage} href=""> Sign Up</Link> </p>
               <Link href="/">
 
                 <input
