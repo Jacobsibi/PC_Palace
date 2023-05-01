@@ -1,3 +1,7 @@
+//this is a template code for Support.jsx component 
+//to use this, first off need to install npm Bulma CSS inside the repo "PC_Palace": 
+//currently just showing a form that Bulma CSS template provided
+
 import styles from "../styles/Login.module.css";
 import { sendEmail } from "../configurations/email";
 
