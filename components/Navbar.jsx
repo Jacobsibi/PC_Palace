@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import Link from 'next/link';
-import { AiOutlineShopping, AiOutlineUser } from 'react-icons/ai';
-import { Cart, Login } from './Index';
+import { AiOutlineShopping, AiOutlineUser } from 'react-icons/ai'
+import { Cart, Login } from './';
 import { useStateContext } from '../context/StateContext';
 import styles from "../styles/Navbar.module.css";
 
@@ -58,9 +58,13 @@ const Departments = (props) => {
 }
 
 const Navbar = () => {
-	const { showLogin, showCart, totalQuantities } = useStateContext();
+<<<<<<<<< Temporary merge branch 1
+	const { showCart, totalQuantities } = useStateContext();
 	const [ showDepartments, setShowDepartments ] = React.useState(false);
- 
+
+=========
+	const { showLogin, showCart, totalQuantities } = useStateContext();
+>>>>>>>>> Temporary merge branch 2
 	return (<>
 		<div className={styles.navbar}>
 			<span className={styles.pages}><Link href={"/"}>home(logo)</Link></span>

@@ -14,7 +14,7 @@ import {
   signOut,
 } from "firebase/auth";
 
-const Login = () => {
+const Logout = () => {
   
   //email and password to be used as parameter for Firebase special function
   const [email, setEmail] = useState("");
@@ -84,4 +84,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default Logout
