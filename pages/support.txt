@@ -1,0 +1,19 @@
+<label class="label" for="name">Name:</label>
+          <input class="input " type="text" id="name" name="name"></input>
+
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email"></input>
+
+          <label for="subject">Subject:</label>
+          <input type="text" id="subject" name="subject"></input>
+
+          <label for="message">Message:</label>
+          <textarea className={styles.textarea} id="message" name="message"></textarea>
+
+          <button class="button is-large"> button </button>
+
+            <h2>Contact Information</h2>
+            <p>Feel free to contact us with any questions, concerns or feedback.</p>
+            <p>Phone: 123-456-7890</p>
+            <p>Email: pcpalace@gmail.com</p>
+            <p>Address: 55 Wellesley Street, Auckland, New Zealand</p>

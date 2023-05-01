@@ -27,6 +27,7 @@ const Login = () => {
   console.log(auth?.currentUser?.email);
   console.log(auth?.currentUser?.displayName);
 
+
   //CREATE ACCOUNT
   const createAccount = async () => {
     try {
@@ -108,13 +109,13 @@ const Login = () => {
             <input 
                 placeholder="FirstName..."
                 type="text"
-                //onChange={(e) => setEmail(e.target.value)}
+                //onChange={(e) => setName(e.target.value)}
                 className={styles.input}
               />
                <input
               placeholder="LastName..."
               type="text"
-              // onChange={(e) => setPassword(e.target.value)}
+              // onChange={(e) => setName(e.target.value)}
                minlength="8" required
                className={styles.input}
             />
