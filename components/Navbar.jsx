@@ -58,13 +58,8 @@ const Departments = (props) => {
 }
 
 const Navbar = () => {
-<<<<<<<<< Temporary merge branch 1
-	const { showCart, totalQuantities } = useStateContext();
-	const [ showDepartments, setShowDepartments ] = React.useState(false);
-
-=========
 	const { showLogin, showCart, totalQuantities } = useStateContext();
->>>>>>>>> Temporary merge branch 2
+	const [ showDepartments, setShowDepartments ] = React.useState(false);
 	return (<>
 		<div className={styles.navbar}>
 			<span className={styles.pages}><Link href={"/"}>home(logo)</Link></span>
