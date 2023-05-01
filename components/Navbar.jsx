@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import Link from 'next/link';
 import { AiOutlineShopping, AiOutlineUser } from 'react-icons/ai';
-import { Cart, Login } from './index.js';
+import { Cart, Login } from './Index';
 import { useStateContext } from '../context/StateContext';
 import styles from "../styles/Navbar.module.css";
 
@@ -60,7 +60,7 @@ const Departments = (props) => {
 const Navbar = () => {
 	const { showLogin, showCart, totalQuantities } = useStateContext();
 	const [ showDepartments, setShowDepartments ] = React.useState(false);
-
+ 
 	return (<>
 		<div className={styles.navbar}>
 			<span className={styles.pages}><Link href={"/"}>home(logo)</Link></span>
