@@ -37,6 +37,11 @@ export default {
       title: 'Description',
       type: 'string',
     },
+    { 
+      name: 'details',
+      title: 'Details',
+      type: 'string',
+    },
     {
       name: 'brand',
       title: 'Brand',
