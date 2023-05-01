@@ -61,45 +61,29 @@
 }
 
 .departments {
+    left: auto;
+    right: 0;
     position: fixed;
     z-index: 50;
-    
-    display: grid;
-    grid-template-columns: 13fr 2fr;
-    width: 100%;
+    background-color: coral;
 }
 
-.categories {
-    background-color: powderblue;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: 2fr repeat(2, 1fr);
-    padding: 2% 2%;
-}
-
-.category {
-    text-align: center;
-}
-
-.category img {
-    max-width: 15vw;
-    height: auto;
-}
-
-.results {
-    display: inline-block;
-    background-color: crimson;
-}
-
-.results li {
-    display: block;
+.departments ul {
     list-style-type: none;
-    margin: 12% 3%;
-    user-select: none;
-    transition: all .2s ease;
 }
 
-.results li:hover {
-    cursor: default;
-    color: #ffa2d5;
+.departments li {
+    margin-left: auto;
+    padding: 5% 2%;
+    right: 0;
+}
+
+.departments li:hover{ 
+    background-color: darkcyan;
+}
+
+.departments li a {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
 }

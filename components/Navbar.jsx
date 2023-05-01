@@ -37,42 +37,21 @@ const Departments = (props) => {
 		window.addEventListener("scroll", handleScroll);
 		return () => window.removeEventListener("scroll", handleScroll);
 	});
-	
-	let current
 
     return (<>
-		<div className={styles.departmentsWrapper}>
-			<div className={styles.departments}>
-				<div className={styles.categories}>
-					<div className={styles.category}>
-						<Link href={""}>
-							<img src="intel-cpu-logo.jpg" />
-							<p>Intel CPUs</p>
-						</Link>
-					</div>
-					<div className={styles.category}>
-						<Link href={""}>
-							<img src="amd-cpu-logo.jpg" />
-							<p>AMD CPUs</p>
-						</Link>
-					</div>
-				</div>
-				
-				<div className={styles.results}>
-					<ul>
-						<li><Link href={""}>CPUs</Link></li>
-						<li><Link href={""}>Graphics Cards</Link></li>
-						<li><Link href={""}>Motherboards</Link></li>
-						<li><Link href={""}>Memory</Link></li>
-						<li><Link href={""}>Storage</Link></li>
-						<li><Link href={""}>Power Supply Units</Link></li>
-						<li><Link href={""}>System Cooling</Link></li>
-						<li><Link href={""}>Case</Link></li>
-						<li><Link href={""}>Monitor</Link></li>
-						<li><Link href={""}>Peripherals</Link></li>
-					</ul>
-				</div>
-			</div>
+		<div className={styles.departments}>
+			<ul>
+				<li><Link href={""}>CPUs</Link></li>
+				<li><Link href={""}>Graphics Cards</Link></li>
+				<li><Link href={""}>Motherboards</Link></li>
+				<li><Link href={""}>Memory</Link></li>
+				<li><Link href={""}>Storage</Link></li>
+				<li><Link href={""}>Power Supply Units</Link></li>
+				<li><Link href={""}>System Cooling</Link></li>
+				<li><Link href={""}>Case</Link></li>
+				<li><Link href={""}>Monitor</Link></li>
+				<li><Link href={""}>Peripherals</Link></li>
+			</ul>
 		</div>
     </>);
 }
