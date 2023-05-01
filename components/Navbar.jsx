@@ -58,7 +58,9 @@ const Departments = (props) => {
 }
 
 const Navbar = () => {
-	const { showDepartments, showLogin, showCart, totalQuantities } = useStateContext();
+	const { showLogin, showCart, totalQuantities } = useStateContext();
+	const [ showDepartments, setShowDepartments ] = React.useState(false);
+
 	return (<>
 		<div className={styles.navbar}>
 			<span className={styles.pages}><Link href={"/"}>home(logo)</Link></span>
