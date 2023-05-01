@@ -102,7 +102,7 @@ const Login = () => {
         {(
           //@QUESTION: How to use link redirect to another page? https://tinyurl.com/yc5se6fx
           <div className={styles.emptylogin}>
-            <h1>Login</h1>
+            <h1>Login {auth?.currentUser?.displayName}</h1>
             <p>New Member?<Link className={styles.buttonsignuppage} href="../pages/index.js"> Sign Up</Link> </p>
             <Link href="/">
 
