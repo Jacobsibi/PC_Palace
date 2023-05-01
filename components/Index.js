@@ -5,9 +5,7 @@ export { default as Product } from './Product';
 export { default as HeroBanner } from './HeroBanner';
 export { default as FooterBanner } from './FooterBanner';
 export { default as Cart } from './Cart';
-<<<<<<< HEAD
-export { default as SearchBar } from "./SearchBar";
-=======
 export { default as Login } from './Login';
 export { default as Support } from './Support';
->>>>>>> DL-LOGIN3
+export { default as SearchBar } from './SearchBar';
+export { default as Logout } from './Logout';

@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import Link from 'next/link';
 import { AiOutlineShopping, AiOutlineUser } from 'react-icons/ai'
-import { Cart } from './';
-import { Login } from './'
+import { Cart, Login } from './';
 import { useStateContext } from '../context/StateContext';
 import styles from "../styles/Navbar.module.css";
 
@@ -60,13 +59,9 @@ const Departments = (props) => {
 }
 
 const Navbar = () => {
-<<<<<<< HEAD
-	const { showCart, totalQuantities } = useStateContext();
+	const { showCart, totalQuantities, showLogin } = useStateContext();
 	const [ showDepartments, setShowDepartments ] = React.useState(false);
 
-=======
-	const { showLogin, showCart, totalQuantities } = useStateContext();
->>>>>>> DL-LOGIN3
 	return (<>
 		<div className={styles.navbar}>
 			<span className={styles.pages}><Link href={"/"}>home(logo)</Link></span>

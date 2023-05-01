@@ -3,10 +3,7 @@ import styles from '../styles/Login.module.css';
 import React, { useRef } from 'react';
 import Link from 'next/link';
 import { AiOutlineLeft } from 'react-icons/ai';
-import { TiDeleteOutline } from 'react-icons/ti';
-import toast from 'react-hot-toast';
 import { useStateContext } from '../context/StateContext';
-import { urlFor } from '../LIB/client';
 import { useState } from "react";
 import { auth, authGoogle } from "../configurations/Firebase";
 import {
