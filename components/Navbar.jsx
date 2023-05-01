@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import Link from 'next/link';
 import { AiOutlineShopping, AiOutlineUser } from 'react-icons/ai'
-import { Cart, Login } from './';
+import { Cart, Login } from './Index';
 import { useStateContext } from '../context/StateContext';
 import styles from "../styles/Navbar.module.css";
 
