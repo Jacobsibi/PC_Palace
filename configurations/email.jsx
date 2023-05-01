@@ -1,6 +1,6 @@
 import emailjs from 'emailjs-com';
 
-export const sendEmail= (e)  => {
+export const sendEmail = (e)  => {
 
     e.preventDefault();
   
@@ -13,3 +13,4 @@ export const sendEmail= (e)  => {
 
 }
   
+export default sendEmail;
