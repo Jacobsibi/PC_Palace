@@ -1,35 +1,65 @@
 import swal from 'sweetalert';
 import styles from '../styles/Login.module.css';
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import Link from 'next/link';
 import { AiOutlineLeft } from 'react-icons/ai';
 import { useStateContext } from '../context/StateContext';
-import { useState } from "react";
-import { auth, authGoogle } from "../configurations/Firebase";
+import { db, auth, authGoogle } from "../configurations/firebase";
+import { collection, doc, getDocs, setDoc, query, where } from "firebase/firestore";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
 } from "firebase/auth";
-import { FirebaseError } from 'firebase/app';
 
 const Login = () => {
 
   //email and password to be used as parameter for Firebase special function
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [currentUserIn, setCurrentUserIn] = useState("");
 
   //draft output current user email on console log
   console.log(auth?.currentUser?.email);
   console.log(auth?.currentUser?.displayName);
 
+//SET A DOCUMENT TO DATABASE Declaration (used for create account)
+const setterDoc = async (email, fullName) => {
+
+  const userRef = collection(db, "usersWithName");
+
+  await setDoc(doc(userRef), {
+    currentUser: email,
+    fullName: fullName
+  });
+  setCurrentUserIn(fullName);
+}
+
+  //GET A DOCUMENT FROM DATABASE Declaration (used for login)
+  const getterDoc = async () => {
+
+    const collectionRef = collection(db, "usersWithName");
+    const q = query(collectionRef, where('currentUser', '==', auth?.currentUser?.email ) );
+
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      //doc.data() is never undefined for query doc snapshots
+      console.log(doc.id, "=>", doc.data());
+      setCurrentUserIn(doc.data().fullName);
+    })
+    
+  }
 
   //CREATE NEW ACCOUNT WITH EMAIL AND PASSWORD
   const createAccount = async () => {
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-      // >>>> QUESTION: how to save the names from field of user when they create via email and password ?
+
+      // >>> Handle the user fullname storage to firestore
+      await setterDoc(email, fullName);
+
       console.log('Create account successful!');
       swal("Welcome", "You created new account", "success");
     }
@@ -76,7 +106,10 @@ const Login = () => {
   const signIn = async () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
+      getterDoc();
       console.log('Login successful!');
+      console.log(currentUserIn);  //just to know who is this name ?????
+
       swal("Logged In", "You signed in with email", "success");
     } catch (error) {
       if (error.code === 'auth/wrong-password') {
@@ -116,6 +149,7 @@ const Login = () => {
   const signInGoogle = async () => {
     try {
       await signInWithPopup(auth, authGoogle);
+      setCurrentUserIn(auth?.currentUser?.displayName);
       console.log('Login with Google successful!');
       swal("Logged In", "You signed in with Google", "success");
     } catch (error) {
@@ -128,6 +162,7 @@ const Login = () => {
   const logOut = async () => {
     try {
       await signOut(auth);
+      setCurrentUserIn("");
       swal("Logged Out", "You are logged out from your account", "info");
     } catch (error) {
       console.log(error);
@@ -154,21 +189,14 @@ const Login = () => {
           {(
             // >>> QUESTION: How to, when click this link, render the page, make SignUp component to show up ?
             <div className={styles.emptylogin}>
-              <h1>Login {auth?.currentUser?.displayName}</h1>
-              <p>New Member?<Link className={styles.buttonsignuppage} href="../pages/index.js"> Sign Up</Link> </p>
+              <h1>Login {currentUserIn}</h1>
+              <p>New Member?<Link className={styles.buttonsignuppage} href=""> Sign Up</Link> </p>
               <Link href="/">
 
                 <input
-                  placeholder="FirstName..."
+                  placeholder="Full Name..."
                   type="text"
-                  //onChange={(e) => setName(e.target.value)}
-                  className={styles.input}
-                />
-                <input
-                  placeholder="LastName..."
-                  type="text"
-                  // onChange={(e) => setName(e.target.value)}
-                  minlength="8" required
+                  onChange={(e) => setFullName(e.target.value)}
                   className={styles.input}
                 />
                 <input
