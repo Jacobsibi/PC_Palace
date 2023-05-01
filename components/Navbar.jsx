@@ -2,8 +2,10 @@ import React, { useEffect } from 'react';
 import Link from 'next/link';
 import { AiOutlineShopping, AiOutlineUser } from 'react-icons/ai'
 import { Cart } from './';
+import { Login } from './'
 import { useStateContext } from '../context/StateContext';
 import styles from "../styles/Navbar.module.css";
+
 
 const CartButton = (props) => {
 	const { setShowCart } = useStateContext();
@@ -16,8 +18,9 @@ const CartButton = (props) => {
 }
 
 const Account = () => {
+	const { setShowLogin} = useStateContext();
 	return (<>
-		<button className={styles.accountButton} onClick={console.log("Add an account drop-down similar to the cart")}>
+		<button className={styles.accountButton} onClick={() => setShowLogin(true)}>
 			<AiOutlineUser />
 		</button>
 	</>);
@@ -57,9 +60,13 @@ const Departments = (props) => {
 }
 
 const Navbar = () => {
+<<<<<<< HEAD
 	const { showCart, totalQuantities } = useStateContext();
 	const [ showDepartments, setShowDepartments ] = React.useState(false);
 
+=======
+	const { showLogin, showCart, totalQuantities } = useStateContext();
+>>>>>>> DL-LOGIN3
 	return (<>
 		<div className={styles.navbar}>
 			<span className={styles.pages}><Link href={"/"}>home(logo)</Link></span>
@@ -75,6 +82,7 @@ const Navbar = () => {
 		</div>
 		{showDepartments && <Departments hideDepartments={() => setShowDepartments(false)} />}
 		{showCart && <Cart />}
+		{showLogin && <Login />}
 	</>);
 }
 
