@@ -190,11 +190,12 @@ const setterDoc = async (email, fullName) => {
             // >>> QUESTION: How to, when click this link, render the page, make SignUp component to show up ?
             <div className={styles.emptylogin}>
               <h1>Login {currentUserIn}</h1>
-              <p>New Member?<Link className={styles.buttonsignuppage} href=""> Sign Up</Link> </p>
+              {/* <p>New Member?<Link className={styles.buttonsignuppage} href=""> Sign Up</Link> </p> */}
+              <p>Welcome to PC Palace</p>
               <Link href="/">
 
                 <input
-                  placeholder="Full Name..."
+                  placeholder="Name..."
                   type="text"
                   onChange={(e) => setFullName(e.target.value)}
                   className={styles.input}
