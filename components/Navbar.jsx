@@ -48,7 +48,7 @@ const Departments = (props) => {
 				<li><Link href={""}>Motherboards</Link></li>
 				<li><Link href={""}>Memory</Link></li>
 				<li><Link href={""}>Storage</Link></li>
-				<li><Link href={""}>Power Supply Units</Link></li>
+				<li><Link href={""}>Power Supply</Link></li>
 				<li><Link href={""}>System Cooling</Link></li>
 				<li><Link href={""}>Case</Link></li>
 				<li><Link href={""}>Monitor</Link></li>
@@ -66,8 +66,6 @@ const Navbar = () => {
 		<div className={styles.navbar}>
 			<span className={styles.pages}><Link href={"/"}>home(logo)</Link></span>
 			<span className={styles.pages}><Link href={"/buildcomputer"}>Computer Builder</Link></span>
-			<span className={styles.pages}><Link href={""}>Specials</Link></span>
-			<span className={styles.pages}><Link href={""}>Brands</Link></span>
 			<span className={styles.pages}><Link href={"/support"}>Support</Link></span>
 			<span className={styles.pages}><Link href={"/about"}>About us</Link></span>
 			<div />

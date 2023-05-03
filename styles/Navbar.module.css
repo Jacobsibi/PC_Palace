@@ -2,7 +2,7 @@
     display: grid;
     padding: 0.6% 2%;
     background-color: #c6edff;
-    grid-template-columns: repeat(6, 5fr) 9fr 6fr repeat(2, 0.5fr);
+    grid-template-columns: repeat(4, 5fr) 15fr 6fr repeat(2, 0.5fr);
 }
 
 .pages:hover {
@@ -43,10 +43,6 @@
     transform: scale(1.1, 1.1);
 }
 
-
-
-
-
 .departmentsButton {
     margin-right: 10%;
     border: none;
@@ -65,7 +61,8 @@
     right: 0;
     position: fixed;
     z-index: 50;
-    background-color: coral;
+    background-color: #72d2ff;
+    width: 12vw;
 }
 
 .departments ul {
@@ -76,10 +73,12 @@
     margin-left: auto;
     padding: 5% 2%;
     right: 0;
+    transition: all .4s ease;
 }
 
 .departments li:hover{ 
-    background-color: darkcyan;
+    background-color: aqua;
+    color: dodgerblue;
 }
 
 .departments li a {
