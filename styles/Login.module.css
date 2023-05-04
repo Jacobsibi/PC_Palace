@@ -68,4 +68,13 @@
     height: 200px;
     overflow: auto;
   }
+  .plaintextbutton {
+    background-color: transparent;
+    border: none;
+    font-size: 16px;
+    color: rgb(0, 166, 255);
+    text-decoration: underline;
+    cursor: pointer;
+    
+    }
   
