@@ -37,13 +37,29 @@
     grid-template-columns: 12fr 1fr;
 }
 
-
-
 .queryResults {
     position: absolute;
     z-index: 60;
     width: 1400px;
-    height: max-content;
-    background-color: lightgray;
+    height: 10vh;
+    background-color: rgb(104, 187, 255);
     overflow-y: scroll;
+    transform: translateY(-10%);
+}
+
+.resultItem {
+    color: black;
+}
+
+.selected {
+    color:darkred
+}
+
+.queryResults::-webkit-scrollbar {
+    width: 0.5vw;
+}
+
+.queryResults::-webkit-scrollbar-thumb {
+    background: rgb(92, 92, 92);
+    border-radius: 10px;
 }
