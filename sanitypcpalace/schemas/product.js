@@ -52,8 +52,11 @@ export default {
       name: 'rating',
       title: 'Rating',
       type: 'number',
+    },
+    {
+      name: "component",
+      title: "Component",
+      type: "string"
     }
-
-
   ]
 }
