@@ -63,7 +63,8 @@
     right: 0;
     position: fixed;
     z-index: 50;
-    background-color: #72d2ff;
+    background-color: #464646;
+    color: white;
     width: 12vw;
 }
 
@@ -79,8 +80,8 @@
 }
 
 .departments li:hover{ 
-    background-color: aqua;
-    color: dodgerblue;
+    background-color: #757575;
+    color: rgb(255, 68, 68);
 }
 
 .departments li a {

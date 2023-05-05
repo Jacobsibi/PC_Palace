@@ -13,32 +13,21 @@ const ProductsContainer = React.forwardRef((props, ref) => {
 const Home = ({ products, bannerData, hasFilter }) => {
   const containerRef = React.createRef();
 
-  React.useEffect(() => {
-    console.log(hasFilter);
+  // React.useEffect(() => {
+  //   console.log(hasFilter);
 
-    // if (!smoothSliding) {
-    //   let element = containerRef.current;
-    //   if (element) {
-    //     let { top } = element.getBoundingClientRect(); 
+  //   if (hasFilter) {
+  //     let element = containerRef.current;
+  //     if (element) {
+  //       let { top } = element.getBoundingClientRect(); 
   
-    //     window.scrollTo({
-    //       top: top - 180 - window.scrollY,
-    //     })
-    //   }
-    // }
-
-    if (hasFilter) {
-      let element = containerRef.current;
-      if (element) {
-        let { top } = element.getBoundingClientRect(); 
-  
-        window.scrollTo({
-          top: top - 180 - window.scrollY,
-          behavior: "smooth"
-        })
-      }
-    }
-  }, []);
+  //       window.scrollTo({
+  //         top: top - 180 - window.scrollY,
+  //         behavior: "smooth"
+  //       })
+  //     }
+  //   }
+  // }, []);
 
   return (
     <div>
