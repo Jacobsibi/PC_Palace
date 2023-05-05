@@ -64,7 +64,7 @@ const Navbar = () => {
 
 	return (<>
 		<div className={styles.navbar}>
-			<span className={styles.pages}><Link href={"/"}>home(logo)</Link></span>
+			<span className={styles.pages}><Link href={"/"}><img src="/logo/logo-image.png" className={styles.logo}></img></Link></span>
 			<span className={styles.pages}><Link href={"/buildcomputer"}>Computer Builder</Link></span>
 			<span className={styles.pages}><Link href={"/support"}>Support</Link></span>
 			<span className={styles.pages}><Link href={"/about"}>About us</Link></span>
