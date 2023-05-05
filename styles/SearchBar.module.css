@@ -20,7 +20,12 @@
 
 .searchBox {
     background-color: inherit;
+    color: white;
     border: none;
+}
+
+.searchBox::placeholder {
+    color: white;
 }
 
 .searchBox:focus {
@@ -28,11 +33,38 @@
 }
 
 .searchBar {
-    background-color: #b0e6ff;
-    border-radius: 10px;
+    background-color: #464646;
+    /* border-radius: 10px; */
     width: 100%;
     padding: 0.5% 3% 0.5% 10%;
     margin: 0% 0% 0.5% 0%;
     display: grid;
     grid-template-columns: 12fr 1fr;
+}
+
+.queryResults {
+    position: absolute;
+    z-index: 60;
+    width: 1400px;
+    height: 10vh;
+    background-color: #202020;
+    overflow-y: scroll;
+    transform: translateY(-10%);
+}
+
+.resultItem {
+    color: rgb(190, 190, 190);
+}
+
+.selected {
+    color:red
+}
+
+.queryResults::-webkit-scrollbar {
+    width: 0.5vw;
+}
+
+.queryResults::-webkit-scrollbar-thumb {
+    background: rgb(92, 92, 92);
+    border-radius: 10px;
 }
