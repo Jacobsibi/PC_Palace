@@ -34,21 +34,9 @@ export default {
       type: 'number',
     },
     {
-      name: 'description',
-      title: 'Description',
+      name: 'details',
+      title: 'Details',
       type: 'string',
-    },
-    {
-      name: 'brand',
-      title: 'Brand',
-      type: 'string',
-    },
-    {
-      name: 'rating',
-      title: 'Rating',
-      type: 'number',
     }
-
-
   ]
 }
