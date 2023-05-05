@@ -147,19 +147,22 @@ const Login = () => {
                   placeholder="Name..."
                   type="text"
                   onChange={(e) => setFullName(e.target.value)}
+                  required
                   className={styles.input}
                 />
                 <input
                   placeholder="Email..."
                   type="text"
                   onChange={(e) => setEmail(e.target.value)}
+                  required
                   className={styles.input}
                 />
                 <input
                   placeholder="Password..."
                   type="password"
                   onChange={(e) => setPassword(e.target.value)}
-                  minlength="8" required
+                  minlength="8" 
+                  required
                   className={styles.input}
                 />
                 <button
