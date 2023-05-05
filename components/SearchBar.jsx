@@ -44,8 +44,10 @@ const SearchResults = props => {
                 <ul>
                     {
                         productsMatching.map((product, index) => (
-                            <Link href={`product/${product.slug.current}`} onMouseEnter={() => props.setSelectedIndex(index)} key={index}>
-                                <div className={`${props.selectedIndex == index ? styles.selected : ""} ${styles.resultItem}`}>
+                            <Link href={`${product.slug.current}`} 
+                                onMouseEnter={() => props.setSelectedIndex(index)} key={index}>
+                                <div className={`${props.selectedIndex == index ? styles.selected : ""} ${styles.resultItem}`}
+                                    onClick={() => router.push(`/product/${product.slug.current}`)}>
                                     {product.name}
                                 </div>
                             </Link>
