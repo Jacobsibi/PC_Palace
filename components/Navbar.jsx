@@ -6,7 +6,6 @@ import { useStateContext } from '../context/StateContext';
 import styles from "../styles/Navbar.module.css";
 import Image from "next/image";
 
-
 const CartButton = (props) => {
 	const { setShowCart } = useStateContext();
 	return (<>
@@ -18,7 +17,7 @@ const CartButton = (props) => {
 }
 
 const Account = () => {
-	const { setShowLogin} = useStateContext();
+	const { setShowLogin } = useStateContext();
 	return (<>
 		<button className={styles.accountButton} onClick={() => setShowLogin(true)}>
 			<AiOutlineUser />
@@ -57,9 +56,8 @@ const Departments = (props) => {
 }
 
 const Navbar = () => {
-	const { showCart, totalQuantities, showLogin } = useStateContext();
+	const { showLogin, showCart, totalQuantities } = useStateContext();
 	const [ showDepartments, setShowDepartments ] = React.useState(false);
-
 	return (<>
 		<div className={styles.navbar}>
 			<span className={styles.pages}>
