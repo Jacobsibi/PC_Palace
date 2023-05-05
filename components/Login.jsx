@@ -4,8 +4,8 @@ import React, { useRef, useState, useEffect } from 'react';
 import Link from 'next/link';
 import { AiOutlineLeft } from 'react-icons/ai';
 import { useStateContext } from '../context/StateContext';
-import { db, auth, authGoogle } from "../configurations/firebase";
-import { collection, doc, getDocs, setDoc, query, where } from "firebase/firestore";
+import { auth, authGoogle } from "../configurations/firebase";
+import { updateProfile } from "firebase/auth";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -19,83 +19,48 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
-  const [currentUserIn, setCurrentUserIn] = useState("");
+ // const [user, setUser] = useState("");
 
+  
   //draft output current user email on console log
   console.log(auth?.currentUser?.email);
-  console.log(auth?.currentUser?.displayName);
 
-//SET A DOCUMENT TO DATABASE Declaration (used for create account)
-const setterDoc = async (email, fullName) => {
-
-  const userRef = collection(db, "usersWithName");
-
-  await setDoc(doc(userRef), {
-    currentUser: email,
-    fullName: fullName
-  });
-  setCurrentUserIn(fullName);
-}
-
-  //GET A DOCUMENT FROM DATABASE Declaration (used for login)
-  const getterDoc = async () => {
-
-    const collectionRef = collection(db, "usersWithName");
-    const q = query(collectionRef, where('currentUser', '==', auth?.currentUser?.email ) );
-
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-      //doc.data() is never undefined for query doc snapshots
-      console.log(doc.id, "=>", doc.data());
-      setCurrentUserIn(doc.data().fullName);
-    })
-    
-  }
 
   //CREATE NEW ACCOUNT WITH EMAIL AND PASSWORD
   const createAccount = async () => {
     try {
       await createUserWithEmailAndPassword(auth, email, password);
 
-      // >>> Handle the user fullname storage to firestore
-      await setterDoc(email, fullName);
-
-      console.log('Create account successful!');
+      //Update user's fullname once account is created
+      updateProfile(auth.currentUser, {displayName: fullName});
       swal("Welcome", "You created new account", "success");
     }
     catch (error) {
       if (error.code === 'auth/email-already-in-use') {
         // Handle the email already in use error
-        console.log('Email already exists');
         swal("Email already exists", "Please enter new email", "error");
       } else if (error.code === 'auth/phone-number-already-exists') {
         // Handle the phone number already in use error
-        console.log('Phone number already exists');
         swal("Phone number already exists", "Please enter new phone number", "error");
       } 
         else if (error.code === 'auth/invalid-email') {
         // Handle the invalid email 
-        console.log('Invalid Email');
         swal("Invalid Email", "Please fill in correct email address", "warning");
       }
         else if (error.code === 'auth/missing-email') {
         // Handle the email field is empty 
-        console.log('Enter Email');
         swal("Enter Email", "Please fill in email field", "warning");
       }
         else if (error.code === 'auth/missing-password') {
         // Handle the password field is empty 
-        console.log('Enter Password');
         swal("Enter Password", "Please fill in password field", "warning");
       } 
         else if (error.code === 'auth/weak-password') {
         // Handle the weak password
-        console.log('Enter Strong Password');
         swal("Enter Strong Password", "Password should be at least 6 characters", "warning");
       } 
         else {
         // Handle other errors
-        console.log(error.message);
         swal("Error", "Please try again",  "error");
       }
     }
@@ -106,40 +71,30 @@ const setterDoc = async (email, fullName) => {
   const signIn = async () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      getterDoc();
-      console.log('Login successful!');
-      console.log(currentUserIn);  //just to know who is this name ?????
-
       swal("Logged In", "You signed in with email", "success");
     } catch (error) {
       if (error.code === 'auth/wrong-password') {
         // Handle the wrong passwrod
-        console.log('Wrong Password');
         swal("Wrong Password", "Please enter correct password", "error");
       } 
        else if (error.code === 'auth/user-not-found') {
         // Handle user not found
-        console.log('User not found)');
         swal("Account not existed", "Please enter correct email or password", "error");
       } 
       else if (error.code ===  'auth/invalid-email' ) {
         // Handle inavlid email but correct password
-        console.log('Invalid email(correct password)');
         swal("Account not existed", "Please enter correct email or password", "error");
       } 
       else if (error.code === 'auth/missing-email') {
         // Handle the email field is empty 
-        console.log('Enter Email');
         swal("Enter Email", "Please fill in email field", "warning");
       }
         else if (error.code === 'auth/missing-password') {
         // Handle the password field is empty 
-        console.log('Enter Password');
         swal("Enter Password", "Please fill in password field", "warning");
       }
       else {
         // Handle other errors
-        console.log(error.message);
         swal("Error", "Please try again",  "error");
       }
     }
@@ -149,11 +104,7 @@ const setterDoc = async (email, fullName) => {
   const signInGoogle = async () => {
     try {
       await signInWithPopup(auth, authGoogle);
-      setCurrentUserIn(auth?.currentUser?.displayName);
-      console.log('Login with Google successful!');
-      swal("Logged In", "You signed in with Google", "success");
     } catch (error) {
-      console.log(error);
       swal("Error", "Please try again",  "error");
     }
   };
@@ -162,10 +113,8 @@ const setterDoc = async (email, fullName) => {
   const logOut = async () => {
     try {
       await signOut(auth);
-      setCurrentUserIn("");
       swal("Logged Out", "You are logged out from your account", "info");
     } catch (error) {
-      console.log(error);
       swal("Error", "Please try again",  "error");
     }
   };
@@ -187,11 +136,9 @@ const setterDoc = async (email, fullName) => {
           </button>
 
           {(
-            // >>> QUESTION: How to, when click this link, render the page, make SignUp component to show up ?
             <div className={styles.emptylogin}>
-              <h1>Login {currentUserIn}</h1>
-              {/* <p>New Member?<Link className={styles.buttonsignuppage} href=""> Sign Up</Link> </p> */}
-              <p>Welcome to PC Palace</p>
+              <h1>Welcome {auth?.currentUser?.displayName}</h1>
+              <p>Sign In or Create Account</p>
               <Link href="/">
 
                 <input
