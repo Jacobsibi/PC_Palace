@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import Link from 'next/link';
-import { AiOutlineShopping, AiOutlineUser } from 'react-icons/ai'
-import { Cart, Login } from './Index';
+import { AiOutlineShopping, } from 'react-icons/ai'
+import { Cart } from './Index';
 import { useStateContext } from '../context/StateContext';
 import styles from "../styles/Navbar.module.css";
 
@@ -15,14 +15,7 @@ const CartButton = (props) => {
 	</>);
 }
 
-const Account = () => {
-	const { setShowLogin } = useStateContext();
-	return (<>
-		<button className={styles.accountButton} onClick={() => setShowLogin(true)}>
-			<AiOutlineUser />
-		</button>
-	</>);
-}
+
 
 const Departments = (props) => {
 	const [ prevScrollY, setPrevScrollY ] = React.useState(0);
@@ -68,14 +61,13 @@ const Navbar = () => {
 			<span className={styles.pages}><Link href={""}>Brands</Link></span>
 			<span className={styles.pages}><Link href={"/support"}>Support</Link></span>
 			<span className={styles.pages}><Link href={"/about"}>About us</Link></span>
+			<span className={styles.pages}><Link href={"/loginpage"}>Account</Link></span>
 			<div />
 			<button className={styles.departmentsButton} onClick={() => setShowDepartments(!showDepartments)}>Departments</button>
-			<Account />
 			<CartButton itemAmount={totalQuantities} />
 		</div>
 		{showDepartments && <Departments hideDepartments={() => setShowDepartments(false)} />}
 		{showCart && <Cart />}
-		{showLogin && <Login />}
 	</>);
 }
 

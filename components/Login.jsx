@@ -1,13 +1,9 @@
-import swal from 'sweetalert';
-import styles from '../styles/Login.module.css';
-import React, { useRef, useState, useEffect } from 'react';
 import Link from 'next/link';
-import { AiOutlineLeft } from 'react-icons/ai';
-import { useStateContext } from '../context/StateContext';
+import swal from 'sweetalert';
+import styles from '../styles/Support.module.css';
+import React, { useRef, useState, useEffect } from 'react';
 import { auth, authGoogle } from "../configurations/firebase";
-import { updateProfile } from "firebase/auth";
 import {
-  createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
@@ -15,64 +11,20 @@ import {
 
 const Login = () => {
 
-  //email and password to be used as parameter for Firebase special function
+  //to DELETE
+  console.log(auth?.currentUser?.email);
+
+  //email and password to be used as parameter for Firebase special functions
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [fullName, setFullName] = useState("");
+  //let loggedIn = true;
+  //const [loggedIn, setLoggedIn] =  useState(false);
 
-
-
-  //CREATE NEW ACCOUNT WITH EMAIL AND PASSWORD
-  const createAccount = async () => {
-    if(!fullName){
-      swal("Enter Name", "Please fill in your name", "warning");
-    }else{
-      try {
-        await createUserWithEmailAndPassword(auth, email, password);
-  
-        //Update user's fullname once account is created
-        updateProfile(auth.currentUser, {displayName: fullName});
-        swal("Welcome", "You created new account", "success");
-      }
-      catch (error) {
-        if (error.code === 'auth/email-already-in-use') {
-          // Handle the email already in use error
-          swal("Email already exists", "Please enter new email", "error");
-        } else if (error.code === 'auth/phone-number-already-exists') {
-          // Handle the phone number already in use error
-          swal("Phone number already exists", "Please enter new phone number", "error");
-        } 
-          else if (error.code === 'auth/invalid-email') {
-          // Handle the invalid email 
-          swal("Invalid Email", "Please fill in correct email address", "warning");
-        }
-          else if (error.code === 'auth/missing-email') {
-          // Handle the email field is empty 
-          swal("Enter Email", "Please fill in email field", "warning");
-        }
-          else if (error.code === 'auth/missing-password') {
-          // Handle the password field is empty 
-          swal("Enter Password", "Please fill in password field", "warning");
-        } 
-          else if (error.code === 'auth/weak-password') {
-          // Handle the weak password
-          swal("Enter Strong Password", "Password should be at least 6 characters", "warning");
-        } 
-          else {
-          // Handle other errors
-          swal("Error", "Please try again",  "error");
-        }
-      }
-    }
-
-    
-
-  }
-
-  //SIGN IN THE EXISTED ACCOUNT ONLY
+  //sign in wiht email function
   const signIn = async () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
+      //handleLogin();
       swal("Logged In", "You signed in with email", "success");
     } catch (error) {
       if (error.code === 'auth/wrong-password') {
@@ -102,104 +54,130 @@ const Login = () => {
     }
   };
 
-  //SIGN IN WITH GOOGLE (both new and returning customer)
+  //sign in with Google function
   const signInGoogle = async () => {
     try {
       await signInWithPopup(auth, authGoogle);
+      //handleLogin();
     } catch (error) {
       swal("Error", "Please try again",  "error");
     }
   };
 
-  //LOGOUT (right now currentUser != NUlL)
+  //logout function
   const logOut = async () => {
     try {
       await signOut(auth);
+      //handleLogin();
       swal("Logged Out", "You are logged out from your account", "info");
     } catch (error) {
       swal("Error", "Please try again",  "error");
     }
   };
 
-  //internal configurations
-  const loginReg = useRef();
-  const { setShowLogin } = useStateContext();
+  //handle login change the use state based on the value of auth.CurrentUser
+  // function handleLogin() {
+  //   if(auth?.currentUser){
+  //     console.log("User in");
+  //     //setLoggedIn(true);
+  //     loggedIn = true;
+  //   } else{
+  //     console.log("User not in");
+  //     //setLoggedIn(false);
+  //     loggedIn = false;
+  //   }
+  // }
+  
+  //useEffect to render again after an action
+  // useEffect(() => {
+  //   if (loggedIn) {
+  //     console.log("User logged in!"); // Your code to execute on login here
+  //     loggedIn = true;
+  //   }
+  //   else{
+  //     loggedIn = false;
+  //   }
+  // }, [loggedIn]);
 
   return (
-    <div class={styles.scrollcontainer}>
-      <div className={styles.loginwrapper} ref={loginReg}>
-        <div className={styles.logincontainer}>
-          <button
-            type="button"
-            className="cart-heading"
-            onClick={() => setShowLogin(false)}>
-            <AiOutlineLeft />
-            <span className="heading">Back</span>
-          </button>
+  // implement this if want to check login inside component and use auxiliary function
+  //   <div className={styles.form}>
+  //   {loggedIn ? (
+  //     <div>
+  //           <h1>Welcome {auth?.currentUser?.displayName} </h1>
+  //           <p>Enjoy Shopping With Us</p>
+  //           <button class={styles.btn} onClick={logOut}> Logout</button> 
+  //     </div>
+  //   ) : (
+  //     <div>
+  //       <h1>Welcome {auth?.currentUser?.displayName} </h1>
+  //       <label className={styles.label}>Email</label>
+  //       <input
+  //         className={styles.input}
+  //         type="email"
+  //         onChange={(e) => setEmail(e.target.value)}
+  //         name="user_email"
+  //         required
+  //         pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+  //       />
 
-          {(
-            <div className={styles.emptylogin}>
-              <h1>Welcome {auth?.currentUser?.displayName}</h1>
-              <p>Sign In or Create Account</p>
-              <Link href="/">
+  //       <label className={styles.label}>Password</label>
+  //       <input
+  //         className={styles.input}
+  //         type="password"
+  //         onChange={(e) => setPassword(e.target.value)}
+  //         name="user_password"
+  //         required
+  //       />
 
-                <input
-                  placeholder="Name..."
-                  type="text"
-                  onChange={(e) => setFullName(e.target.value)}
-                  required
-                  className={styles.input}
-                />
-                <input
-                  placeholder="Email..."
-                  type="text"
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  className={styles.input}
-                />
-                <input
-                  placeholder="Password..."
-                  type="password"
-                  onChange={(e) => setPassword(e.target.value)}
-                  minlength="8" 
-                  required
-                  className={styles.input}
-                />
-                <button
-                  type="button"
-                  onClick={signIn}
-                  className={styles.btn}
-                >
-                  Sign In
-                </button>
-                <button
-                  type="button"
-                  onClick={signInGoogle}
-                  className={styles.btn}
-                >
-                  Sign In With Google
-                </button>
-                <button
-                  type="button"
-                  onClick={logOut}
-                  className={styles.btn}
-                >
-                  Sign Out
-                </button>
-                <button
-                  type="button"
-                  onClick={createAccount}
-                  className={styles.btn}
-                >
-                  Create Account
-                </button>
-              </Link>
-            </div>
-          )}
-        </div>
-      </div>
-    </div>
-  )
+  //       <p>
+  //         New Member? <Link href="/loginnewaccount"> Sign Up Now</Link>
+  //       </p>
+
+  //       <button className={styles.btn} onClick={signIn}>
+  //         Sign In
+  //       </button>
+  //       <button className={styles.btn} onClick={signInGoogle}>
+  //         Sign In With Google
+  //       </button>
+  //     </div>
+  //   )}
+  // </div>
+
+<div className={styles.form}>
+<h1>Welcome {auth?.currentUser?.displayName} </h1>
+<label className={styles.label}>Email</label>
+<input
+  className={styles.input}
+  type="email"
+  onChange={(e) => setEmail(e.target.value)}
+  name="user_email"
+  required
+  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+/>
+
+<label className={styles.label}>Password</label>
+<input
+  className={styles.input}
+  type="password"
+  onChange={(e) => setPassword(e.target.value)}
+  name="user_password"
+  required
+/>
+
+<p>
+  New Member? <Link href="/loginnewaccount"> Sign Up Now</Link>
+</p>
+
+<button className={styles.btn} onClick={signIn}>
+  Sign In
+</button>
+<button className={styles.btn} onClick={signInGoogle}>
+  Sign In With Google
+</button>
+</div>
+   
+  );
 }
 
 export default Login
