@@ -4,6 +4,7 @@ import { AiOutlineShopping, AiOutlineUser } from 'react-icons/ai'
 import { Cart, Login } from './index';
 import { useStateContext } from '../context/StateContext';
 import styles from "../styles/Navbar.module.css";
+import { useRouter } from "next/router";
 
 
 const CartButton = (props) => {
@@ -27,6 +28,8 @@ const Account = () => {
 
 const Departments = (props) => {
 	const [ prevScrollY, setPrevScrollY ] = React.useState(0);
+	const router = useRouter();
+	console.log(router.pathname);
 
 	const handleScroll = () => {
 		if (window.scrollY != prevScrollY) {
@@ -43,13 +46,13 @@ const Departments = (props) => {
     return (<>
 		<div className={styles.departments}>
 			<ul>
-				<li><Link href={"/?filter=cpu"}>CPUs</Link></li>
-				<li><Link href={"/?filter=gpu"}>Graphics Cards</Link></li>
-				<li><Link href={"/?filter=mb"}>Motherboards</Link></li>
-				<li><Link href={"/?filter=ram"}>Memory</Link></li>
-				<li><Link href={"/?filter=sto"}>Storage</Link></li>
-				<li><Link href={"/?filter=psu"}>Power Supply</Link></li>
-				<li><Link href={"/?filter=case"}>Case</Link></li>
+				<li><Link href={`/?filter=cpu&rerender=${router.pathname !== "/"}`}>CPUs</Link></li>
+				<li><Link href={`/?filter=gpu&rerender=${router.pathname !== "/"}`}>Graphics Cards</Link></li>
+				<li><Link href={`/?filter=mb&rerender=${router.pathname !== "/"}`}>Motherboards</Link></li>
+				<li><Link href={`/?filter=ram&rerender=${router.pathname !== "/"}`}>Memory</Link></li>
+				<li><Link href={`/?filter=sto&rerender=${router.pathname !== "/"}`}>Storage</Link></li>
+				<li><Link href={`/?filter=psu&rerender=${router.pathname !== "/"}`}>Power Supply</Link></li>
+				<li><Link href={`/?filter=case&rerender=${router.pathname !== "/"}`}>Case</Link></li>
 			</ul>
 		</div>
     </>);

@@ -4,30 +4,41 @@ import { Product, FooterBanner, HeroBanner } from '../components'
 
 const ProductsContainer = React.forwardRef((props, ref) => {
   return (
-    <div id="products-container" ref={ref}>
+    <div className="products-container" ref={ref}>
       {props.products?.map(product => <Product key={product._id} product={product} />)}
     </div>
   );
 });
 
 const Home = ({ products, bannerData, hasFilter }) => {
-  const [ hasScrolled, setHasScrolled ] = React.useState(false);
   const containerRef = React.createRef();
-  console.log(hasFilter);
+
+  React.useEffect(() => {
+    console.log(hasFilter);
+
+    // if (!smoothSliding) {
+    //   let element = containerRef.current;
+    //   if (element) {
+    //     let { top } = element.getBoundingClientRect(); 
   
-  if (hasFilter && !hasScrolled) {
-    let element = containerRef.current;
-    if (element) {
-      let { top } = element.getBoundingClientRect();
+    //     window.scrollTo({
+    //       top: top - 180 - window.scrollY,
+    //     })
+    //   }
+    // }
 
-      window.scrollTo({
-        top: top,
-        behavior: "smooth"
-      })
-
-      setHasScrolled(true);
+    if (hasFilter) {
+      let element = containerRef.current;
+      if (element) {
+        let { top } = element.getBoundingClientRect(); 
+  
+        window.scrollTo({
+          top: top - 180 - window.scrollY,
+          behavior: "smooth"
+        })
+      }
     }
-  }
+  }, []);
 
   return (
     <div>
@@ -62,7 +73,7 @@ export const getServerSideProps = async context => {
   const bannerData = await client.fetch(bannerQuery);
 
   return {
-    props: { products, bannerData, hasFilter: filter !== null }
+    props: { products, bannerData, hasFilter: filter !== undefined }
   }
 }
 
