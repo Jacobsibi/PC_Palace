@@ -51,8 +51,8 @@
     color: black;
 }
 
-.resultItem:hover {
-    color: white;
+.selected {
+    color:white
 }
 
 .queryResults::-webkit-scrollbar {

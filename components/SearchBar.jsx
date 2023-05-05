@@ -46,7 +46,7 @@ const SearchResults = props => {
                         productsMatching.map((product, index) => (
                             <Link href={`/product/${product.slug.current}`} 
                                 onMouseEnter={() => props.setSelectedIndex(index)} key={index}>
-                                <div className={`${styles.resultItem}`} >
+                                <div className={`${props.selectedIndex == index ? styles.selected : ""} ${styles.resultItem}`} >
                                     {product.name}
                                 </div>
                             </Link>
