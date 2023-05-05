@@ -19,11 +19,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
- // const [user, setUser] = useState("");
 
-  
-  //draft output current user email on console log
-  console.log(auth?.currentUser?.email);
 
 
   //CREATE NEW ACCOUNT WITH EMAIL AND PASSWORD
