@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@babel/core": "^7.17.9",
+    "@emailjs/browser": "^3.11.0",
     "@sanity/client": "^3.4.1",
     "@sanity/image-url": "^1.0.1",
     "@stripe/stripe-js": "^1.52.1",
@@ -23,7 +24,8 @@
     "react-hot-toast": "^2.4.0",
     "react-icons": "^4.8.0",
     "stripe": "^12.2.0",
-    "sweetalert": "^2.1.2"
+    "sweetalert": "^2.1.2",
+    "swr": "^2.1.5"
   },
   "devDependencies": {
     "@babel/preset-react": "^7.16.7",

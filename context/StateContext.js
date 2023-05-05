@@ -4,6 +4,7 @@ import { toast } from 'react-hot-toast';
 const Context = createContext();
 
 export const StateContext = ({ children }) => {
+
   const [showLogin, setShowLogin] = useState(false);
   const [showCart, setShowCart] = useState(false);
   const [cartItems, setCartItems] = useState([]);
@@ -88,6 +89,8 @@ export const StateContext = ({ children }) => {
       return prevQty - 1
     });
   }
+
+ 
 
   return (
     <Context.Provider
