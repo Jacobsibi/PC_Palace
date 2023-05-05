@@ -1,13 +1,13 @@
 .navbar {
     display: grid;
     padding: 0.6% 2%;
-    background-color: #c6edff;
+    background-color: black;
     grid-template-columns: repeat(4, 5fr) 15fr 6fr repeat(2, 0.5fr);
 }
 
 .pages:hover {
-    background-color: #9de0ff;
-    color: rgb(26, 71, 194);
+    background-color: #1d1d1d;
+    color: rgb(255, 112, 112);
 }
 
 .navbar a {
@@ -27,6 +27,7 @@
     font-weight: bold;
     transition: all .2s ease;
     margin: 0% 1.2%;
+    color: white;
 }
 
 .accountButton {
@@ -47,13 +48,14 @@
     margin-right: 10%;
     border: none;
     background-color: inherit;
-    background-color: #9de0ff;
+    background-color: #1d1d1d;
+    color: white;
     border-radius: 10px;
     z-index: 50;
 }
 
 .departmentsButton:hover {
-    background-color: #72d2ff;
+    background-color: #3a3a3a;
 }
 
 .departments {
