@@ -1,9 +1,9 @@
 import LogInNewAccount from "../components/LoginNewAccount"
 
-const LogInNewAccount = () => {
+const LogInNewAccountPage = () => {
   return(
    <LogInNewAccount/>
   );
 }
 
-export default LogInNewAccount;
+export default LogInNewAccountPage;

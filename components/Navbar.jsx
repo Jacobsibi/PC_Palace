@@ -15,8 +15,6 @@ const CartButton = (props) => {
 	</>);
 }
 
-
-
 const Departments = (props) => {
 	const [ prevScrollY, setPrevScrollY ] = React.useState(0);
 

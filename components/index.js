@@ -6,7 +6,8 @@ export { default as HeroBanner } from './HeroBanner';
 export { default as FooterBanner } from './FooterBanner';
 export { default as Cart } from './Cart';
 export { default as Login } from './Login';
-export { default as Logout } from './LoginNewAccount';
+export { default as LoginNewAccount } from './LoginNewAccount';
+export { default as lgout } from './Logout';
 export { default as Support } from './Support';
 export { default as SearchBar } from './SearchBar';
 

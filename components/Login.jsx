@@ -20,7 +20,7 @@ const Login = () => {
   //let loggedIn = true;
   //const [loggedIn, setLoggedIn] =  useState(false);
 
-  //sign in wiht email function
+  //Function: signIn
   const signIn = async () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
@@ -54,7 +54,7 @@ const Login = () => {
     }
   };
 
-  //sign in with Google function
+  //Function: sign in with google
   const signInGoogle = async () => {
     try {
       await signInWithPopup(auth, authGoogle);
@@ -64,7 +64,7 @@ const Login = () => {
     }
   };
 
-  //logout function
+  //Function: logout
   const logOut = async () => {
     try {
       await signOut(auth);
@@ -75,74 +75,9 @@ const Login = () => {
     }
   };
 
-  //handle login change the use state based on the value of auth.CurrentUser
-  // function handleLogin() {
-  //   if(auth?.currentUser){
-  //     console.log("User in");
-  //     //setLoggedIn(true);
-  //     loggedIn = true;
-  //   } else{
-  //     console.log("User not in");
-  //     //setLoggedIn(false);
-  //     loggedIn = false;
-  //   }
-  // }
-  
-  //useEffect to render again after an action
-  // useEffect(() => {
-  //   if (loggedIn) {
-  //     console.log("User logged in!"); // Your code to execute on login here
-  //     loggedIn = true;
-  //   }
-  //   else{
-  //     loggedIn = false;
-  //   }
-  // }, [loggedIn]);
+
 
   return (
-  // implement this if want to check login inside component and use auxiliary function
-  //   <div className={styles.form}>
-  //   {loggedIn ? (
-  //     <div>
-  //           <h1>Welcome {auth?.currentUser?.displayName} </h1>
-  //           <p>Enjoy Shopping With Us</p>
-  //           <button class={styles.btn} onClick={logOut}> Logout</button> 
-  //     </div>
-  //   ) : (
-  //     <div>
-  //       <h1>Welcome {auth?.currentUser?.displayName} </h1>
-  //       <label className={styles.label}>Email</label>
-  //       <input
-  //         className={styles.input}
-  //         type="email"
-  //         onChange={(e) => setEmail(e.target.value)}
-  //         name="user_email"
-  //         required
-  //         pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-  //       />
-
-  //       <label className={styles.label}>Password</label>
-  //       <input
-  //         className={styles.input}
-  //         type="password"
-  //         onChange={(e) => setPassword(e.target.value)}
-  //         name="user_password"
-  //         required
-  //       />
-
-  //       <p>
-  //         New Member? <Link href="/loginnewaccount"> Sign Up Now</Link>
-  //       </p>
-
-  //       <button className={styles.btn} onClick={signIn}>
-  //         Sign In
-  //       </button>
-  //       <button className={styles.btn} onClick={signInGoogle}>
-  //         Sign In With Google
-  //       </button>
-  //     </div>
-  //   )}
-  // </div>
 
 <div className={styles.form}>
 <h1>Welcome {auth?.currentUser?.displayName} </h1>
@@ -166,7 +101,7 @@ const Login = () => {
 />
 
 <p>
-  New Member? <Link href="/loginnewaccount"> Sign Up Now</Link>
+  New Member? <Link href="/loginnewaccountpage"> Sign Up Now</Link>
 </p>
 
 <button className={styles.btn} onClick={signIn}>

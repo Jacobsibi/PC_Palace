@@ -5,7 +5,7 @@ import {signOut} from "firebase/auth";
 
 const Logout = () => {
 
-  //LOGOUT (right now currentUser != NUlL)  maybe not implementeing ?
+  //Function: logout
   const logOut = async () => {
     try {
       await signOut(auth);

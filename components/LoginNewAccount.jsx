@@ -6,15 +6,14 @@ import { auth } from "../configurations/firebase";
 import { updateProfile } from "firebase/auth";
 import {createUserWithEmailAndPassword} from "firebase/auth";
 
-const Logout = () => {
+const LoginNewAccount = () => {
 
   //email and password to be used as parameter for Firebase special function
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
 
-
-  //CREATE NEW ACCOUNT WITH EMAIL AND PASSWORD
+  //Function: create new account with email and password
   const createAccount = async () => {
     if(!fullName){
       swal("Enter Name", "Please fill in your name", "warning");
@@ -81,4 +80,4 @@ const Logout = () => {
   );
 }
 
-export default Logout
+export default LoginNewAccount
