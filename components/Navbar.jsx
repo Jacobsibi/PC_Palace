@@ -43,16 +43,13 @@ const Departments = (props) => {
     return (<>
 		<div className={styles.departments}>
 			<ul>
-				<li><Link href={""}>CPUs</Link></li>
-				<li><Link href={""}>Graphics Cards</Link></li>
-				<li><Link href={""}>Motherboards</Link></li>
-				<li><Link href={""}>Memory</Link></li>
-				<li><Link href={""}>Storage</Link></li>
-				<li><Link href={""}>Power Supply</Link></li>
-				<li><Link href={""}>System Cooling</Link></li>
-				<li><Link href={""}>Case</Link></li>
-				<li><Link href={""}>Monitor</Link></li>
-				<li><Link href={""}>Peripherals</Link></li>
+				<li><Link href={"/?filter=cpu"}>CPUs</Link></li>
+				<li><Link href={"/?filter=gpu"}>Graphics Cards</Link></li>
+				<li><Link href={"/?filter=mb"}>Motherboards</Link></li>
+				<li><Link href={"/?filter=ram"}>Memory</Link></li>
+				<li><Link href={"/?filter=sto"}>Storage</Link></li>
+				<li><Link href={"/?filter=psu"}>Power Supply</Link></li>
+				<li><Link href={"/?filter=case"}>Case</Link></li>
 			</ul>
 		</div>
     </>);
