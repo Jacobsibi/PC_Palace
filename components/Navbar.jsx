@@ -5,6 +5,7 @@ import { Cart, Login } from './index';
 import { useStateContext } from '../context/StateContext';
 import styles from "../styles/Navbar.module.css";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 
 const CartButton = (props) => {
@@ -64,7 +65,11 @@ const Navbar = () => {
 
 	return (<>
 		<div className={styles.navbar}>
-			<span className={styles.pages}><Link href={"/"}><img src="/logo/logo-image.png" className={styles.logo}></img></Link></span>
+			<span className={styles.pages}>
+				<Link href={"/"}>
+					<Image src={"/logo-image.png"} width={1134} height={272}></Image>
+				</Link>
+			</span>
 			<span className={styles.pages}><Link href={"/buildcomputer"}>Computer Builder</Link></span>
 			<span className={styles.pages}><Link href={"/support"}>Support</Link></span>
 			<span className={styles.pages}><Link href={"/about"}>About us</Link></span>
