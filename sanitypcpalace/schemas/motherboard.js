@@ -1,7 +1,7 @@
 // export schema, export as object
 export default {
-  name: 'product',
-  title: 'Product',
+  name: 'motherboard',
+  title: 'Motherboard',
   type: 'document',
   fields: [
     {
@@ -38,11 +38,6 @@ export default {
       title: 'Description',
       type: 'string',
     },
-    { 
-      name: 'details',
-      title: 'Details',
-      type: 'string',
-    },
     {
       name: 'brand',
       title: 'Brand',
@@ -52,8 +47,37 @@ export default {
       name: 'rating',
       title: 'Rating',
       type: 'number',
+    },
+    {
+        name: 'model',
+        title: 'Model',
+        type: 'string',
+    },
+    {
+      name: 'cpusocket',
+      title: 'CPU Socket',
+      type: 'string',
+    },
+    {
+      name: 'ramslots',
+      title: 'RAM Slots',
+      type: 'number',
+    },
+    {
+      name: 'memorytype',
+      title: 'Memory Type',
+      type: 'string',
+    },
+    {
+      name: 'wifi',
+      title: 'Wifi',
+      type: 'string',
+    },
+    {
+      name: 'bluetooth',
+      title: 'Bluetooth',
+      type: 'string',
     }
-
-
+ 
   ]
 }

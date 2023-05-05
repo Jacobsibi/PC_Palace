@@ -1,7 +1,7 @@
 // export schema, export as object
 export default {
-  name: 'product',
-  title: 'Product',
+  name: 'PCcase',
+  title: 'PCCase',
   type: 'document',
   fields: [
     {
@@ -38,11 +38,6 @@ export default {
       title: 'Description',
       type: 'string',
     },
-    { 
-      name: 'details',
-      title: 'Details',
-      type: 'string',
-    },
     {
       name: 'brand',
       title: 'Brand',
@@ -52,8 +47,32 @@ export default {
       name: 'rating',
       title: 'Rating',
       type: 'number',
+    },
+    {
+        name: 'model',
+        title: 'Model',
+        type: 'string',
+    },
+    {
+      name: 'sidewindow',
+      title: 'Side Window',
+      type: 'string',
+    },
+    {
+      name: 'colour',
+      title: 'Colour',
+      type: 'string',
+    },
+    {
+      name: 'bays',
+      title: 'Bays',
+      type: 'number',
+    },
+    {
+      name: 'usbaccess',
+      title: 'USB access',
+      type: 'string',
     }
-
-
+ 
   ]
 }

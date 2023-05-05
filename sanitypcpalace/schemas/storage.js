@@ -1,7 +1,7 @@
 // export schema, export as object
 export default {
-  name: 'product',
-  title: 'Product',
+  name: 'storage',
+  title: 'Storage',
   type: 'document',
   fields: [
     {
@@ -38,11 +38,6 @@ export default {
       title: 'Description',
       type: 'string',
     },
-    { 
-      name: 'details',
-      title: 'Details',
-      type: 'string',
-    },
     {
       name: 'brand',
       title: 'Brand',
@@ -52,8 +47,12 @@ export default {
       name: 'rating',
       title: 'Rating',
       type: 'number',
+    },
+    {
+        name: 'memorysize',
+        title: 'Memory Size',
+        type: 'string',
     }
-
 
   ]
 }

@@ -1,7 +1,7 @@
 // export schema, export as object
 export default {
-  name: 'product',
-  title: 'Product',
+  name: 'cpu',
+  title: 'CPU',
   type: 'document',
   fields: [
     {
@@ -38,11 +38,6 @@ export default {
       title: 'Description',
       type: 'string',
     },
-    { 
-      name: 'details',
-      title: 'Details',
-      type: 'string',
-    },
     {
       name: 'brand',
       title: 'Brand',
@@ -52,8 +47,36 @@ export default {
       name: 'rating',
       title: 'Rating',
       type: 'number',
+    },
+    {
+        name: 'cores',
+        title: 'Cores',
+        type: 'number',
+    },
+    {
+        name: 'clock',
+        title: 'Standard Clock',
+        type: 'string',
+    },
+    {
+        name: 'power',
+        title: 'Thermal Design Power',
+        type: 'string',
+    },  
+    {
+        name: 'integratedgraphics',
+        title: 'Integrated Graphics',
+        type: 'string',
+    },  
+    {
+      name: 'multithreading',
+      title: 'Multithreading',
+      type: 'string',
+    },
+    {
+      name: 'socket',
+      title: 'Socket',
+      type: 'string',
     }
-
-
   ]
 }
