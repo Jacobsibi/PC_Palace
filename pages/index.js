@@ -1,6 +1,6 @@
 import React from 'react';
 import { client } from '../lib/client';
-import { Product, FooterBanner, HeroBanner, SearchBar } from '../components'
+import { Product, Banner } from '../components'
 
 const ProductsContainer = React.forwardRef((props, ref) => {
   return (
@@ -32,7 +32,7 @@ const Home = ({ products, bannerData, hasFilter }) => {
   return (
     <div>
       {/* <HeroBanner heroBanner={bannerData.length && bannerData[0]}/> */}
-      <FooterBanner footerBanner={bannerData && bannerData[0]}/>
+      <Banner banner={bannerData && bannerData[0]}/>
 
       <div className="products-heading">
         <h2>Best Selling Products</h2>
@@ -42,7 +42,7 @@ const Home = ({ products, bannerData, hasFilter }) => {
       <ProductsContainer products={products} ref={containerRef} />
 
 
-      <FooterBanner footerBanner={bannerData && bannerData[0]}/>
+      <Banner banner={bannerData && bannerData[0]}/>
     </div>
   );
 }
