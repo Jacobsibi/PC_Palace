@@ -125,8 +125,13 @@ const Login = () => {
   //Function: logout
   const logOut = async () => {
     try {
-      await signOut(auth);
-      swal("Logged Out", "You are logged out from your account", "info");
+        //check if there account is signed out already, give out a prompt
+      if (!auth?.currentUser){
+        await swal("Already Logged Out", "No user signed in at the moment", "warning");
+      } else{
+        await signOut(auth);
+        swal("Logged Out", "You are logged out from your account", "info");
+      }
     } catch (error) {
       swal("Error", "Please try again",  "error");
     }
@@ -159,6 +164,7 @@ const Login = () => {
                   placeholder="Name..."
                   type="text"
                   onChange={(e) => setFullName(e.target.value)}
+                  maxLength={20}
                   required
                   className={styles.input}
                 />
