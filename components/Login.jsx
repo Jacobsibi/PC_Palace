@@ -16,23 +16,27 @@ import {
 const Login = () => {
 
   //email and password to be used as parameter for Firebase special function
+  //name to update user's name when create an account via email, becuase it is not done automatically
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
 
-
-
-  //CREATE NEW ACCOUNT WITH EMAIL AND PASSWORD
+  //Function: create new account via email and password
   const createAccount = async () => {
-    if(!fullName){
-      swal("Enter Name", "Please fill in your name", "warning");
-    }else{
       try {
-        await createUserWithEmailAndPassword(auth, email, password);
-  
-        //Update user's fullname once account is created
-        updateProfile(auth.currentUser, {displayName: fullName});
-        swal("Welcome", "You created new account", "success");
+        //check if there is an account is signed in, prompt to sign out first to continue action
+        if (auth?.currentUser){
+          swal("Currently Logged In", "Please sign out first to create new account", "warning");
+        } 
+        //check if name is entered, ohterwise cannot create new account
+        else if (!fullName) { 
+          swal("Enter Name", "Please fill in your name", "warning");
+        } else{
+          await createUserWithEmailAndPassword(auth, email, password);
+          //update user's fullname once account is created because login with email does not create name automatically
+          updateProfile(auth.currentUser, {displayName: fullName});
+          swal("Welcome", "You created new account", "success");
+        }
       }
       catch (error) {
         if (error.code === 'auth/email-already-in-use') {
@@ -63,17 +67,18 @@ const Login = () => {
           swal("Error", "Please try again",  "error");
         }
       }
-    }
-
-    
-
   }
 
-  //SIGN IN THE EXISTED ACCOUNT ONLY
+  //Function: log in with existed account only
   const signIn = async () => {
     try {
-      await signInWithEmailAndPassword(auth, email, password);
-      swal("Logged In", "You signed in with email", "success");
+        //check if there is an account is signed in, prompt to sign out first to continue action
+        if (auth?.currentUser){
+        swal("Already Logged In", "Please sign out first", "warning");
+      } else{
+        await signInWithEmailAndPassword(auth, email, password);
+        swal("Logged In", "You signed in with email", "success");
+      }
     } catch (error) {
       if (error.code === 'auth/wrong-password') {
         // Handle the wrong passwrod
@@ -102,16 +107,22 @@ const Login = () => {
     }
   };
 
-  //SIGN IN WITH GOOGLE (both new and returning customer)
+  //Function: sign in with google for both new and existing customer
   const signInGoogle = async () => {
     try {
-      await signInWithPopup(auth, authGoogle);
+      //check if there is an account is signed in, prompt to sign out first to continue action
+      if (auth?.currentUser){
+        await swal("Already Logged In", "Please sign out first", "warning");
+      } else{
+        await signInWithPopup(auth, authGoogle);
+        swal("Logged In", "You signed in with Google", "success");
+      }
     } catch (error) {
       swal("Error", "Please try again",  "error");
     }
   };
 
-  //LOGOUT (right now currentUser != NUlL)
+  //Function: logout
   const logOut = async () => {
     try {
       await signOut(auth);
@@ -121,10 +132,11 @@ const Login = () => {
     }
   };
 
-  //internal configurations
+  //internal configurations to show login component
   const loginReg = useRef();
   const { setShowLogin } = useStateContext();
 
+  //the output
   return (
     <div class={styles.scrollcontainer}>
       <div className={styles.loginwrapper} ref={loginReg}>
