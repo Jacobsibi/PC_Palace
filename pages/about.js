@@ -4,7 +4,7 @@ import { client } from '../lib/client';
 import { Product, FooterBanner, HeroBanner } from '../components';
 
 const AboutPage = () => { return (
-    <div>
+    <div style={{ textAlign: 'center' }}>
         <h2>About us</h2>
 
         <p>At PC Palace, we are passionate about building the perfect computer. We know that every person has unique needs and preferences when it comes to their computer, and we strive to provide a personalized experience for each and every one of our customers.</p>
