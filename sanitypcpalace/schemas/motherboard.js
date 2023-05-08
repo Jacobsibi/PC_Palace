@@ -64,7 +64,7 @@ export default {
       type: 'number',
     },
     {
-      name: 'memorytype',
+      name: 'memoryctype',
       title: 'Memory Type',
       type: 'string',
     },
