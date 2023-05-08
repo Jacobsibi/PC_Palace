@@ -1,5 +1,5 @@
 import React from 'react';
-import { client } from '../lib/client';
+import { client } from '../LIB/client';
 import { Product, Banner } from '../components'
 
 const ProductsContainer = React.forwardRef((props, ref) => {
