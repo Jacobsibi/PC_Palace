@@ -39,10 +39,10 @@ const Login = () => {
         } else{
           await createUserWithEmailAndPassword(auth, email, password);
           //update user's fullname once account is created because login with email does not create name automatically
-          updateProfile(auth.currentUser, {displayName: fullName});
-          //refresh the page
-          refreshPage();
-          swal("Welcome", "You created new account", "success");
+          await updateProfile(auth.currentUser, {displayName: fullName});
+          await swal("Welcome", "You created new account", "success");
+                    //refresh the page
+                     refreshPage();
         }
       }
       catch (error) {
@@ -84,9 +84,9 @@ const Login = () => {
         swal("Already Logged In", "Please sign out first", "warning");
       } else{
         await signInWithEmailAndPassword(auth, email, password);
-                  //refresh the page
-                  refreshPage();
-        swal("Logged In", "You signed in with email", "success");
+        await swal("Logged In", "You signed in with email", "success");
+                          //refresh the page
+                          refreshPage();
       }
     } catch (error) {
       if (error.code === 'auth/wrong-password') {
@@ -124,9 +124,9 @@ const Login = () => {
         await swal("Already Logged In", "Please sign out first", "warning");
       } else{
         await signInWithPopup(auth, authGoogle);
-                  //refresh the page
-                  refreshPage();
-        swal("Logged In", "You signed in with Google", "success");
+        await swal("Logged In", "You signed in with Google", "success");
+                          //refresh the page
+                          refreshPage();
       }
     } catch (error) {
       swal("Error", "Please try again",  "error");
@@ -141,9 +141,7 @@ const Login = () => {
         await swal("Already Logged Out", "No user signed in at the moment", "warning");
       } else{
         await signOut(auth);
-                  //refresh the page
-                  refreshPage();
-        swal("Logged Out", "You are logged out from your account", "info");
+        await swal("Logged Out", "You are logged out from your account", "info");
       }
     } catch (error) {
       swal("Error", "Please try again",  "error");
