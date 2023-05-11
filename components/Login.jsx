@@ -1,7 +1,6 @@
 import swal from 'sweetalert';
 import styles from '../styles/Login.module.css';
 import React, { useRef, useState, useEffect } from 'react';
-import Link from 'next/link';
 import { AiOutlineLeft } from 'react-icons/ai';
 import { useStateContext } from '../context/StateContext';
 import { auth, authGoogle } from "../configurations/firebase";
@@ -142,6 +141,8 @@ const Login = () => {
       } else{
         await signOut(auth);
         await swal("Logged Out", "You are logged out from your account", "info");
+        //refresh the page
+        refreshPage();
       }
     } catch (error) {
       swal("Error", "Please try again",  "error");
@@ -169,7 +170,7 @@ const Login = () => {
             <div className={styles.emptylogin}>
               <h1>Welcome {auth?.currentUser?.displayName}</h1>
               <p>Sign In or Create Account</p>
-              <Link href="/">
+             
 
                 <input
                   placeholder="Name..."
@@ -222,7 +223,7 @@ const Login = () => {
                 >
                   Create Account
                 </button>
-              </Link>
+              
             </div>
           )}
         </div>
