@@ -21,6 +21,11 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
 
+  //Function: refresh the page
+  function refreshPage(){
+    window.location.reload(false);
+  }
+
   //Function: create new account via email and password
   const createAccount = async () => {
       try {
@@ -35,6 +40,8 @@ const Login = () => {
           await createUserWithEmailAndPassword(auth, email, password);
           //update user's fullname once account is created because login with email does not create name automatically
           updateProfile(auth.currentUser, {displayName: fullName});
+          //refresh the page
+          refreshPage();
           swal("Welcome", "You created new account", "success");
         }
       }
@@ -77,6 +84,8 @@ const Login = () => {
         swal("Already Logged In", "Please sign out first", "warning");
       } else{
         await signInWithEmailAndPassword(auth, email, password);
+                  //refresh the page
+                  refreshPage();
         swal("Logged In", "You signed in with email", "success");
       }
     } catch (error) {
@@ -115,6 +124,8 @@ const Login = () => {
         await swal("Already Logged In", "Please sign out first", "warning");
       } else{
         await signInWithPopup(auth, authGoogle);
+                  //refresh the page
+                  refreshPage();
         swal("Logged In", "You signed in with Google", "success");
       }
     } catch (error) {
@@ -130,6 +141,8 @@ const Login = () => {
         await swal("Already Logged Out", "No user signed in at the moment", "warning");
       } else{
         await signOut(auth);
+                  //refresh the page
+                  refreshPage();
         swal("Logged Out", "You are logged out from your account", "info");
       }
     } catch (error) {
