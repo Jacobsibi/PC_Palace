@@ -40,8 +40,8 @@ const Login = () => {
           //update user's fullname once account is created because login with email does not create name automatically
           await updateProfile(auth.currentUser, {displayName: fullName});
           await swal("Welcome", "You created new account", "success");
-                    //refresh the page
-                     refreshPage();
+          //refresh the page
+           refreshPage();
         }
       }
       catch (error) {
@@ -84,8 +84,8 @@ const Login = () => {
       } else{
         await signInWithEmailAndPassword(auth, email, password);
         await swal("Logged In", "You signed in with email", "success");
-                          //refresh the page
-                          refreshPage();
+        //refresh the page
+        refreshPage();
       }
     } catch (error) {
       if (error.code === 'auth/wrong-password') {
@@ -124,8 +124,8 @@ const Login = () => {
       } else{
         await signInWithPopup(auth, authGoogle);
         await swal("Logged In", "You signed in with Google", "success");
-                          //refresh the page
-                          refreshPage();
+        //refresh the page
+        refreshPage();
       }
     } catch (error) {
       swal("Error", "Please try again",  "error");
