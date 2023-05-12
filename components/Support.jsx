@@ -1,7 +1,6 @@
 import React, { useState, useRef } from 'react';
 import emailjs from '@emailjs/browser';
 import styles from '../styles/Support.module.css';
-import { sendForm } from 'emailjs-com';
 
 const Support = () => {
 
