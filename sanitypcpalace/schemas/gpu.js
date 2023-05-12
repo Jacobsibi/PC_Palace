@@ -1,7 +1,7 @@
 // export schema, export as object
 export default {
-  name: 'product',
-  title: 'Product',
+  name: 'gpu',
+  title: 'GPU',
   type: 'document',
   fields: [
     {
@@ -11,7 +11,7 @@ export default {
       of: [{type: 'image'}],
       options: {
         hotspot: true,
-      },
+      }
     },
     {
       name: 'name',
@@ -26,7 +26,7 @@ export default {
       options: {
         source: 'name',
         maxLength: 90,
-      },
+      }
     },
     {
       name: 'price',
@@ -36,11 +36,6 @@ export default {
     {
       name: 'description',
       title: 'Description',
-      type: 'string',
-    },
-    { 
-      name: 'details',
-      title: 'Details',
       type: 'string',
     },
     {
@@ -54,9 +49,30 @@ export default {
       type: 'number',
     },
     {
-      name: "component",
-      title: "Component",
-      type: "string"
+        name: 'model',
+        title: 'Model',
+        type: 'string',
+    },
+    {
+      name: 'memorysize',
+      title: 'Memory Size',
+      type: 'string',
+    },
+    {
+      name: 'clockspeed',
+      title: 'Clock Speed',
+      type: 'string',
+    },
+    {
+      name: 'displayports',
+      title: 'Display Ports',
+      type: 'number',
+    },
+    {
+      name: 'hdmiports',
+      title: 'HDMI Ports',
+      type: 'number',
     }
+ 
   ]
 }

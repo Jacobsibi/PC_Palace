@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import Link from 'next/link';
-import { AiOutlineShopping, } from 'react-icons/ai'
-import { Cart } from './Index';
+import { AiOutlineShopping, AiOutlineUser } from 'react-icons/ai'
+import { Cart, Login } from './index';
 import { useStateContext } from '../context/StateContext';
 import styles from "../styles/Navbar.module.css";
+import Image from "next/image";
 
 const CartButton = (props) => {
 	const { setShowCart } = useStateContext();
@@ -33,16 +34,13 @@ const Departments = (props) => {
     return (<>
 		<div className={styles.departments}>
 			<ul>
-				<li><Link href={""}>CPUs</Link></li>
-				<li><Link href={""}>Graphics Cards</Link></li>
-				<li><Link href={""}>Motherboards</Link></li>
-				<li><Link href={""}>Memory</Link></li>
-				<li><Link href={""}>Storage</Link></li>
-				<li><Link href={""}>Power Supply Units</Link></li>
-				<li><Link href={""}>System Cooling</Link></li>
-				<li><Link href={""}>Case</Link></li>
-				<li><Link href={""}>Monitor</Link></li>
-				<li><Link href={""}>Peripherals</Link></li>
+				<li><Link href={`/?filter=cpu`}>CPUs</Link></li>
+				<li><Link href={`/?filter=gpu`}>Graphics Cards</Link></li>
+				<li><Link href={`/?filter=mb`}>Motherboards</Link></li>
+				<li><Link href={`/?filter=ram`}>Memory</Link></li>
+				<li><Link href={`/?filter=sto`}>Storage</Link></li>
+				<li><Link href={`/?filter=psu`}>Power Supply</Link></li>
+				<li><Link href={`/?filter=case`}>Case</Link></li>
 			</ul>
 		</div>
     </>);
@@ -53,10 +51,12 @@ const Navbar = () => {
 	const [ showDepartments, setShowDepartments ] = React.useState(false);
 	return (<>
 		<div className={styles.navbar}>
-			<span className={styles.pages}><Link href={"/"}>home(logo)</Link></span>
+			<span className={styles.pages}>
+				<Link href={"/"}>
+					<Image src={"/logo-image.png"} width={1134} height={272}></Image>
+				</Link>
+			</span>
 			<span className={styles.pages}><Link href={"/buildcomputer"}>Computer Builder</Link></span>
-			<span className={styles.pages}><Link href={""}>Specials</Link></span>
-			<span className={styles.pages}><Link href={""}>Brands</Link></span>
 			<span className={styles.pages}><Link href={"/support"}>Support</Link></span>
 			<span className={styles.pages}><Link href={"/about"}>About us</Link></span>
 			<span className={styles.pages}><Link href={"/loginpage"}>Account</Link></span>

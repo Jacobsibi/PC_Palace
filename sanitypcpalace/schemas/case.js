@@ -1,7 +1,7 @@
 // export schema, export as object
 export default {
-  name: 'product',
-  title: 'Product',
+  name: 'PCcase',
+  title: 'PCCase',
   type: 'document',
   fields: [
     {
@@ -11,7 +11,7 @@ export default {
       of: [{type: 'image'}],
       options: {
         hotspot: true,
-      },
+      }
     },
     {
       name: 'name',
@@ -26,7 +26,7 @@ export default {
       options: {
         source: 'name',
         maxLength: 90,
-      },
+      }
     },
     {
       name: 'price',
@@ -36,11 +36,6 @@ export default {
     {
       name: 'description',
       title: 'Description',
-      type: 'string',
-    },
-    { 
-      name: 'details',
-      title: 'Details',
       type: 'string',
     },
     {
@@ -54,9 +49,30 @@ export default {
       type: 'number',
     },
     {
-      name: "component",
-      title: "Component",
-      type: "string"
+        name: 'model',
+        title: 'Model',
+        type: 'string',
+    },
+    {
+      name: 'sidewindow',
+      title: 'Side Window',
+      type: 'string',
+    },
+    {
+      name: 'colour',
+      title: 'Colour',
+      type: 'string',
+    },
+    {
+      name: 'bays',
+      title: 'Bays',
+      type: 'number',
+    },
+    {
+      name: 'usbaccess',
+      title: 'USB access',
+      type: 'string',
     }
+ 
   ]
 }
