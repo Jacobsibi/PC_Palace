@@ -2,6 +2,7 @@ import Link from "next/link";
 import swal from "sweetalert";
 import styles from "../styles/Support.module.css";
 import React, { useState } from "react";
+import { useRouter } from 'next/router';
 import { auth } from "../configurations/firebase";
 import { updateProfile } from "firebase/auth";
 import { createUserWithEmailAndPassword } from "firebase/auth";
@@ -9,6 +10,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 const LoginNewAccount = () => {
   //email and password to be used as parameter for Firebase special function
   //name to update user's name when create an account via email, becuase it is not done automatically
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
@@ -36,6 +38,8 @@ const LoginNewAccount = () => {
         await createUserWithEmailAndPassword(auth, email, password);
         //update user's fullname once account is created because login with email does not create name automatically
         await updateProfile(auth.currentUser, { displayName: fullName });
+        // redirect to home
+        await router.push('/');
         await swal("Welcome", "You created new account", "success");
         //refresh the page
         refreshPage();
@@ -118,15 +122,11 @@ const LoginNewAccount = () => {
         required
       />
 
-      <Link href="/">
-        {" "}
         <button class={styles.btn} onClick={createAccount}>
-          {" "}
-          Create Account{" "}
+          Create Account
         </button>
-      </Link>
     </div>
   );
 };
-
+   
 export default LoginNewAccount;

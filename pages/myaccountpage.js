@@ -6,4 +6,4 @@ const MyAccountPage = () => {
   );
 }
 
-export default MyAccountPage
+export default MyAccountPage;

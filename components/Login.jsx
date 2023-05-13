@@ -2,11 +2,13 @@ import Link from "next/link";
 import swal from "sweetalert";
 import styles from "../styles/Support.module.css";
 import React, { useState } from "react";
+import { useRouter } from "next/router";
 import { auth, authGoogle } from "../configurations/firebase";
 import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 
 const Login = () => {
   //email and password to be used as parameter for Firebase special function
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -23,6 +25,8 @@ const Login = () => {
         swal("Already Logged In", "Please sign out first", "warning");
       } else {
         await signInWithEmailAndPassword(auth, email, password);
+        //redirect to home
+        await router.push('/');
         await swal("Logged In", "You signed in with email", "success");
         //refresh the page
         refreshPage();
@@ -66,6 +70,8 @@ const Login = () => {
         await swal("Already Logged In", "Please sign out first", "warning");
       } else {
         await signInWithPopup(auth, authGoogle);
+        //redirect to home
+        await router.push('/');
         await swal("Logged In", "You signed in with Google", "success");
         //refresh the page
         refreshPage();
@@ -111,20 +117,12 @@ const Login = () => {
         </Link>
       </p>
 
-      <Link href="/">
-        {" "}
-        <button class={styles.btn} onClick={signIn}>
-          {" "}
-          Sign In{" "}
-        </button>
-      </Link>
-      <Link href="/">
-        {" "}
-        <button class={styles.btn} onClick={signInGoogle}>
-          {" "}
-          Sign In With Google{" "}
-        </button>
-      </Link>
+      <button class={styles.btn} onClick={signIn}>
+        Sign In
+      </button>
+      <button class={styles.btn} onClick={signInGoogle}>
+        Sign In With Google
+      </button>
     </div>
   );
 };
