@@ -5,7 +5,7 @@ const Context = createContext();
 
 export const StateContext = ({ children }) => {
 
-  const [showLogin, setShowLogin] = useState(false);
+  const [showAccountPopUp, setShowAccountPopUp] = useState(false);
   const [showCart, setShowCart] = useState(false);
   const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
@@ -95,8 +95,8 @@ export const StateContext = ({ children }) => {
   return (
     <Context.Provider
       value={{
-        showLogin,
-        setShowLogin,
+        showAccountPopUp,
+        setShowAccountPopUp,
         showCart,
         setShowCart,
         cartItems,

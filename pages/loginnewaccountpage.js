@@ -5,5 +5,4 @@ const LogInNewAccountPage = () => {
    <LogInNewAccount/>
   );
 }
-
 export default LogInNewAccountPage;

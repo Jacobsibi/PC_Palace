@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import Link from 'next/link';
 import { AiOutlineShopping, AiOutlineUser } from 'react-icons/ai'
-import { Cart, Login } from './index';
+import { Cart, AccountPopUp } from './index';
 import { useStateContext } from '../context/StateContext';
 import styles from "../styles/Navbar.module.css";
 import Image from "next/image";
@@ -12,6 +12,15 @@ const CartButton = (props) => {
 		<button className="cart-icon" onClick={() => setShowCart(true)}>
 			<AiOutlineShopping />
 			<span className="cart-item-qty">{props.itemAmount}</span>
+		</button>
+	</>);
+}
+
+const Account = () => {
+	const { setShowAccountPopUp } = useStateContext();
+	return (<>
+		<button className={styles.accountButton} onClick={() => setShowAccountPopUp(true)}>
+			<AiOutlineUser />
 		</button>
 	</>);
 }
@@ -47,7 +56,7 @@ const Departments = (props) => {
 }
 
 const Navbar = () => {
-	const { showLogin, showCart, totalQuantities } = useStateContext();
+	const { showAccountPopUp, showCart, totalQuantities } = useStateContext();
 	const [ showDepartments, setShowDepartments ] = React.useState(false);
 	return (<>
 		<div className={styles.navbar}>
@@ -59,13 +68,14 @@ const Navbar = () => {
 			<span className={styles.pages}><Link href={"/buildcomputer"}>Computer Builder</Link></span>
 			<span className={styles.pages}><Link href={"/support"}>Support</Link></span>
 			<span className={styles.pages}><Link href={"/about"}>About us</Link></span>
-			<span className={styles.pages}><Link href={"/loginpage"}>Account</Link></span>
 			<div />
 			<button className={styles.departmentsButton} onClick={() => setShowDepartments(!showDepartments)}>Departments</button>
+			<Account />
 			<CartButton itemAmount={totalQuantities} />
 		</div>
 		{showDepartments && <Departments hideDepartments={() => setShowDepartments(false)} />}
 		{showCart && <Cart />}
+		{showAccountPopUp && <AccountPopUp />}
 	</>);
 }
 
