@@ -1,19 +1,13 @@
 import Link from "next/link";
 import swal from "sweetalert";
 import styles from "../styles/Login.module.css";
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef } from "react";
 import { AiOutlineLeft } from "react-icons/ai";
 import { useStateContext } from "../context/StateContext";
-import { auth, authGoogle } from "../configurations/firebase";
-import { updateProfile } from "firebase/auth";
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signInWithPopup,
-  signOut,
-} from "firebase/auth";
+import { auth } from "../configurations/firebase";
+import {signOut} from "firebase/auth";
 
-//LATER: I WANT WHEN CLICK MY ACCOUNT BUTTON, REDIRECT TO THE PAGE
+//LATER: I WANT WHEN CLICK MY ACCOUNT BUTTON, REDIRECT TO THE PAGE: loginnewaccountpage.js
 
 const Account = () => {
     //state: configurations
@@ -53,7 +47,7 @@ const Account = () => {
     //ouput:
     return (
       <div>
-        {auth.currentUser ? (     
+        {auth?.currentUser ? (     
         <>
         <div class={styles.scrollcontainer}>
           <div className={styles.loginwrapper} ref={accountReg}>
@@ -80,10 +74,17 @@ const Account = () => {
                       My Account
                     </button>
                   </Link>
-    
-                  <button type="button" onClick={logOut} className="btn">
-                    Sign Out
-                  </button>
+
+                  <Link href="/">
+                    <button
+                      type="button"
+                      onClick={logOut}
+                      className="btn"
+                    >
+                      Sign Out
+                    </button>
+                  </Link>
+                  
                 </div>
               }
             </div>

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import swal from "sweetalert";
 import styles from "../styles/Support.module.css";
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState } from "react";
 import { auth, authGoogle } from "../configurations/firebase";
 import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 
@@ -80,7 +80,10 @@ const Login = () => {
     <div class={styles.form}>
       <h1>Sign In</h1>
       <p>
-        New member? <Link href="/loginnewaccountpage">Create New Account</Link>
+        New member?{" "}
+        <Link class={styles.highlightedLink} href="/loginnewaccountpage">
+          Create New Account
+        </Link>
       </p>
 
       <label class={styles.label}>Email</label>
@@ -93,7 +96,7 @@ const Login = () => {
         pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
       />
 
-      <label class={styles.label}>password</label>
+      <label class={styles.label}>Password</label>
       <input
         class={styles.input}
         type="password"
@@ -102,18 +105,26 @@ const Login = () => {
         required
       />
       <p>
-        Forgot password? <Link href="/about">Send a magic link</Link>
+        Forgot password?{" "}
+        <Link class={styles.highlightedLink} href="/about">
+          Send a magic link
+        </Link>
       </p>
 
-      <button class={styles.btn} onClick={signIn}>
+      <Link href="/">
         {" "}
-        Sign In{" "}
-      </button>
-
-      <button class={styles.btn} onClick={signInGoogle}>
+        <button class={styles.btn} onClick={signIn}>
+          {" "}
+          Sign In{" "}
+        </button>
+      </Link>
+      <Link href="/">
         {" "}
-        Sign In With Google{" "}
-      </button>
+        <button class={styles.btn} onClick={signInGoogle}>
+          {" "}
+          Sign In With Google{" "}
+        </button>
+      </Link>
     </div>
   );
 };
