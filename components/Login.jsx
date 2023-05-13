@@ -29,7 +29,7 @@ const Login = () => {
         await router.push('/');
         await swal("Logged In", "You signed in with email", "success");
         //refresh the page
-        refreshPage();
+        await refreshPage();
       }
     } catch (error) {
       if (error.code === "auth/wrong-password") {
@@ -74,7 +74,7 @@ const Login = () => {
         await router.push('/');
         await swal("Logged In", "You signed in with Google", "success");
         //refresh the page
-        refreshPage();
+        await refreshPage();
       }
     } catch (error) {
       swal("Error", "Please try again", "error");

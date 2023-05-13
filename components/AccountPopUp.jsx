@@ -47,7 +47,6 @@ const Account = () => {
     //ouput:
     return (
       <div>
-        {refreshPage}
         {auth?.currentUser ? (     
         <>
         <div class={styles.scrollcontainer}>

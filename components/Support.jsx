@@ -42,7 +42,7 @@ const Support = () => {
       <label class={styles.label} >Email</label>
       <input class={styles.input} type="email" name="user_email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"/>
       <label class={styles.label}> Message</label>
-      <textarea class={styles.messageTextarea} name="message" onChange={(e) => setMessage(e.target.value)} required pattern="\\S+"/>
+      <textarea class={styles.messageTextarea} name="message" onChange={(e) => setMessage(e.target.value)} required/>
       <input class={styles.input} type="submit" value="Send" />
     </form>
   );

@@ -42,7 +42,7 @@ const LoginNewAccount = () => {
         await router.push('/');
         await swal("Welcome", "You created new account", "success");
         //refresh the page
-        refreshPage();
+        await refreshPage();
       }
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
