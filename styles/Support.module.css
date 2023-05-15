@@ -13,6 +13,13 @@
   text-align: left;
   width: 35%;
 }
+.info {
+  margin-bottom: 5px;
+  color: #2c3e50;
+  font-size: 12px;
+  text-align: left;
+  width: 35%;
+}
 
 .input[type="text"],
 .input[type="email"],
@@ -73,7 +80,6 @@
   box-shadow: 0 0 5px #811d95;
 }
 
-/* Custom styles */
 .label[for="user_name"] {
   color: #2980b9;
 }
