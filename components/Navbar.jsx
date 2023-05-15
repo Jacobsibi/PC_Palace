@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Link from 'next/link';
 import { AiOutlineShopping, AiOutlineUser } from 'react-icons/ai'
-import SearchBar from "./SearchBar.jsx";
-import styles from "../styles/Navbar.module.css";
-import { Cart } from './';
+import { Cart, Login } from './index';
 import { useStateContext } from '../context/StateContext';
+import styles from "../styles/Navbar.module.css";
+import Image from "next/image";
 
 const CartButton = (props) => {
 	const { setShowCart } = useStateContext();
@@ -17,78 +17,65 @@ const CartButton = (props) => {
 }
 
 const Account = () => {
+	const { setShowLogin } = useStateContext();
 	return (<>
-		<button className={styles.accountButton} onClick={console.log("Add an account drop-down similar to the cart")}>
+		<button className={styles.accountButton} onClick={() => setShowLogin(true)}>
 			<AiOutlineUser />
 		</button>
 	</>);
 }
 
+const Departments = (props) => {
+	const [ prevScrollY, setPrevScrollY ] = React.useState(0);
+
+	const handleScroll = () => {
+		if (window.scrollY != prevScrollY) {
+			setPrevScrollY(window.scrollY);
+			props.hideDepartments();
+		}
+	};
+
+	useEffect(() => {
+		window.addEventListener("scroll", handleScroll);
+		return () => window.removeEventListener("scroll", handleScroll);
+	});
+
+    return (<>
+		<div className={styles.departments}>
+			<ul>
+				<li><Link href={`/?filter=cpu`}>CPUs</Link></li>
+				<li><Link href={`/?filter=gpu`}>Graphics Cards</Link></li>
+				<li><Link href={`/?filter=mb`}>Motherboards</Link></li>
+				<li><Link href={`/?filter=ram`}>Memory</Link></li>
+				<li><Link href={`/?filter=sto`}>Storage</Link></li>
+				<li><Link href={`/?filter=psu`}>Power Supply</Link></li>
+				<li><Link href={`/?filter=case`}>Case</Link></li>
+			</ul>
+		</div>
+    </>);
+}
+
 const Navbar = () => {
-	const { showCart, totalQuantities } = useStateContext();
+	const { showLogin, showCart, totalQuantities } = useStateContext();
+	const [ showDepartments, setShowDepartments ] = React.useState(false);
 	return (<>
-		<div className={styles.navbarWrapper}>
 		<div className={styles.navbar}>
-			<div className={styles.pages}>
-				<div>
-					<Link href={"/"}>
-						{/*<img className="logo" />*/}
-						home(logo)
-					</Link>
-				</div>
-
-				<div>
-					<Link href={"/buildcomputer"}>
-						Computer Builder
-					</Link>
-				</div>
-
-
-				<div>
-					<Link href={""}>
-						Hardware
-					</Link>
-				</div>
-
-				<div>
-					<Link href={""}>
-						Peripherals
-					</Link>
-				</div>
-
-				<div>
-					<Link href={""}>
-						Specials
-					</Link>
-				</div>
-
-				<div>
-					<Link href={""}>
-						Brands
-					</Link>
-				</div>
-
-				<div>
-					<Link href={"/support"}>
-						Support
-					</Link>
-				</div>
-
-				<div>
-					<Link href={"/about"}>
-						About us
-					</Link>
-				</div>
-			</div>
-			
-			<div className={styles.functionality}>
-				<SearchBar />
-				<Account />
-				<CartButton itemAmount={totalQuantities} />
-			</div>
+			<span className={styles.pages}>
+				<Link href={"/"}>
+					<Image src={"/logo-image.png"} width={1134} height={272}></Image>
+				</Link>
+			</span>
+			<span className={styles.pages}><Link href={"/buildcomputer"}>Computer Builder</Link></span>
+			<span className={styles.pages}><Link href={"/support"}>Support</Link></span>
+			<span className={styles.pages}><Link href={"/about"}>About us</Link></span>
+			<div />
+			<button className={styles.departmentsButton} onClick={() => setShowDepartments(!showDepartments)}>Departments</button>
+			<Account />
+			<CartButton itemAmount={totalQuantities} />
 		</div>
-		</div>
+		{showDepartments && <Departments hideDepartments={() => setShowDepartments(false)} />}
 		{showCart && <Cart />}
+		{showLogin && <Login />}
 	</>);
 }
 

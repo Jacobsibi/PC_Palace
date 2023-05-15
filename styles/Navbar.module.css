@@ -1,52 +1,33 @@
-.navbarWrapper {
-    background-color: #ffffff;
-    height: 100px;
+.navbar {
+    display: grid;
+    padding: 0.6% 2%;
+    background-color: black;
+    grid-template-columns: repeat(4, 5fr) 15fr 6fr repeat(2, 0.5fr);
 }
 
-.navbar {
+.pages:hover {
+    background-color: #1d1d1d;
+    color: rgb(255, 112, 112);
+}
+
+.navbar a {
+    display: inline-block;
+    top: 50%;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
     display: flex;
-    background-color: #c6edff;
-    border-radius: 10px;
-    margin-bottom: 0.8%;
-    min-height: 60px;
-    min-width: 98.4%;
-    position: fixed;
-    z-index: 99;
 }
 
 .pages {
-    padding-left: 1%;
-    display: flex;
-    text-align: center;
-    align-items: center;
-}
-
-.pages div {
-    height: 100%;
-    display: inline;
-    align-items: center;
-    margin: 0% 5%;
-    font-size: small;
+    background-color: inherit;
+    border-radius: 10px;    
     font-weight: bold;
     transition: all .2s ease;
-    white-space: nowrap;
-}
-
-.pages div:hover {
-    color: rgb(194, 26, 166);
-}
-
-.pages a {
-    align-items: center;
-    display: flex;
-    height: 100%;
-}
-
-.functionality {
-    display: flex;
-    margin-left: auto;
-    align-items: center;
-    padding: 0% 1%;
+    margin: 0% 1.2%;
+    color: white;
 }
 
 .accountButton {
@@ -61,5 +42,55 @@
 
 .accountButton:hover {
     transform: scale(1.1, 1.1);
+}
 
+.departmentsButton {
+    margin-right: 10%;
+    border: none;
+    background-color: inherit;
+    background-color: #1d1d1d;
+    color: white;
+    border-radius: 10px;
+    z-index: 50;
+}
+
+.departmentsButton:hover {
+    background-color: #3a3a3a;
+}
+
+.departments {
+    left: auto;
+    right: 0;
+    position: fixed;
+    z-index: 50;
+    background-color: #464646;
+    color: white;
+    width: 12vw;
+}
+
+.departments ul {
+    list-style-type: none;
+}
+
+.departments li {
+    margin-left: auto;
+    padding: 5% 2%;
+    right: 0;
+    transition: all .4s ease;
+}
+
+.departments li:hover{ 
+    background-color: #757575;
+    color: rgb(255, 68, 68);
+}
+
+.departments li a {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+}
+
+.pages img {
+    width: 250px;
+    height: inherit;
 }
