@@ -35,22 +35,20 @@ const Login = () => {
       if (error.code === "auth/wrong-password") {
         // Handle the wrong passwrod
         swal("Wrong Password", "Please enter correct password", "error");
-        setPassword("");
       } else if (error.code === "auth/user-not-found") {
         // Handle user not found
         swal(
-          "Account not existed",
+          "Account Not Existed",
           "Please enter correct email or password",
           "error"
         );
       } else if (error.code === "auth/invalid-email") {
-        // Handle inavlid email but correct password
+        // Handle invalid email but correct password
         swal(
-          "Account not existed",
+          "Account Not Existed",
           "Please enter correct email or password",
           "error"
         );
-        setEmail("");
       } else if (error.code === "auth/missing-email") {
         // Handle the email field is empty
         swal("Enter Email", "Please fill in email field", "warning");
@@ -62,8 +60,6 @@ const Login = () => {
       } else {
         // Handle other errors
         swal("Error", "Please try again", "error");
-        setEmail("");
-        setPassword("");
       }
     }
   };

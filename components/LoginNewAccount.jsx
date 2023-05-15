@@ -31,7 +31,7 @@ const LoginNewAccount = () => {
           "warning"
         );
       }
-      //check if name is entered, ohterwise cannot create new account
+      //Handle the name field is empty
       else if (!fullName) {
         swal("Enter Name", "Please fill in your name", "warning");
         setFullName("");
@@ -49,7 +49,6 @@ const LoginNewAccount = () => {
       if (error.code === "auth/email-already-in-use") {
         // Handle the email already in use error
         swal("Email already exists", "Please enter new email", "error");
-        setEmail("");
       } else if (error.code === "auth/phone-number-already-exists") {
         // Handle the phone number already in use error
         swal(
@@ -64,7 +63,6 @@ const LoginNewAccount = () => {
           "Please fill in correct email address",
           "warning"
         );
-        setEmail("");
       } else if (error.code === "auth/missing-email") {
         // Handle the email field is empty
         swal("Enter Email", "Please fill in email field", "warning");
@@ -80,13 +78,9 @@ const LoginNewAccount = () => {
           "Password should be at least 6 characters",
           "warning"
         );
-        setPassword("");
       } else {
         // Handle other errors
         swal("Error", "Please try again", "error");
-        setEmail("");
-        setPassword("")
-        setFullName("");
       }
     }
   };
