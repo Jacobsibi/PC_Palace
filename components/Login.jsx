@@ -35,6 +35,7 @@ const Login = () => {
       if (error.code === "auth/wrong-password") {
         // Handle the wrong passwrod
         swal("Wrong Password", "Please enter correct password", "error");
+        setPassword("");
       } else if (error.code === "auth/user-not-found") {
         // Handle user not found
         swal(
@@ -49,15 +50,20 @@ const Login = () => {
           "Please enter correct email or password",
           "error"
         );
+        setEmail("");
       } else if (error.code === "auth/missing-email") {
         // Handle the email field is empty
         swal("Enter Email", "Please fill in email field", "warning");
+        setEmail("");
       } else if (error.code === "auth/missing-password") {
         // Handle the password field is empty
         swal("Enter Password", "Please fill in password field", "warning");
+        setPassword("");
       } else {
         // Handle other errors
         swal("Error", "Please try again", "error");
+        setEmail("");
+        setPassword("");
       }
     }
   };
@@ -97,6 +103,11 @@ const Login = () => {
         class={styles.input}
         type="email"
         onChange={(e) => setEmail(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') {
+            signIn();
+          }
+        }}
         name="user_email"
         required
         pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
@@ -107,22 +118,32 @@ const Login = () => {
         class={styles.input}
         type="password"
         onChange={(e) => setPassword(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') {
+            signIn();
+          }
+        }}
         name="user_password"
         required
       />
       <p>
         Forgot password?{" "}
+        {/* //CHANGE THE LINK TO A TEXT BUTTON WITH AND SHOW SWAL ONCLICK */}
         <Link class={styles.highlightedLink} href="/about">
           Send a magic link
         </Link>
       </p>
 
-      <button class={styles.btn} onClick={signIn}>
+      <button class={styles.btn} 
+              onClick={signIn} 
+      >
         Sign In
       </button>
+
       <button class={styles.btn} onClick={signInGoogle}>
         Sign In With Google
       </button>
+
     </div>
   );
 };
