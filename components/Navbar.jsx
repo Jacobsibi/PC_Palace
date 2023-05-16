@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import Link from 'next/link';
-import { AiOutlineShopping, AiOutlineUser } from 'react-icons/ai'
-import { Cart, Login } from './index';
+import { AiOutlineSearch, AiOutlineShopping, AiOutlineUser } from 'react-icons/ai'
+import { Cart, Login, SearchBar } from './index';
 import { useStateContext } from '../context/StateContext';
 import styles from "../styles/Navbar.module.css";
 import Image from "next/image";
@@ -19,14 +19,14 @@ const CartButton = (props) => {
 
 const Account = () => {
 	const { setShowLogin} = useStateContext();
-	return (<>
-		<button className={styles.accountButton} onClick={() => setShowLogin(true)}>
+	return (
+		<button className={styles.functionalityButton} onClick={() => setShowLogin(true)}>
 			<AiOutlineUser />
 		</button>
-	</>);
+	);
 }
 
-const Departments = (props) => {
+const Departments = props => {
 	const [ prevScrollY, setPrevScrollY ] = React.useState(0);
 
 	const handleScroll = () => {
@@ -56,24 +56,37 @@ const Departments = (props) => {
     </>);
 }
 
+const BeginSearch = props => {
+	return (
+		<button className={styles.functionalityButton} onClick={() => props.handleClick()}>
+			<AiOutlineSearch />
+		</button>
+	);
+}
+
 const Navbar = () => {
 	const { showCart, totalQuantities, showLogin } = useStateContext();
 	const [ showDepartments, setShowDepartments ] = React.useState(false);
+	const [ showSearch, setShowSearch ] = React.useState(false);
 
 	return (<>
-		<div className={styles.navbar}>
-			<span className={styles.pages}>
-				<Link href={"/"}>
-					<Image src={"/logo-image.png"} width={1134} height={272}></Image>
-				</Link>
-			</span>
-			<span className={styles.pages}><Link href={"/buildcomputer"}>Computer Builder</Link></span>
-			<span className={styles.pages}><Link href={"/support"}>Support</Link></span>
-			<span className={styles.pages}><Link href={"/about"}>About us</Link></span>
-			<div />
-			<button className={styles.departmentsButton} onClick={() => setShowDepartments(!showDepartments)}>Departments</button>
-			<Account />
-			<CartButton itemAmount={totalQuantities} />
+		<div className={styles.navigation}>
+			<div className={styles.navbar}>
+				<span className={styles.pages}>
+					<Link href={"/"}>
+						<Image src={"/logo-image.png"} width={1134} height={272}></Image>
+					</Link>
+				</span>
+				<span className={styles.pages}><Link href={"/buildcomputer"}>Computer Builder</Link></span>
+				<span className={styles.pages}><Link href={"/support"}>Support</Link></span>
+				<span className={styles.pages}><Link href={"/about"}>About us</Link></span>
+				<div />
+				<button className={styles.departmentsButton} onClick={() => setShowDepartments(!showDepartments)}>Departments</button>
+				<BeginSearch handleClick={() => setShowSearch(!showSearch)} />
+				<Account />
+				<CartButton itemAmount={totalQuantities} />
+			</div>
+			{showSearch && <SearchBar />}
 		</div>
 		{showDepartments && <Departments hideDepartments={() => setShowDepartments(false)} />}
 		{showCart && <Cart />}

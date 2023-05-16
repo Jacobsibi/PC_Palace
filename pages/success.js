@@ -4,7 +4,7 @@ import { BsBagCheckFill } from 'react-icons/bs';
 import { useRouter } from 'next/router';
 
 import { useStateContext } from '../context/StateContext';
-import { runSuccessStars } from '@/LIB/utils';
+import { runSuccessStars } from '@/lib/utils';
 
 const Success = () => {
   const { setCartItems, setTotalPrice, setTotalQuantities } = useStateContext();

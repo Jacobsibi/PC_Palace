@@ -43,7 +43,7 @@
 }
 
 .queryResults {
-    position: absolute;
+    position: relative;
     z-index: 60;
     width: 1400px;
     height: 10vh;

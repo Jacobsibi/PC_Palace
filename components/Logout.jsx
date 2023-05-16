@@ -5,7 +5,7 @@ import { AiOutlineLeft, AiOutlineLogin } from 'react-icons/ai';
 import { TiDeleteOutline } from 'react-icons/ti';
 import toast from 'react-hot-toast';
 import { useStateContext } from '../context/StateContext';
-import { urlFor } from '../LIB/client';
+import { urlFor } from '../lib/client';
 import { useState } from "react";
 import { auth, authGoogle } from "../configurations/Firebase";
 import {

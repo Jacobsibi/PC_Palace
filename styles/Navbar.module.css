@@ -1,8 +1,14 @@
+.navigation {
+    display: grid;
+    grid-template-rows: 1fr 0.6fr;
+    width: 100%;
+}
+
 .navbar {
     display: grid;
     padding: 0.6% 2%;
     background-color: black;
-    grid-template-columns: repeat(4, 5fr) 15fr 6fr repeat(2, 0.5fr);
+    grid-template-columns: 8fr repeat(4, 5fr) 6fr 5fr repeat(3, 0.5fr);
 }
 
 .pages:hover {
@@ -30,7 +36,7 @@
     color: white;
 }
 
-.accountButton {
+.functionalityButton {
     font-size: 25px;
     color: gray;
     cursor: pointer;
@@ -40,7 +46,7 @@
     background-color: transparent;
 }
 
-.accountButton:hover {
+.functionalityButton:hover {
     transform: scale(1.1, 1.1);
 }
 
