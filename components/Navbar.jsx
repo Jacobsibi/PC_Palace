@@ -81,7 +81,9 @@ const Navbar = () => {
 				<span className={styles.pages}><Link href={"/support"}>Support</Link></span>
 				<span className={styles.pages}><Link href={"/about"}>About us</Link></span>
 				<div />
-				<button className={styles.departmentsButton} onClick={() => setShowDepartments(!showDepartments)}>Departments</button>
+				<button className={styles.departmentsButton} onClick={() => setShowDepartments(!showDepartments)}>
+					Departments
+				</button>
 				<BeginSearch handleClick={() => setShowSearch(!showSearch)} />
 				<Account />
 				<CartButton itemAmount={totalQuantities} />

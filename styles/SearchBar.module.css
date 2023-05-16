@@ -45,7 +45,7 @@
 .queryResults {
     position: relative;
     z-index: 60;
-    width: 1400px;
+    width: 100%;
     height: 10vh;
     background-color: #202020;
     overflow-y: scroll;

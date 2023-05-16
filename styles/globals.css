@@ -24,18 +24,12 @@ a {
   max-width: 1400px;
   margin: auto;
   width: 100%;
-  padding-top: 10vh;
+  padding-top: 12vh;
 
 }
 
 .layout {
   padding: 10px;
-}
-
-.navbar-container {
-  display: flex;
-  justify-content: space-between;
-  position: relative;
 }
 
 .marquee-text {

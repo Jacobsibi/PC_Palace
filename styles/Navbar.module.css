@@ -1,6 +1,6 @@
 .navigation {
     display: grid;
-    grid-template-rows: 1fr 0.6fr;
+    grid-template-rows: 1fr 0.8fr;
     width: 100%;
 }
 
@@ -8,7 +8,7 @@
     display: grid;
     padding: 0.6% 2%;
     background-color: black;
-    grid-template-columns: 8fr repeat(4, 5fr) 6fr 5fr repeat(3, 0.5fr);
+    grid-template-columns: repeat(4, 5fr) 6fr 5fr repeat(3, 0.5fr);
 }
 
 .pages:hover {
@@ -32,7 +32,6 @@
     border-radius: 10px;    
     font-weight: bold;
     transition: all .2s ease;
-    margin: 0% 1.2%;
     color: white;
 }
 
@@ -65,9 +64,9 @@
 }
 
 .departments {
-    left: auto;
-    right: 0;
-    position: fixed;
+    position: relative;
+    margin-left: auto;
+    transform: translateY(-22.2%);
     z-index: 50;
     background-color: #464646;
     color: white;
