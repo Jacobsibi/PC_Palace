@@ -28,6 +28,8 @@ const Account = () => {
 
 const Departments = props => {
 	const [ prevScrollY, setPrevScrollY ] = React.useState(0);
+	
+	props.handleClick();
 
 	const handleScroll = () => {
 		if (window.scrollY != prevScrollY) {
@@ -84,13 +86,16 @@ const Navbar = () => {
 				<button className={styles.departmentsButton} onClick={() => setShowDepartments(!showDepartments)}>
 					Departments
 				</button>
-				<BeginSearch handleClick={() => setShowSearch(!showSearch)} />
+				<BeginSearch handleClick={() => { 
+					setShowSearch(!showSearch); 
+					setShowDepartments(false); 
+				}}/>
 				<Account />
 				<CartButton itemAmount={totalQuantities} />
 			</div>
-			{showSearch && <SearchBar />}
 		</div>
-		{showDepartments && <Departments hideDepartments={() => setShowDepartments(false)} />}
+		{showSearch && <SearchBar />}
+		{showDepartments && <Departments handleClick={() => setShowSearch(false)} hideDepartments={() => setShowDepartments(false)} />}
 		{showCart && <Cart />}
 		{showLogin && <Login />}
 	</>);

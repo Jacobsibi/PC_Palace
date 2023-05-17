@@ -1,6 +1,4 @@
 .navigation {
-    display: grid;
-    grid-template-rows: 1fr 0.8fr;
     width: 100%;
 }
 
@@ -66,7 +64,6 @@
 .departments {
     position: relative;
     margin-left: auto;
-    transform: translateY(-22.2%);
     z-index: 50;
     background-color: #464646;
     color: white;

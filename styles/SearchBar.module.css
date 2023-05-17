@@ -37,7 +37,6 @@
     /* border-radius: 10px; */
     width: 100%;
     padding: 0.5% 3% 0.5% 10%;
-    margin: 0% 0% 0.5% 0%;
     display: grid;
     grid-template-columns: 12fr 1fr;
 }
