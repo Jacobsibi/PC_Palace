@@ -7,10 +7,9 @@ import styles from "../styles/Navbar.module.css";
 import Image from "next/image";
 
 
-const CartButton = (props) => {
-	const { setShowCart } = useStateContext();
+const CartButton = props => {
 	return (<>
-		<button className="cart-icon" onClick={() => setShowCart(true)}>
+		<button className="cart-icon" onClick={() => props.setShowCart(true)}>
 			<AiOutlineShopping />
 			<span className="cart-item-qty">{props.itemAmount}</span>
 		</button>
@@ -67,9 +66,10 @@ const BeginSearch = props => {
 }
 
 const Navbar = () => {
-	const { showCart, totalQuantities, showLogin } = useStateContext();
+	const { totalQuantities, showLogin } = useStateContext();
 	const [ showDepartments, setShowDepartments ] = React.useState(false);
 	const [ showSearch, setShowSearch ] = React.useState(false);
+	const [ showCart, setShowCart ] = React.useState(false);
 
 	return (<>
 		<div className={styles.navigation}>
@@ -91,12 +91,12 @@ const Navbar = () => {
 					setShowDepartments(false); 
 				}}/>
 				<Account />
-				<CartButton itemAmount={totalQuantities} />
+				<CartButton setShowCart={e => setShowCart(e)} itemAmount={totalQuantities} />
 			</div>
 		</div>
 		{showSearch && <SearchBar />}
 		{showDepartments && <Departments handleClick={() => setShowSearch(false)} hideDepartments={() => setShowDepartments(false)} />}
-		{showCart && <Cart />}
+		{showCart && <Cart setShowCart={e => setShowCart(e)} />}
 		{showLogin && <Login />}
 	</>);
 }
