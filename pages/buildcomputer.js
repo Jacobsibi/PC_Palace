@@ -1,26 +1,29 @@
-import { ClientReferenceManifestPlugin } from "next/dist/build/webpack/plugins/flight-manifest-plugin";
-import { MiddlewareNotFoundError } from "next/dist/shared/lib/utils";
+const handleClick = () => {
+    console.log('Button clicked!');
+  };
 
 const ComputerBuilder = () => { return (
+    
 
-<div style={{ textAlign: 'Left', marginLeft :300  }}>
+<div style={{ textAlign: 'Left', marginLeft :300, marginRight : 300  }}>
     <h1>Computer Builder</h1>   
-    <p>Welcome to the computer builder! To get started answer a few simple questions to help us unnderstand what type of computer best fits you!</p> 
+    <p>To get started answer a few simple questions to help us unnderstand what type of computer best fits you!</p> <br  /> 
 
     <form>
 
         <label style={{ fontWeight: 'bold' }}> What will you be using the computer for? <br  />   {/* CPU and GPU */}
-        </label>
+        </label >
 
-            <p style={{ textAlign: "center" }}><input type="checkbox" name="myCheckbox" style={{ width : 25, height : 25, margin: 20 }}/>Gaming</p>    {/* ask what type of games next */}
-            <p>Web Browsing <input type="checkbox" name="myCheckbox"/></p>      {/* irrelevant */}
-            <p>Image Editing and Rendering <input type="checkbox" name="myCheckbox"/></p>  {/* ask what type of editing */}
-            <p>Crypto Currency Mining <input type="checkbox" name="myCheckbox"/></p>     {/* ask */}
+            <p style={{ fontSize : 23 }}><input type="checkbox" name="myCheckbox" style={{ width : 25, height : 25, margin: 20 }}/>Gaming    {/* high gpu and med cpu, ask what type of games next */}
+            <input type="checkbox" name="myCheckbox" style={{ width : 25, height : 25, margin: 20 }}/>Image Editing or Rendering</p> {/* high cpu,  ask what type of editing */}
+            <p style={{ fontSize : 23 }}><input type="checkbox" name="myCheckbox" style={{ width : 25, height : 25, margin: 20 }}/>Crypto Mining</p>
+            <p style={{ fontSize : 23 }}><input type="checkbox" name="myCheckbox" style={{ width : 25, height : 25, margin: 20 }}/>Web Browsing</p>
 
+            <button type="submit" value="Submit" onClick={handleClick} style={{ fontSize: 23, padding: '1rem', width : '45rem' }}>Submit</button>
 
-
-        <button type="submit" value="Submit" />
     </form>
+    
+
     </div> )
 }
 
