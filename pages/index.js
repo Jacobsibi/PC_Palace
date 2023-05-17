@@ -1,5 +1,5 @@
 import React from 'react';
-import { client } from '../LIB/client';
+import { client } from '../lib/client';
 import { Product, Banner } from '../components'
 
 const ProductsContainer = React.forwardRef((props, ref) => {
@@ -10,24 +10,8 @@ const ProductsContainer = React.forwardRef((props, ref) => {
   );
 });
 
-const Home = ({ products, bannerData, hasFilter }) => {
+const Home = ({ products, bannerData }) => {
   const containerRef = React.createRef();
-
-  // React.useEffect(() => {
-  //   console.log(hasFilter);
-
-  //   if (hasFilter) {
-  //     let element = containerRef.current;
-  //     if (element) {
-  //       let { top } = element.getBoundingClientRect(); 
-  
-  //       window.scrollTo({
-  //         top: top - 180 - window.scrollY,
-  //         behavior: "smooth"
-  //       })
-  //     }
-  //   }
-  // }, []);
 
   return (
     <div>
@@ -40,7 +24,6 @@ const Home = ({ products, bannerData, hasFilter }) => {
       </div>
 
       <ProductsContainer products={products} ref={containerRef} />
-
 
       <Banner banner={bannerData && bannerData[0]}/>
     </div>
@@ -63,7 +46,7 @@ export const getServerSideProps = async context => {
   const bannerData = await client.fetch(bannerQuery);
 
   return {
-    props: { products, bannerData, hasFilter: filter !== undefined }
+    props: { products, bannerData }
   }
 }
 
