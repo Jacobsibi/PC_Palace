@@ -38,11 +38,10 @@ const SearchResults = props => {
     props.setResultAmount(productsMatching.length);
     props.setCurrentProduct(productsMatching[props.selectedIndex]);
 
-    if (productsMatching) {
-        return (
-            <div className={styles.queryResults} ref={resultsRef}>
-                <ul>
-                    {
+    return (
+        <div className={styles.queryResults} ref={resultsRef}>
+            {productsMatching && 
+                <ul>{
                         productsMatching.map((product, index) => (
                             <Link href={`/product/${product.slug.current}`} 
                                 onMouseEnter={() => props.setSelectedIndex(index)} key={index}>
@@ -53,11 +52,9 @@ const SearchResults = props => {
                         ))
                     }
                 </ul>
-            </div>
-        );
-    }
-    
-    return <></>;
+            }
+        </div>
+    );
 };
 
 const SearchBar = () => {

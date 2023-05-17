@@ -1,8 +1,12 @@
+.navigation {
+    width: 100%;
+}
+
 .navbar {
     display: grid;
     padding: 0.6% 2%;
     background-color: black;
-    grid-template-columns: repeat(4, 5fr) 15fr 6fr repeat(2, 0.5fr);
+    grid-template-columns: repeat(4, 5fr) 6fr 5fr repeat(3, 0.5fr);
 }
 
 .pages:hover {
@@ -26,11 +30,10 @@
     border-radius: 10px;    
     font-weight: bold;
     transition: all .2s ease;
-    margin: 0% 1.2%;
     color: white;
 }
 
-.accountButton {
+.functionalityButton {
     font-size: 25px;
     color: gray;
     cursor: pointer;
@@ -40,7 +43,7 @@
     background-color: transparent;
 }
 
-.accountButton:hover {
+.functionalityButton:hover {
     transform: scale(1.1, 1.1);
 }
 
@@ -59,9 +62,8 @@
 }
 
 .departments {
-    left: auto;
-    right: 0;
-    position: fixed;
+    position: relative;
+    margin-left: auto;
     z-index: 50;
     background-color: #464646;
     color: white;
