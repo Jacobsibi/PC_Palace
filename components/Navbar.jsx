@@ -49,32 +49,36 @@ const Departments = props => {
 
 		switch (chosen) {
 			case "CPUs": {
-				setDepartmentsFilter("cpu");
+				setDepartmentsFilter("CPU");
 			} break;
 
 			case "Graphics Cards": {
-				setDepartmentsFilter("gpu");
+				setDepartmentsFilter("GPU");
 			} break;
 
 			case "Motherboards": { 
-				setDepartmentsFilter("mb");
+				setDepartmentsFilter("MB");
 			} break;
 
 			case "Memory": {
-				setDepartmentsFilter("ram");
+				setDepartmentsFilter("RAM");
 			} break;
 
 			case "Storage": {
-				setDepartmentsFilter("sto");
+				setDepartmentsFilter("STO");
 			} break;
 
 			case "Power Supply": {
-				setDepartmentsFilter("psu");
+				setDepartmentsFilter("PSU");
 			} break;
 
 			case "Case": {
-				setDepartmentsFilter("case");
-			}
+				setDepartmentsFilter("CASE");
+			} break;
+
+			case "All departments": {
+				setDepartmentsFilter("");
+			} break;
 		}
 
 		if (router.pathname !== "/") {
@@ -84,23 +88,15 @@ const Departments = props => {
 
     return (<>
 		<div className={styles.departments}>
-			{/* <ul>
-				<li><Link href={`/?filter=cpu`}>CPUs</Link></li>
-				<li><Link href={`/?filter=gpu`}>Graphics Cards</Link></li>
-				<li><Link href={`/?filter=mb`}>Motherboards</Link></li>
-				<li><Link href={`/?filter=ram`}>Memory</Link></li>
-				<li><Link href={`/?filter=sto`}>Storage</Link></li>
-				<li><Link href={`/?filter=psu`}>Power Supply</Link></li>
-				<li><Link href={`/?filter=case`}>Case</Link></li>
-			</ul> */}
 			<ul>
-				<li><div onClick={e => onClick(e)}>CPUs</div></li>
-				<li><div>Graphics Cards</div></li>
-				<li><div>Motherboards</div></li>
-				<li><div>Memory</div></li>
-				<li><div>Storage</div></li>
-				<li><div>Power Supply</div></li>
-				<li><div>Case</div></li>
+				<li onClick={e => onClick(e)}><div>CPUs</div></li>
+				<li onClick={e => onClick(e)}><div>Graphics Cards</div></li>
+				<li onClick={e => onClick(e)}><div>Motherboards</div></li>
+				<li onClick={e => onClick(e)}><div>Memory</div></li>
+				<li onClick={e => onClick(e)}><div>Storage</div></li>
+				<li onClick={e => onClick(e)}><div>Power Supply</div></li>
+				<li onClick={e => onClick(e)}><div>Case</div></li>
+				<li onClick={e => onClick(e)}><div>All departments</div></li>
 			</ul>
 		</div>
     </>);
@@ -120,6 +116,7 @@ const Navbar = () => {
 	const [ showSearch, setShowSearch ] = React.useState(false);
 	const [ showCart, setShowCart ] = React.useState(false);
 	const [ showLogin, setShowLogin ] = React.useState(false);
+	const { setDepartmentsFilter } = useDepartmentsContext();
 
 	const handleDepartmentsClick = () => {
 		setShowSearch(false);
@@ -130,8 +127,8 @@ const Navbar = () => {
 		<div className={styles.navigation}>
 			<div className={styles.navbar}>
 				<span className={styles.pages}>
-					<Link href={"/"}>
-						<Image src={"/logo-image.png"} width={1134} height={272}></Image>
+					<Link href={"/"} onClick={() => setDepartmentsFilter("")}>
+						<Image src={"/logo-image.png"} width={1134} height={272} alt="Logo"></Image>
 					</Link>
 				</span>
 				<span className={styles.pages}><Link href={"/buildcomputer"}>Computer Builder</Link></span>

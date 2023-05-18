@@ -1,18 +1,15 @@
 import React from 'react';
 import { client } from '../lib/client';
 import { Product, Banner } from '../components'
-import { DepartmentsContextProvider, useDepartmentsContext } from '@/context/DepartmentsContext';
+import { useDepartmentsContext } from '@/context/DepartmentsContext';
 
 const ProductsContainer = React.forwardRef((props, ref) => {
 	const { departmentsFilter } = useDepartmentsContext();
-
-	let products = props.products?.filter(item => (item.component === departmentsFilter));
-
-	console.log(products);
+	const products = props.products?.filter(item => (departmentsFilter === "" ? true : item.component === departmentsFilter));
 
 	return (
 		<div className="products-container" ref={ref}>
-			{props.products?.map(product => <Product key={product._id} product={product} />)}
+			{products?.map(product => <Product key={product._id} product={product} />)}
 		</div>
 	);
 });
@@ -22,7 +19,6 @@ const Home = ({ products, bannerData }) => {
 
 	return (
 		<div>
-			{/* <HeroBanner heroBanner={bannerData.length && bannerData[0]}/> */}
 			<Banner banner={bannerData && bannerData[0]} />
 
 			<div className="products-heading">
@@ -30,9 +26,7 @@ const Home = ({ products, bannerData }) => {
 				<p>PC Components of many variations</p>
 			</div>
 
-			<DepartmentsContextProvider>
-				<ProductsContainer products={products} ref={containerRef} />
-			</DepartmentsContextProvider>
+			<ProductsContainer products={products} ref={containerRef} />
 
 			<Banner banner={bannerData && bannerData[0]} />
 		</div>

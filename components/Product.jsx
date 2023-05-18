@@ -1,15 +1,9 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import Link from 'next/link';
 
 import { urlFor } from '../lib/client';
 
 const Product = ({ product: { image, name, slug, price } }) => {
-
-  useEffect(() => {
-    // This logs the value of `slug` as it changes
-    console.log('value of slug:', slug);
-  }, [slug]);
-
   // This means that nothing is rendered if `slug` is undefined
   if (!slug) return null;
 
