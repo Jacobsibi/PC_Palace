@@ -16,10 +16,9 @@ const CartButton = props => {
 	</>);
 }
 
-const Account = () => {
-	const { setShowLogin} = useStateContext();
+const Account = props => {
 	return (
-		<button className={styles.functionalityButton} onClick={() => setShowLogin(true)}>
+		<button className={styles.functionalityButton} onClick={() => props.setShowLogin(true)}>
 			<AiOutlineUser />
 		</button>
 	);
@@ -66,10 +65,11 @@ const BeginSearch = props => {
 }
 
 const Navbar = () => {
-	const { totalQuantities, showLogin } = useStateContext();
+	const { totalQuantities } = useStateContext();
 	const [ showDepartments, setShowDepartments ] = React.useState(false);
 	const [ showSearch, setShowSearch ] = React.useState(false);
 	const [ showCart, setShowCart ] = React.useState(false);
+	const [ showLogin, setShowLogin ] = React.useState(false);
 
 	return (<>
 		<div className={styles.navigation}>
@@ -90,14 +90,14 @@ const Navbar = () => {
 					setShowSearch(!showSearch); 
 					setShowDepartments(false); 
 				}}/>
-				<Account />
+				<Account setShowLogin={e => setShowLogin(e)} />
 				<CartButton setShowCart={e => setShowCart(e)} itemAmount={totalQuantities} />
 			</div>
 		</div>
 		{showSearch && <SearchBar />}
 		{showDepartments && <Departments handleClick={() => setShowSearch(false)} hideDepartments={() => setShowDepartments(false)} />}
 		{showCart && <Cart setShowCart={e => setShowCart(e)} />}
-		{showLogin && <Login />}
+		{showLogin && <Login setShowLogin={e => setShowLogin(e)} />}
 	</>);
 }
 

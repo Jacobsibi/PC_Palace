@@ -13,7 +13,7 @@ import {
   signOut,
 } from "firebase/auth";
 
-const Login = () => {
+const Login = props => {
 
   //email and password to be used as parameter for Firebase special function
   //name to update user's name when create an account via email, becuase it is not done automatically
@@ -139,7 +139,6 @@ const Login = () => {
 
   //internal configurations to show login component
   const loginReg = useRef();
-  const { setShowLogin } = useStateContext();
 
   //the output
   return (
@@ -149,7 +148,7 @@ const Login = () => {
           <button
             type="button"
             className="cart-heading"
-            onClick={() => setShowLogin(false)}>
+            onClick={() => props.setShowLogin(false)}>
             <AiOutlineLeft />
             <span className="heading">Back</span>
           </button>
