@@ -6,14 +6,14 @@ export const DepartmentsContextProvider = ({ children }) => {
     const [ departmentsFilter, setDepartmentsFilter ] = React.useState("");
 
     return (
-        <DepartmentsContext.Provider
-          value={{
-            departmentsFilter,
-            setDepartmentsFilter,
-          }}>
-          {children}
-        </DepartmentsContext.Provider>
-      );
+		<DepartmentsContext.Provider
+			value={{
+				departmentsFilter,
+				setDepartmentsFilter,
+			}}>
+			{children}
+		</DepartmentsContext.Provider>
+	);
 };
 
 export const useDepartmentsContext = () => useContext(DepartmentsContext);
