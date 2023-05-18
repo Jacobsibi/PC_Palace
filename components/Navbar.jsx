@@ -26,8 +26,6 @@ const Account = props => {
 
 const Departments = props => {
 	const [ prevScrollY, setPrevScrollY ] = React.useState(0);
-	
-	props.handleClick();
 
 	const handleScroll = () => {
 		if (window.scrollY != prevScrollY) {
@@ -71,6 +69,11 @@ const Navbar = () => {
 	const [ showCart, setShowCart ] = React.useState(false);
 	const [ showLogin, setShowLogin ] = React.useState(false);
 
+	const handleDepartmentsClick = () => {
+		setShowSearch(false);
+		setShowDepartments(!showDepartments);
+	}
+
 	return (<>
 		<div className={styles.navigation}>
 			<div className={styles.navbar}>
@@ -83,7 +86,7 @@ const Navbar = () => {
 				<span className={styles.pages}><Link href={"/support"}>Support</Link></span>
 				<span className={styles.pages}><Link href={"/about"}>About us</Link></span>
 				<div />
-				<button className={styles.departmentsButton} onClick={() => setShowDepartments(!showDepartments)}>
+				<button className={styles.departmentsButton} onClick={() => handleDepartmentsClick()}>
 					Departments
 				</button>
 				<BeginSearch handleClick={() => { 
@@ -95,7 +98,7 @@ const Navbar = () => {
 			</div>
 		</div>
 		{showSearch && <SearchBar />}
-		{showDepartments && <Departments handleClick={() => setShowSearch(false)} hideDepartments={() => setShowDepartments(false)} />}
+		{showDepartments && <Departments hideDepartments={() => setShowDepartments(false)} />}
 		{showCart && <Cart setShowCart={e => setShowCart(e)} />}
 		{showLogin && <Login setShowLogin={e => setShowLogin(e)} />}
 	</>);
