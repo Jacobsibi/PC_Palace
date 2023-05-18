@@ -5,6 +5,8 @@ import { Cart, Login, SearchBar } from './index';
 import { useStateContext } from '../context/StateContext';
 import styles from "../styles/Navbar.module.css";
 import Image from "next/image";
+import { useDepartmentsContext } from '@/context/DepartmentsContext';
+import { useRouter } from "next/router";
 
 
 const CartButton = props => {
@@ -26,6 +28,9 @@ const Account = props => {
 
 const Departments = props => {
 	const [ prevScrollY, setPrevScrollY ] = React.useState(0);
+	const { setDepartmentsFilter } = useDepartmentsContext();
+
+	const router = useRouter();
 
 	const handleScroll = () => {
 		if (window.scrollY != prevScrollY) {
@@ -39,9 +44,47 @@ const Departments = props => {
 		return () => window.removeEventListener("scroll", handleScroll);
 	});
 
+	const onClick = event => {
+		let chosen = event.target.textContent;
+
+		switch (chosen) {
+			case "CPUs": {
+				setDepartmentsFilter("cpu");
+			} break;
+
+			case "Graphics Cards": {
+				setDepartmentsFilter("gpu");
+			} break;
+
+			case "Motherboards": { 
+				setDepartmentsFilter("mb");
+			} break;
+
+			case "Memory": {
+				setDepartmentsFilter("ram");
+			} break;
+
+			case "Storage": {
+				setDepartmentsFilter("sto");
+			} break;
+
+			case "Power Supply": {
+				setDepartmentsFilter("psu");
+			} break;
+
+			case "Case": {
+				setDepartmentsFilter("case");
+			}
+		}
+
+		if (router.pathname !== "/") {
+			router.push("/");
+		}
+	}
+
     return (<>
 		<div className={styles.departments}>
-			<ul>
+			{/* <ul>
 				<li><Link href={`/?filter=cpu`}>CPUs</Link></li>
 				<li><Link href={`/?filter=gpu`}>Graphics Cards</Link></li>
 				<li><Link href={`/?filter=mb`}>Motherboards</Link></li>
@@ -49,6 +92,15 @@ const Departments = props => {
 				<li><Link href={`/?filter=sto`}>Storage</Link></li>
 				<li><Link href={`/?filter=psu`}>Power Supply</Link></li>
 				<li><Link href={`/?filter=case`}>Case</Link></li>
+			</ul> */}
+			<ul>
+				<li><div onClick={e => onClick(e)}>CPUs</div></li>
+				<li><div>Graphics Cards</div></li>
+				<li><div>Motherboards</div></li>
+				<li><div>Memory</div></li>
+				<li><div>Storage</div></li>
+				<li><div>Power Supply</div></li>
+				<li><div>Case</div></li>
 			</ul>
 		</div>
     </>);
