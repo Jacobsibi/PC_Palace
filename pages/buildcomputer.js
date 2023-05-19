@@ -89,11 +89,11 @@ const ComputerBuilder = () => {
         <>
           <label style={{ fontWeight: 'bold' }}>What is the desired gaming performance?</label>
           <p>
-            <input type="radio" name="gamingPerformance" value="low-end" onChange={handleOptionChange} />
+            <input type="checkbox" name="gamingPerformance" value="low-end" onChange={handleOptionChange} style={{ width: 25, height: 25, margin: 20 }}/>
             Low-end
-            <input type="radio" name="gamingPerformance" value="medium" onChange={handleOptionChange} />
+            <input type="checkbox" name="gamingPerformance" value="medium" onChange={handleOptionChange} style={{ width: 25, height: 25, margin: 20 }}/>
             Medium
-            <input type="radio" name="gamingPerformance" value="high-end" onChange={handleOptionChange} />
+            <input type="checkbox" name="gamingPerformance" value="high-end" onChange={handleOptionChange} style={{ width: 25, height: 25, margin: 20 }}/>
             High-end
           </p>
         </>
