@@ -23,6 +23,9 @@
     "react-dom": "18.2.0",
     "react-hot-toast": "^2.4.0",
     "react-icons": "^4.8.0",
+    "react-redux": "^8.0.5",
+    "react-router-dom": "^6.11.2",
+    "redux": "^4.2.1",
     "stripe": "^12.2.0",
     "sweetalert": "^2.1.2",
     "swr": "^2.1.5"

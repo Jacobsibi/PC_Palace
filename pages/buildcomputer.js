@@ -1,35 +1,73 @@
-const handleClick = () => {
-    console.log('Button clicked!');
+import React, { useState } from 'react';
+import { useHistory } from 'react-router';
+
+const ComputerBuilder = () => { //const history = useHistory();
+    const [answers, setAnswers] = useState([]); // State to store the answers
+
+    const handleAnswer = (answer) => {
+        setAnswers([...answers, answer]); // Add the selected answer to the answers array
+        history.push('/question/' + (answers.length + 2)); // Navigate to the next question based on the number of answers given
+    };
+
+    const renderQuestion = () => {
+        switch (answers.length) {
+            case 0:
+                return (
+                    <div>
+                        <h2>Question 1:</h2>
+                        <p>What is your budget?</p>
+                        <button style= {{margin:10}} onClick={() => handleAnswer('budget1')}>Less than $1000</button>
+                        <button style= {{margin:10}} onClick={() => handleAnswer('budget2')}>$1000 - $1500</button>
+                        <button style= {{margin:10}} onClick={() => handleAnswer('budget3')}>$1500 - $2000</button>
+                    </div>
+                );
+        case 1:
+            return (
+                <div>
+                    <h2>Question 2:</h2>
+                    <p>What is your primary use for the PC?</p>
+                    <button onClick={() => handleAnswer('use1')}>Gaming</button>
+                    <button onClick={() => handleAnswer('use2')}>Video editing</button>
+                    <button onClick={() => handleAnswer('use3')}>Graphic design</button>
+                    <button onClick={() => handleAnswer('use3')}>Crypto Mining</button>
+                </div>
+            );
+      
+      // Add more cases for additional questions
+      default:
+        return (
+          <div>
+            <h2>Question {answers.length + 1}:</h2>
+            <p>Placeholder question</p>
+            <button onClick={() => handleAnswer('placeholder')}>Placeholder option 1</button>
+            <button onClick={() => handleAnswer('placeholder')}>Placeholder option 2</button>
+            <button onClick={() => handleAnswer('placeholder')}>Placeholder option 3</button>
+          </div>
+        );
+    }
   };
 
-const ComputerBuilder = () => { return (
+  return (
     
+    <div style={{ textAlign: 'center', marginLeft :300, marginRight : 300  }}>
+        <h1>Computer Builder</h1>   
+        <p>To get started answer a few simple questions to help us unnderstand what type of computer best fits you!</p> <br     /> 
 
-<div style={{ textAlign: 'Left', marginLeft :300, marginRight : 300  }}>
-    <h1>Computer Builder</h1>   
-    <p>To get started answer a few simple questions to help us unnderstand what type of computer best fits you!</p> <br  /> 
-
-    <form>
-
-        <label style={{ fontWeight: 'bold' }}> What will you be using the computer for? <br  />   {/* CPU and GPU */}
-        </label >
-
-            <p style={{ fontSize : 23 }}><input type="checkbox" name="myCheckbox" style={{ width : 25, height : 25, margin: 20 }}/>Gaming    {/* high gpu and med cpu, ask what type of games next */}
-            <input type="checkbox" name="myCheckbox" style={{ width : 25, height : 25, margin: 20 }}/>Image Editing or Rendering</p> {/* high cpu,  ask what type of editing */}
-            <p style={{ fontSize : 23 }}><input type="checkbox" name="myCheckbox" style={{ width : 25, height : 25, margin: 20 }}/>Crypto Mining</p>
-            <p style={{ fontSize : 23 }}><input type="checkbox" name="myCheckbox" style={{ width : 25, height : 25, margin: 20 }}/>Web Browsing</p>
-
-            <button type="submit" value="Submit" onClick={handleClick} style={{ fontSize: 23, padding: '1rem', width : '45rem' }}>Submit</button>
-
-    </form>
+        {renderQuestion()} {/* Render the current question */}
     
+    </div>
 
-    </div> )
-}
+  );
+};
+
 
 export default ComputerBuilder;
 
 /* 
+
+
+Storage
+How much storage will you require
 
 
 CASE
@@ -45,5 +83,12 @@ how much were you looking to spend on this PC?   Slider
 not alot ($500-$1000 NZD)
 regular amount ($1000-$2000 NZD)
 large amount ($2000-$5000 NZD)
+
+
+
+        <button className="big-button">Begin AI Builder</button>
+        <button className="big-button">Custom Build</button>
+
+
 
 */
