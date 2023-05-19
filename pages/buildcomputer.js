@@ -1,33 +1,43 @@
 import React, { useState, useEffect } from 'react';
 
 const ComputerBuilder = () => {
-  const [selectedOptions, setSelectedOptions] = useState([]);
-  const [showGamingPerformance, setShowGamingPerformance] = useState(false);
-  const [generatedNumber, setGeneratedNumber] = useState(null);
+  // State variables
+  const [selectedOptions, setSelectedOptions] = useState([]); // Stores the selected options
+  const [showGamingPerformance, setShowGamingPerformance] = useState(false); // Controls whether to show the gaming performance options
+  const [generatedNumber, setGeneratedNumber] = useState(null); // Stores the generated number
 
+  // Event handler for the "Generate" button click
   const handleGenerateClick = () => {
     if (selectedOptions.includes('gaming') && selectedOptions.includes('high-end')) {
+      // If both "Gaming" and "High-end" are selected, set the generated number to 3500
       setGeneratedNumber(3500);
     } else {
+      // Otherwise, reset the generated number
       setGeneratedNumber(null);
     }
   };
 
+  // Event handler for option changes
   const handleOptionChange = (event) => {
     const option = event.target.value;
     setSelectedOptions((prevSelectedOptions) => {
       if (prevSelectedOptions.includes(option)) {
+        // If the option is already selected, remove it from the selected options
         return prevSelectedOptions.filter((item) => item !== option);
       } else {
+        // Otherwise, add the option to the selected options
         return [...prevSelectedOptions, option];
       }
     });
   };
 
+  // Effect hook to handle changes in selectedOptions and showGamingPerformance
   useEffect(() => {
     if (!selectedOptions.includes('gaming') && showGamingPerformance) {
+      // If "Gaming" is not selected and showGamingPerformance is true, hide the gaming performance options
       setShowGamingPerformance(false);
     } else if (selectedOptions.includes('gaming') && !showGamingPerformance) {
+      // If "Gaming" is selected and showGamingPerformance is false, show the gaming performance options
       setShowGamingPerformance(true);
     }
   }, [selectedOptions, showGamingPerformance]);
