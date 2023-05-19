@@ -8,11 +8,23 @@ const ComputerBuilder = () => {
 
   // Event handler for the "Generate" button click
   const handleGenerateClick = () => {
-    if (selectedOptions.includes('gaming') && selectedOptions.includes('high-end')) {
-      // If both "Gaming" and "High-end" are selected, set the generated number to 3500
-      setGeneratedNumber(3500);
+    if (selectedOptions.includes('gaming')) {
+      // If "Gaming" is selected
+      if (selectedOptions.includes('high-end')) {
+        // If "High-end" is selected, set the generated number to 3500
+        setGeneratedNumber(3500);
+      } else if (selectedOptions.includes('medium')) {
+        // If "Medium" is selected, set the generated number to 2500
+        setGeneratedNumber(2500);
+      } else if (selectedOptions.includes('low-end')) {
+        // If "Low-end" is selected, set the generated number to 1500
+        setGeneratedNumber(1500);
+      } else {
+        // If no gaming performance option is selected, reset the generated number
+        setGeneratedNumber(null);
+      }
     } else {
-      // Otherwise, reset the generated number
+      // If "Gaming" is not selected, reset the generated number
       setGeneratedNumber(null);
     }
   };
@@ -31,6 +43,14 @@ const ComputerBuilder = () => {
     });
   };
 
+  // Reset to clear state & refresh page a result. 
+  const handleResetClick = () => {
+    setSelectedOptions([]);
+    setShowGamingPerformance(false);
+    setGeneratedNumber(null);
+    window.location.reload();
+  };
+
   // Effect hook to handle changes in selectedOptions and showGamingPerformance
   useEffect(() => {
     if (!selectedOptions.includes('gaming') && showGamingPerformance) {
@@ -43,7 +63,7 @@ const ComputerBuilder = () => {
   }, [selectedOptions, showGamingPerformance]);
 
   return (
-    <div style={{ textAlign: 'left', marginLeft:  300, marginRight: 300 }}>
+    <div style={{ textAlign: 'left', marginLeft: 300, marginRight: 300 }}>
       <h1>Computer Builder</h1>
       <p>To get started, answer a few simple questions to help us understand what type of computer best fits you!</p>
       <br />
@@ -89,18 +109,23 @@ const ComputerBuilder = () => {
         <>
           <label style={{ fontWeight: 'bold' }}>What is the desired gaming performance?</label>
           <p>
-            <input type="checkbox" name="gamingPerformance" value="low-end" onChange={handleOptionChange} style={{ width: 25, height: 25, margin: 20 }}/>
+            <input type="radio" name="gamingPerformance" value="low-end" onChange={handleOptionChange} style={{ width: 25, height: 25, margin: 20 }} />
             Low-end
-            <input type="checkbox" name="gamingPerformance" value="medium" onChange={handleOptionChange} style={{ width: 25, height: 25, margin: 20 }}/>
+            <input type="radio" name="gamingPerformance" value="medium" onChange={handleOptionChange} style={{ width: 25, height: 25, margin: 20 }} />
             Medium
-            <input type="checkbox" name="gamingPerformance" value="high-end" onChange={handleOptionChange} style={{ width: 25, height: 25, margin: 20 }}/>
+            <input type="radio" name="gamingPerformance" value="high-end" onChange={handleOptionChange} style={{ width: 25, height: 25, margin: 20 }} />
             High-end
           </p>
         </>
       )}
 
+
       <button onClick={handleGenerateClick} style={{ fontSize: 23, padding: '1rem', width: '45rem' }}>
         Generate
+      </button>
+
+      <button onClick={handleResetClick} style={{ fontSize: 23, padding: '1rem', width: '100%', marginTop: '1rem' }}>
+        Reset
       </button>
 
       {generatedNumber !== null && (
