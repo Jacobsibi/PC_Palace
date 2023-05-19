@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router';
+import styles from '../styles/Builder.module.css';
 
-const ComputerBuilder = () => {//const history = useHistory();
+const ComputerBuilder = () => {
     const [answers, setAnswers] = useState([]); // State to store the answers
 
     const handleAnswer = (answer) => {
         setAnswers([...answers, answer]); // Add the selected answer to the answers array
-        history.push('/question/' + (answers.length + 2)); // Navigate to the next question based on the number of answers given
     };
 
     const renderQuestion = () => {
@@ -16,24 +15,76 @@ const ComputerBuilder = () => {//const history = useHistory();
                     <div>
                         <h2>Question 1:</h2>
                         <p>What is your budget?</p>
-                        <button style= {{margin:10}} onClick={() => handleAnswer('budget1')}>Less than $1000</button>
-                        <button style= {{margin:10}} onClick={() => handleAnswer('budget2')}>$1000 - $1500</button>
-                        <button style= {{margin:10}} onClick={() => handleAnswer('budget3')}>$1500 - $2000</button>
+                        <button className={styles.btn} onClick={() => handleAnswer('budget1')}>Less than $1000</button>
+                        <button className={styles.btn} onClick={() => handleAnswer('budget2')}>$1000 - $1500</button>
+                        <button className={styles.btn} onClick={() => handleAnswer('budget3')}>$1500 - $2000</button>
+                        <p>Note: lowering your budget may result in your PC being garbage. <br/>To prevent this, make sure to select the third option.</p>
                     </div>
                 );
         case 1:
-            return (
+            if (1 == 1) return (
+                
                 <div>
                     <h2>Question 2:</h2>
                     <p>What is your primary use for the PC?</p>
-                    <button onClick={() => handleAnswer('use1')}>Gaming</button>
-                    <button onClick={() => handleAnswer('use2')}>Streaming </button>
-                    <button onClick={() => handleAnswer('use3')}>Workstation</button>
-                    <button onClick={() => handleAnswer('use3')}>Server Hosting</button>
+                    <button className={styles.btn} onClick={() => handleAnswer('use1')}>Gaming</button>
+                    <button className={styles.btn} onClick={() => handleAnswer('use2')}>Streaming </button>
+                    <button className={styles.btn} onClick={() => handleAnswer('use3')}>Workstation</button>
+                </div>
+            ); else return (
+                <p>a</p>
+            );
+        case 2:
+            return (
+                <div>
+                    <h2>Question 3:</h2>
+                    <p>What is your primary use for the PC?</p>
+                    <button className={styles.btn} onClick={() => handleAnswer('use1')}>Gaming</button>
+                    <button className={styles.btn} onClick={() => handleAnswer('use2')}>Streaming </button>
+                    <button className={styles.btn} onClick={() => handleAnswer('use3')}>Workstation</button>
+                </div>
+            );
+        case 3:
+            return (
+                <div>
+                    <h2>Question 4:</h2>
+                    <p>What is your primary use for the PC?</p>
+                    <button className={styles.btn} onClick={() => handleAnswer('use1')}>Gaming</button>
+                    <button className={styles.btn} onClick={() => handleAnswer('use2')}>Streaming </button>
+                    <button className={styles.btn} onClick={() => handleAnswer('use3')}>Workstation</button>
+                </div>
+            );
+        case 4:
+            return (
+                <div>
+                    <h2>Question 5:</h2>
+                    <p>What is your primary use for the PC?</p>
+                    <button className={styles.btn} onClick={() => handleAnswer('use1')}>Gaming</button>
+                    <button className={styles.btn} onClick={() => handleAnswer('use2')}>Streaming </button>
+                    <button className={styles.btn} onClick={() => handleAnswer('use3')}>Workstation</button>
+                </div>
+            );
+        case 5:
+            return (
+                <div>
+                    <h2>Question 6:</h2>
+                    <p>What is your primary use for the PC?</p>
+                    <button className={styles.btn} onClick={() => handleAnswer('use1')}>Gaming</button>
+                    <button className={styles.btn} onClick={() => handleAnswer('use2')}>Streaming </button>
+                    <button className={styles.btn} onClick={() => handleAnswer('use3')}>Workstation</button>
+                </div>
+            );
+        case 6:
+            return (
+                <div>
+                    <h2>Question 7:</h2>
+                    <p>What is your primary use for the PC?</p>
+                    <button className={styles.btn} onClick={() => handleAnswer('use1')}>Gaming</button>
+                    <button className={styles.btn} onClick={() => handleAnswer('use2')}>Streaming </button>
+                    <button className={styles.btn} onClick={() => handleAnswer('use3')}>Workstation</button>
                 </div>
             );
       
-      // Add more cases for additional questions
       default:
         return (
           <div>
@@ -49,7 +100,7 @@ const ComputerBuilder = () => {//const history = useHistory();
 
   return (
     
-    <div style={{ textAlign: 'center', marginLeft :300, marginRight : 300  }}>
+    <div style={{ textAlign: 'center', marginLeft :300, marginRight : 300}}>
         <h1>Computer Builder</h1>   
         <p>To get started answer a few simple questions to help us unnderstand what type of computer best fits you!</p> <br     /> 
 
