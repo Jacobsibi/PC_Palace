@@ -49,14 +49,16 @@
     background-color: #202020;
     overflow-y: scroll;
     transform: translateY(-10%);
+    padding-left: 6%;
+    cursor: pointer;
 }
 
 .resultItem {
     color: rgb(190, 190, 190);
 }
 
-.selected {
-    color:red
+.selected, .resultItem:hover {
+    color: red;
 }
 
 .queryResults::-webkit-scrollbar {
