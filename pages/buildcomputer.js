@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 
-const ComputerBuilder = () => { //const history = useHistory();
+const ComputerBuilder = () => {//const history = useHistory();
     const [answers, setAnswers] = useState([]); // State to store the answers
 
     const handleAnswer = (answer) => {
@@ -27,9 +27,9 @@ const ComputerBuilder = () => { //const history = useHistory();
                     <h2>Question 2:</h2>
                     <p>What is your primary use for the PC?</p>
                     <button onClick={() => handleAnswer('use1')}>Gaming</button>
-                    <button onClick={() => handleAnswer('use2')}>Video editing</button>
-                    <button onClick={() => handleAnswer('use3')}>Graphic design</button>
-                    <button onClick={() => handleAnswer('use3')}>Crypto Mining</button>
+                    <button onClick={() => handleAnswer('use2')}>Streaming </button>
+                    <button onClick={() => handleAnswer('use3')}>Workstation</button>
+                    <button onClick={() => handleAnswer('use3')}>Server Hosting</button>
                 </div>
             );
       
