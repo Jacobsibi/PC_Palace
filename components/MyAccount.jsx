@@ -114,10 +114,38 @@ const MyAccount = () => {
         );
       } else {
         // Handle other errors
-        //swal("Error", "Please try updating again", "error");
         swal("Hey Bro", "Please try again", "error");
-        console.log("Hey bro this is the error: " + error);
       }
+    }
+  };
+
+  //function: delete account
+  const deleteAccount = async () => {
+    try {
+      swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this account!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then(async (willDelete) => {
+        if (willDelete) {
+          await auth.currentUser.delete();
+          swal("Account Deleted", "Your account has been deleted", "success", {
+            icon: "success",
+          });
+        } else {
+          swal("Account Is Not Deleted", "Your account is safe", "warning");
+        }
+      });
+
+    } catch (error) {
+       if(error.code === "auth/requires-recent-login"){
+        swal("Run Time Out", "Please relogin again to delete", "error");
+       } else{
+        swal("Error", "Cannot delete the account", "error");
+       }
     }
   };
 
@@ -191,6 +219,11 @@ const MyAccount = () => {
       <button class={styles.btn} onClick={updateAccount}>
         {" "}
         Update{" "}
+      </button>
+
+      <button class={styles.btn} onClick={deleteAccount}>
+        {" "}
+        Delete This Account{" "}
       </button>
     </div>
   );
