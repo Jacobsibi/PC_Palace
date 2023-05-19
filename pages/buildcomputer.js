@@ -14,16 +14,22 @@ const ComputerBuilder = () => {
                 return (
                     <div>
                         <h2>Question 1:</h2>
-                        <p>What is your budget?</p>
-                        <button className={styles.btn} onClick={() => handleAnswer('budget1')}>Less than $1000</button>
-                        <button className={styles.btn} onClick={() => handleAnswer('budget2')}>$1000 - $1500</button>
-                        <button className={styles.btn} onClick={() => handleAnswer('budget3')}>$1500 - $2000</button>
-                        <p>Note: lowering your budget may result in your PC being garbage. <br/>To prevent this, make sure to select the third option.</p>
+                        <p>What is your primary use for the PC?</p>
+                        <button className={styles.btn} onClick={() => handleAnswer('use1')}>Gaming</button>
+                        <button className={styles.btn} onClick={() => handleAnswer('use2')}>Streaming </button>
+                        <button className={styles.btn} onClick={() => handleAnswer('use3')}>Workstation</button>
                     </div>
                 );
         case 1:
-            if (1 == 1) return (
-                
+            if (answers[0] == 'use1') return (
+                <div>
+                        <h2>Question 2:</h2>
+                        <p>Which of these games are you looking to play?</p>
+                        <button className={styles.btn} onClick={() => handleAnswer('use1')}>CS:GO (low end)</button>
+                        <button className={styles.btn} onClick={() => handleAnswer('use2')}>Apex Legneds mid </button>
+                        <button className={styles.btn} onClick={() => handleAnswer('use3')}>Rust high</button>
+                    </div>
+            ); else if (answers[0] == 'use2') return (
                 <div>
                     <h2>Question 2:</h2>
                     <p>What is your primary use for the PC?</p>
@@ -32,7 +38,7 @@ const ComputerBuilder = () => {
                     <button className={styles.btn} onClick={() => handleAnswer('use3')}>Workstation</button>
                 </div>
             ); else return (
-                <p>a</p>
+                <p>workstation boring bruh</p>
             );
         case 2:
             return (
@@ -57,11 +63,12 @@ const ComputerBuilder = () => {
         case 4:
             return (
                 <div>
-                    <h2>Question 5:</h2>
-                    <p>What is your primary use for the PC?</p>
-                    <button className={styles.btn} onClick={() => handleAnswer('use1')}>Gaming</button>
-                    <button className={styles.btn} onClick={() => handleAnswer('use2')}>Streaming </button>
-                    <button className={styles.btn} onClick={() => handleAnswer('use3')}>Workstation</button>
+                    <h2>Question 1:</h2>
+                    <p>What is your budget?</p>
+                    <button className={styles.btn} onClick={() => handleAnswer('budget1')}>Less than $1000</button>
+                    <button className={styles.btn} onClick={() => handleAnswer('budget2')}>$1000 - $1500</button>
+                    <button className={styles.btn} onClick={() => handleAnswer('budget3')}>$1500 - $2000</button>
+                    <p>Note: lowering your budget may result in your PC being garbage. <br/>To prevent this, make sure to select the third option.</p>
                 </div>
             );
         case 5:
@@ -99,7 +106,6 @@ const ComputerBuilder = () => {
   };
 
   return (
-    
     <div style={{ textAlign: 'center', marginLeft :300, marginRight : 300}}>
         <h1>Computer Builder</h1>   
         <p>To get started answer a few simple questions to help us unnderstand what type of computer best fits you!</p> <br     /> 
