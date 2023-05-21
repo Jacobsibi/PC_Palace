@@ -1,0 +1,69 @@
+.btn{
+    width: 10%;
+    padding: 8px 10px;
+    border-radius: 15px;
+    border: none;
+    font-size: 18px;
+    margin-top: 10px;
+    margin-top: 40px;
+    text-transform: uppercase;
+    background-color: #811d95;
+    color: #fff;
+    cursor: pointer;
+    transform: scale(1, 1);
+    transition: transform 0.2s ease;
+    align-self: center;
+  }
+  .btn:hover{
+    transform: scale(1.05,1.05);
+    border:rgba(0, 0, 0, 0.5);
+  }
+  
+  .radio {
+    border: black;
+    background-color: #811d95;
+    padding-right: 25px;
+    padding-left: 15px;
+    padding: 15%;
+  }
+  
+  .input:focus {
+    border-color: #007bff;
+  }
+  
+  .input::placeholder {
+    color: #999;
+  }
+  .loginwrapper{
+    width: 100vw;
+    background: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 100;
+    /* will-change: transform; */
+    transition: all 1s ease-in-out;
+  
+  }
+  .logincontainer{
+    height: 100vh;
+    width: 600px;
+    background-color: white;
+    float: right;
+    padding: 40px 10px;
+    position: relative;
+    
+  }
+  .emptylogin{
+    margin:40px;
+    text-align:center;
+  }
+  .buttonsignuppage{
+    color: hotpink;
+  }
+  
+  .scrollcontainer {
+    height: 200px;
+    overflow: auto;
+  }
+  

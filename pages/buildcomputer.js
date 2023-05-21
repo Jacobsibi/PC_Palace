@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import styles from '../styles/Builder.module.css';
+import Image from "next/image";
 
 const ComputerBuilder = () => {
   // State variables
   const [selectedOptions, setSelectedOptions] = useState([]); // Stores the selected options
   const [showGamingPerformance, setShowGamingPerformance] = useState(false); // Controls whether to show the gaming performance options
+  const [showGamingOptions, setShowGamingOptions] = useState(false); // Controls whether to show the optional games
+  const [showStreamingPerformance, setShowStreamingPerformance] = useState(false); // Controls whether to show the gaming performance options
   const [generatedNumber, setGeneratedNumber] = useState(null); // Stores the generated number
 
   // Event handler for the "Generate" button click
@@ -36,11 +40,29 @@ const ComputerBuilder = () => {
     if (!selectedOptions.includes('gaming') && showGamingPerformance) {
       // If "Gaming" is not selected and showGamingPerformance is true, hide the gaming performance options
       setShowGamingPerformance(false);
+      setShowGamingOptions(false);
+      //reset selectedOptions
+      setSelectedOptions([]);
+
     } else if (selectedOptions.includes('gaming') && !showGamingPerformance) {
       // If "Gaming" is selected and showGamingPerformance is false, show the gaming performance options
       setShowGamingPerformance(true);
     }
-  }, [selectedOptions, showGamingPerformance]);
+
+    if (!selectedOptions.includes('unsure') && showGamingOptions ) {
+      setShowGamingOptions(false);
+    } else if (selectedOptions.includes('unsure') && !showGamingOptions && selectedOptions.includes('gaming')) {
+      setShowGamingOptions(true);
+    }
+
+    if (!selectedOptions.includes('streaming') && showStreamingPerformance) {
+      // If "Streaming" is not selected and showStreamingPerformance is true, hide the gaming performance options
+      setShowStreamingPerformance(false);
+    } else if (selectedOptions.includes('streaming') && !showStreamingPerformance) {
+      // If "Gaming" is selected and showStreamingPerformance is false, show the gaming performance options
+      setShowStreamingPerformance(true);
+    }
+  }, [selectedOptions, showGamingPerformance, showGamingOptions, showStreamingPerformance]);
 
   return (
     <div style={{ textAlign: 'left', marginLeft:  300, marginRight: 300 }}>
@@ -83,23 +105,56 @@ const ComputerBuilder = () => {
           style={{ width: 25, height: 25, margin: 20 }}
           onChange={handleOptionChange}
         />
+        Image Editing
       </p>
 
       {showGamingPerformance && (
         <>
           <label style={{ fontWeight: 'bold' }}>What is the desired gaming performance?</label>
           <p>
-            <input type="radio" name="gamingPerformance" value="low-end" onChange={handleOptionChange} />
+            <input type="radio" className={styles.radio} name="gamingPerformance" value="low-end" onChange={handleOptionChange} />
             Low-end
-            <input type="radio" name="gamingPerformance" value="medium" onChange={handleOptionChange} />
+            <input type="radio" className={styles.radio} name="gamingPerformance" value="medium" onChange={handleOptionChange} />
             Medium
-            <input type="radio" name="gamingPerformance" value="high-end" onChange={handleOptionChange} />
-            High-end
+            <input type="radio" className={styles.radio}name="gamingPerformance" value="high-end" onChange={handleOptionChange} />
+            High-end 
+            <input type="radio" className={styles.radio}name="gamingPerformance" value="unsure" onChange={handleOptionChange} />
+            I dont know
           </p>
         </>
       )}
 
-      <button onClick={handleGenerateClick} style={{ fontSize: 23, padding: '1rem', width: '45rem' }}>
+      {showGamingOptions && (
+        <>
+          <label style={{ fontWeight: 'bold' }}>which of these games will you likely play?</label>
+          <p>
+            <input type="radio" name="gamingOptions" value="low-end-gaming" onChange={handleOptionChange} />
+            <button onClick={handleOptionChange}> 
+            <Image src={"/leagueoflegends.jpg"} width={150} height={150}></Image></button>
+
+            <input type="radio" name="gamingOptions" value="high-end-gaming" onChange={handleOptionChange} />
+            High-end 
+            <input type="radio" name="gamingOptions" value="unsure" onChange={handleOptionChange} />
+            I'm not sure 
+          </p>
+        </>
+      )}
+
+      {showStreamingPerformance && (
+        <>
+          <label style={{ fontWeight: 'bold' }}>What bitrate will you want to use when streaming?</label>
+          <p>
+            <input type="radio" name="streamingPerformance" value="low-end-streaming" onChange={handleOptionChange} />
+            Standard Definition (SD, 480p)
+            <input type="radio" name="streamingPerformance" value="medium-streaming" onChange={handleOptionChange} />
+            High Definition (HD, 720p)
+            <input type="radio" name="streamingPerformance" value="high-end-streaming" onChange={handleOptionChange} />
+            Ultra High Definition (UHD or 4K, 2160p)
+          </p>
+        </>
+      )}
+
+      <button onClick={handleGenerateClick} className={styles.btn} style={{ fontSize: 23, padding: '1rem', width: '45rem' }}>
         Generate
       </button>
 
@@ -113,6 +168,11 @@ const ComputerBuilder = () => {
 };
 
 export default ComputerBuilder;
+
+
+
+
+
 
 
 
