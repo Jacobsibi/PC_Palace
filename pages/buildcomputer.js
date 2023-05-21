@@ -181,6 +181,20 @@ const ComputerBuilder = () => {
       <input type="range" min="1700" max="3000" value={sliderValue} onChange={handleSliderChange} style={{ width: 700, height: 20, margin: 10}} />
       ${sliderValue}
       </p>
+        
+      <label style={{ fontWeight: 'bold' }}>What type of storage do you want for this pc?</label>
+          <p style={{  }}>
+            <input type="radio" className={styles.radio} name="storage" value="low-storage" onChange={handleOptionChange} style={{ width: 25, height: 25, margin: 10 }}/>
+            Hard Disk Drive (HDD), slowest and cheapest option <br   />
+            <input type="radio" className={styles.radio} name="storage" value="medium-storage" onChange={handleOptionChange} style={{ width: 25, height: 25, margin:10 }}/>
+            External Solid State Drive (SSD), portable and faster  <br  />
+            <input type="radio" className={styles.radio} name="storage" value="high-storage" onChange={handleOptionChange} style={{ width: 25, height: 25, margin: 10 }}/>
+            Internal Solid Statae Drive (SSD), fastest and most expensive  (Recommended)
+          </p>
+
+
+          
+
 
       <button onClick={handleGenerateClick} className={styles.btn} style={{ fontSize: 23, padding: '1rem', width: '100%' }}>
         Generate
@@ -200,3 +214,14 @@ const ComputerBuilder = () => {
 };
 
 export default ComputerBuilder;
+
+// notes 
+// ram, powersupply, motherboard, cpu and gpu can be derrived from which level of gaming or streaming they chose.
+
+// you could use extra money left to choose the case because its less important than the other components
+// or alternativly you can just set a low,med,high case and give them one based on the gaming performance they choose.
+
+// if they set the budget too low its easier to just tell them to change it than to try to change parts till it fits what they gave.
+
+// if they select workstation give medium cpu and cheapest case
+// if they select image editing give high cpu
