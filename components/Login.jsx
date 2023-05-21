@@ -131,6 +131,8 @@ const Login = () => {
       swal("Error", "Cannot send the magic link", "error");
       //DRAFT, here... just referesh this same page again, dont go anywhere
     }
+
+
     
 
   };
