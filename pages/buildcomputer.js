@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styles from '../styles/Builder.module.css';
-import Image from "next/image";
+
 
 const ComputerBuilder = () => {
   // State variables
@@ -149,7 +149,7 @@ const ComputerBuilder = () => {
             <input type="radio" className={styles.radio}name="gamingPerformance" value="high-end-gaming" onChange={handleOptionChange} style={{ width: 25, height: 25, margin: 20 }} />
             High-end 
             <input type="radio" className={styles.radio}name="gamingPerformance" value="unsure" onChange={handleOptionChange} style={{ width: 25, height: 25, margin: 20 }} />
-            I dont know
+            I dont know 
           </p>
         </> 
       )}
