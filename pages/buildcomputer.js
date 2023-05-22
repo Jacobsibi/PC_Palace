@@ -9,8 +9,7 @@ const ComputerBuilder = () => {
   const [showGamingOptions, setShowGamingOptions] = useState(false); // Controls whether to show the optional games
   const [showStreamingPerformance, setShowStreamingPerformance] = useState(false); // Controls whether to show the gaming performance options
   const [generatedNumber, setGeneratedNumber] = useState(null); // Stores the generated number
-
-
+  const [selectedImages, setSelectedImages] = useState([]); // Stores the selected images
   const [sliderValue, setSliderValue] = useState(1800); // Stores the slider value
 
   // Event handler for the "Generate" button click
@@ -36,6 +35,28 @@ const ComputerBuilder = () => {
     }
   };
 
+  function SelectableImage({ src, selected, onClick }) {
+    return (
+      <img
+        src={src}
+        className={`${styles.selectableImage}  ${selected ? styles.selected : ''}`}
+        onClick={onClick}
+        alt="Selectable Image"
+        width={150} height={150}
+        
+      />
+    );
+  }
+
+  const handleImageClick = (imageSrc) => {                         //when a gaming option image is clicked...
+    const isImageSelected = selectedImages.includes(imageSrc);
+    if (isImageSelected) {
+      setSelectedImages(selectedImages.filter((src) => src !== imageSrc)); // Remove the image from the selected images
+    } else {
+      setSelectedImages([...selectedImages, imageSrc]); // Add the image to the selected images
+    }
+  };
+
   // Event handler for option changes
   const handleOptionChange = (event) => {
     const option = event.target.value;
@@ -49,12 +70,6 @@ const ComputerBuilder = () => {
       }
     });
   };
-
-  const handleLeagueClick = () => {    //////////////////////////work in progresss
-    if (selectedOptions.includes('low-end-gaming')) {
-      setIsSelected(!isSelected);
-    }
-  }
       
   const handleSliderChange = (event) => { // Slider for budget
     setSliderValue(event.target.value);
@@ -106,7 +121,7 @@ const ComputerBuilder = () => {
   return (
     <div style={{ textAlign: 'left', marginLeft: 300, marginRight: 300 }}>
       <h1>Computer Builder</h1>
-      <p>To get started, answer a few simple questions to help us understand what type of computer best fits you!</p> {selectedOptions}
+      <p>To get started, answer a few simple questions to help us understand what type of computer best fits you!</p> {selectedImages}
       <br />
 
       <label style={{ fontWeight: 'bold' }}>What will you be using the computer for?</label>
@@ -143,21 +158,13 @@ const ComputerBuilder = () => {
         <>
           <label style={{ fontWeight: 'bold', }}>which of these games will you likely play?</label>
           <p> 
-            <button name="gamingOptions" value="low-option" onClick={handleLeagueClick} className={styles.btn2} >
-              <Image src={"/leagueoflegends.jpg"} width={150} height={150}></Image></button>
 
-            <button name="gamingOptions" value="low-option" onClick={handleOptionChange} className={styles.btn2}>
-              <Image src={"/factorio1.jpg"} width={150} height={150}></Image></button>
-
-            <button name="gamingOptions" value="medium-option" onClick={handleOptionChange} className={styles.btn2}>
-              <Image src={"/csgo1.jpg"} width={150} height={150}></Image></button>
-
-            <button name="gamingOptions" value="high-option" onClick={handleOptionChange} className={styles.btn2}>
-              <Image src={"/gtav.jpg"} width={150} height={150} ></Image></button>
-
-            <button name="gamingOptions" value="high-option" onClick={handleOptionChange} className={styles.btn2}>
-              <Image src={"/witcher3.jpg"} width={150} height={150}></Image></button>
-
+          <SelectableImage src="/leagueoflegends.jpg" selected={selectedImages.includes("low1 ")} onClick={() => handleImageClick("low1 ")}/>
+          <SelectableImage src="/factorio1.jpg" selected={selectedImages.includes("low2 ")} onClick={() => handleImageClick("low2 ")}/>
+          <SelectableImage src="/csgo1.jpg" selected={selectedImages.includes("medium ")} onClick={() => handleImageClick("medium ")}/>
+          <SelectableImage src="/gtav.jpg" selected={selectedImages.includes("high ")} onClick={() => handleImageClick("high ")}/>
+          <SelectableImage src="/witcher3.jpg" selected={selectedImages.includes("ultra ")} onClick={() => handleImageClick("ultra ")}/>
+          
           </p>
         </>
       )}
@@ -225,3 +232,8 @@ export default ComputerBuilder;
 
 // if they select workstation give medium cpu and cheapest case
 // if they select image editing give high cpu
+
+
+//old image setup
+//              <button name="gamingOptions" value="high-option" onClick={handleOptionChange} className={styles.btn2}>
+//      <Image src={"/witcher3.jpg"} width={150} height={150}></Image></button>
