@@ -111,14 +111,23 @@ const Login = () => {
 
 //DRAFT: I AM IMPLEMENTING THE ADDING EMAIL TO DATABASE
 //function: add email to database
-const addEmailToDatabase = async () => {
+// const addEmailToDatabase = async () => {
+
+//   try(){
+
+//   }catch(error){
+//     console.log("Hey Bro " + error);
+//     swal("Error", "Please try again", "error");
+//   }
+
+
 // Add a new document in collection "cities"
-await setDoc(doc(database, "cities", "LA"), {
-  name: "Los Angeles",
-  state: "CA",
-  country: "USA"
-});
-}
+// await setDoc(doc(database, "cities", "LA"), {
+//   name: "Los Angeles",
+//   state: "CA",
+//   country: "USA"
+// });
+//}
 
 
 
@@ -164,7 +173,7 @@ await setDoc(doc(database, "cities", "LA"), {
       />
       <Link class={styles.highlightedLink} href="/forgotpasswordpage">
           Forgot Password ?
-        </Link>
+      </Link>
 
       <button class={styles.btn} 
               onClick={signIn} 
@@ -172,11 +181,12 @@ await setDoc(doc(database, "cities", "LA"), {
         Sign In
       </button>
       <button class={styles.btn} onClick={signInWithFacebook}>
-        Sign In With Google
+        Sign In With Facebook
       </button>
-      <button class={styles.btn} onClick={addEmailToDatabase}>
+
+      {/* <button class={styles.btn} onClick={addEmailToDatabase}>
        Test Button To Add Email To Database
-      </button>
+      </button> */}
 
     </div>
   );

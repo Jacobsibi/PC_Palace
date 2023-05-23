@@ -2,42 +2,20 @@ import Link from "next/link";
 import swal from "sweetalert";
 import styles from "../styles/Support.module.css";
 import React, { useState } from "react";
-import { useRouter } from "next/router";
 import { sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "../configurations/firebase";
 
 const ForgotPassword = () => {
   //email and password to be used as parameter for Firebase special function
-  const router = useRouter();
   const [email, setEmail] = useState("");
-
-  //function: refresh the page
-  function refreshPage() {
-    window.location.reload(false);
-  }
 
   //function: forgot password, when onclick send an email
   const resetPassword = async () => {
     try {
-      //PROBLEM, HOW TO CHECK IF EMAIL IS EXISTED EVEN THE USER IS NOT LOGGED IN YET ??
-      //ONE SOLUTION: MAYBE MAKE A COLLECTION OF EMAILS, AND CHECK IF THE EMAIL IS EXISTED IN THAT COLLECTION
-      //FOR THAT I NEED TO SETUP FIRESTORE, AND MAKE A COLLECTION OF EMAILS
-      //SET UP THE GETTER AND SETTER
-      //THEN CHECK IF THE EMAIL IS EXISTED IN THAT COLLECTION
-
-      //TRY NUMBER ONE:
       sendPasswordResetEmail(auth, email);
-
-      //TRY NUMBER TWO:
-      //await auth.sendPasswordResetEmail(email);
-
       swal("Magic Link Sent", "Please check your email", "success");
-      //DRAFT, here... use router to go to homepage if success
     } catch (error) {
-      console.log("Here is why cannot send the magic link: " + error);
-      console.log("Email: " + email);
       swal("Error", "Cannot send the magic link", "error");
-      //DRAFT, here... just referesh this same page again, dont go anywhere
     }
   };
 
