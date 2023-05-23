@@ -4,6 +4,7 @@ import styles from "../styles/Support.module.css";
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { sendPasswordResetEmail } from "firebase/auth";
+import { auth } from "../configurations/firebase";
 
 const ForgotPassword = () => {
   //email and password to be used as parameter for Firebase special function
@@ -25,7 +26,7 @@ const ForgotPassword = () => {
       //THEN CHECK IF THE EMAIL IS EXISTED IN THAT COLLECTION
 
       //TRY NUMBER ONE:
-      sendPasswordResetEmail(email);
+      sendPasswordResetEmail(auth, email);
 
       //TRY NUMBER TWO:
       //await auth.sendPasswordResetEmail(email);
