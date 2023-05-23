@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import styles from '../styles/Builder.module.css';
+import styles from '../../styles/Builder.module.css';
 
 
 const ComputerBuilder = () => {
