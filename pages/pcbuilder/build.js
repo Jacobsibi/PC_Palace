@@ -134,8 +134,8 @@ const ComputerBuilder = () => {
         Streaming
         <input type="checkbox" name="myCheckbox" value="workstation" style={{ width: 25, height: 25, margin: 20 }} onChange={handleOptionChange} />
         Workstation
-        <input type="checkbox" name="myCheckbox" value="imageEditing" style={{ width: 25, height: 25, margin: 20 }} onChange={handleOptionChange} />
-        Image Editing
+        <input type="checkbox" name="myCheckbox" value="server" style={{ width: 25, height: 25, margin: 20 }} onChange={handleOptionChange} />
+        Server Hosting
       </p>
 
       {showGamingPerformance && (
@@ -231,7 +231,7 @@ export default ComputerBuilder;
 // if they set the budget too low its easier to just tell them to change it than to try to change parts till it fits what they gave.
 
 // if they select workstation give medium cpu and cheapest case
-// if they select image editing give high cpu
+// if they select server give high cpu
 
 
 //old image setup

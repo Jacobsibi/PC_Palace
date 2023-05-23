@@ -29,12 +29,14 @@
 
   .image{
 
-        position:absolute;
-        left:57%;
-        top:28%;
+        position: relative;
+        left: 54%;
+        
+        margin-top: -12%;
         z-index:0;
-        width: 40%;
-        height: 60%;
+        width: 45%;
+        transform: translate(-50%, -50%);
+        height: auto;
     }
 
   .div1{
@@ -53,6 +55,8 @@
     border-radius: 20px;
     width: 100%;
     z-index:2;
+    
+    margin-top: -16%;
   }
 
   .selectableImage {
