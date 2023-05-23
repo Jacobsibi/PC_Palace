@@ -3,15 +3,17 @@ import swal from "sweetalert";
 import styles from "../styles/Support.module.css";
 import React, { useState } from "react";
 import { useRouter } from "next/router";
-import { auth, authGoogle, authFacebook } from "../configurations/firebase";
-import { sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup} from "firebase/auth";
+import { auth, authGoogle, authFacebook, database  } from "../configurations/firebase";
+import { signInWithEmailAndPassword, signInWithPopup} from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore"; 
+
 
 const Login = () => {
+
   //email and password to be used as parameter for Firebase special function
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
 
   //function: refresh the page
   function refreshPage() {
@@ -66,7 +68,7 @@ const Login = () => {
   };
 
   //function: sign in with google for both new and existing customer
-  const signInGoogle = async () => {
+  const signInWithGoogle = async () => {
     try {
       //check if there is an account is signed in, prompt to sign out first to continue action
       if (auth?.currentUser) {
@@ -84,7 +86,7 @@ const Login = () => {
     }
   };
 
-  //DRAFT, MAYBE IMPLEMENT THIS ?
+  //DRAFT, MAYBE IMPLEMENT THIS IF I HAVE TIME, I AM ALMOST DONE?
   //function: sign in with facebook for both new and existing customer
   const signInWithFacebook = async () => {
     try {
@@ -106,36 +108,20 @@ const Login = () => {
     }
   };
 
-  //function: forgot password, when onclick send an email
-  const resetPassword = async () => {
-    try{
 
-      //PROBLEM, HOW TO CHECK IF EMAIL IS EXISTED EVEN THE USER IS NOT LOGGED IN YET ??
-      //ONE SOLUTION: MAYBE MAKE A COLLECTION OF EMAILS, AND CHECK IF THE EMAIL IS EXISTED IN THAT COLLECTION
-      //FOR THAT I NEED TO SETUP FIRESTORE, AND MAKE A COLLECTION OF EMAILS
-      //SET UP THE GETTER AND SETTER
-      //THEN CHECK IF THE EMAIL IS EXISTED IN THAT COLLECTION
-
-      //TRY NUMBER ONE:
-      FirebaseError.auth().sendPasswordResetEmail(email);
-
-      //TRY NUMBER TWO:
-      //await auth.sendPasswordResetEmail(email);
-
-      swal("Magic Link Sent", "Please check your email", "success");
-      //DRAFT, here... use router to go to homepage if success
-
-    } catch(error){
-      console.log("Here is why cannot send the magic link: " + error);
-      console.log("Email: " + email);
-      swal("Error", "Cannot send the magic link", "error");
-      //DRAFT, here... just referesh this same page again, dont go anywhere
-    }
+//DRAFT: I AM IMPLEMENTING THE ADDING EMAIL TO DATABASE
+//function: add email to database
+const addEmailToDatabase = async () => {
+// Add a new document in collection "cities"
+await setDoc(doc(database, "cities", "LA"), {
+  name: "Los Angeles",
+  state: "CA",
+  country: "USA"
+});
+}
 
 
-    
 
-  };
 
   //the output
   return (
@@ -176,18 +162,20 @@ const Login = () => {
         name="user_password"
         required
       />
-      <p>
-        Forgot password?{" "}
-          <button onClick={resetPassword}> Send a magic link </button>
-      </p>
+      <Link class={styles.highlightedLink} href="/forgotpasswordpage">
+          Forgot Password ?
+        </Link>
 
       <button class={styles.btn} 
               onClick={signIn} 
       >
         Sign In
       </button>
-      <button class={styles.btn} onClick={signInGoogle}>
+      <button class={styles.btn} onClick={signInWithFacebook}>
         Sign In With Google
+      </button>
+      <button class={styles.btn} onClick={addEmailToDatabase}>
+       Test Button To Add Email To Database
       </button>
 
     </div>

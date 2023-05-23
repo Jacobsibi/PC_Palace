@@ -10,4 +10,5 @@ export { default as LoginNewAccount } from './LoginNewAccount';
 export { default as MyAccount } from './MyAccount';
 export { default as Support } from './Support';
 export { default as SearchBar } from './SearchBar';
+export { default as ForgotPassword } from './ForgotPassword';
 
