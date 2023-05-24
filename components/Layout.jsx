@@ -3,7 +3,6 @@ import Head from 'next/head';
 
 import Navbar from './Navbar';
 import Footer from './Footer';
-import SearchBar from './SearchBar';
 
 const Layout = ({ children }) => {
   return (
