@@ -131,7 +131,7 @@ const Navbar = () => {
 						<Image src={"/logo-image.png"} width={1134} height={272} alt="Logo"></Image>
 					</Link>
 				</span>
-				<span className={styles.pages}><Link href={"/buildcomputer"}>Computer Builder</Link></span>
+				<span className={styles.pages}><Link href={"/pcbuilder/build"}>Computer Builder</Link></span>
 				<span className={styles.pages}><Link href={"/support"}>Support</Link></span>
 				<span className={styles.pages}><Link href={"/about"}>About us</Link></span>
 				<div />
