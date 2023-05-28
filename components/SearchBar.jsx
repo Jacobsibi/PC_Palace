@@ -14,7 +14,9 @@ const SearchResults = React.forwardRef((props, ref) => {
     React.useEffect(() => {
         async function getProductsMatching(query) {
             const sanityQuery = `*[_type == "product" && (name match "${query}" || details match "${query}" || brand match "${query}")]`;
-            const products = await fetch(`/api/sanity/query?query=${encodeURIComponent(sanityQuery)}`).then(res => res.json());
+            // const products = await fetch(`/api/sanity/query?query=${encodeURIComponent(sanityQuery)}`).then(res => res.json());
+            const products = await fetch(`/api/sanity/query?query=${encodeURIComponent(sanityQuery)}`).then(res => res.json()).catch(res => ([]));
+            console.log(products);
             setProductsMatching(products);
         }
         
