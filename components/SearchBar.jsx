@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styles from "../styles/SearchBar.module.css";
 import { AiOutlineSearch } from 'react-icons/ai';
-import { client } from "../lib/client";
 import { useRouter } from "next/router";
 
 const SearchResults = React.forwardRef((props, ref) => {
@@ -15,8 +14,7 @@ const SearchResults = React.forwardRef((props, ref) => {
         async function getProductsMatching(query) {
             const sanityQuery = `*[_type == "product" && (name match "${query}" || details match "${query}" || brand match "${query}")]`;
             // const products = await fetch(`/api/sanity/query?query=${encodeURIComponent(sanityQuery)}`).then(res => res.json());
-            const products = await fetch(`/api/sanity/query?query=${encodeURIComponent(sanityQuery)}`).then(res => res.json()).catch(res => ([]));
-            console.log(products);
+            const products = await fetch(`/api/sanity/query?query=${encodeURIComponent(sanityQuery)}`).then(res => res.json()).catch(err => ([]));
             setProductsMatching(products);
         }
         
@@ -42,7 +40,7 @@ const SearchResults = React.forwardRef((props, ref) => {
         router.push(`/product/${product.slug.current}`);
     }
 
-    const itemHovered = index => {
+    const itemHovered = () => {
         props.setSelectedIndex(-1);
     }
 
@@ -54,7 +52,7 @@ const SearchResults = React.forwardRef((props, ref) => {
                     return (
                         <p key={index} className={`${styles.resultItem} ${props.selectedIndex == index ? styles.selected : ""}` } 
                             onMouseDown={() => itemClicked(product)}
-                            onMouseEnter={() => itemHovered(index)}
+                            onMouseEnter={() => itemHovered()}
                             ref={props.selectedIndex == index ? ref : null}>
                             {product.name}
                         </p>
