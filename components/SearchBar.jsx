@@ -14,11 +14,11 @@ const SearchResults = React.forwardRef((props, ref) => {
     React.useEffect(() => {
         async function getProductsMatching(query) {
             const sanityQuery = `*[_type == "product" && (name match "${query}" || details match "${query}" || brand match "${query}")]`;
-            const getProducts = await client.fetch(sanityQuery);
-            setProductsMatching(getProducts);
+            const products = await fetch(`/api/sanity/query?query=${encodeURIComponent(sanityQuery)}`).then(res => res.json());
+            setProductsMatching(products);
         }
         
-        getProductsMatching(query); 
+        getProductsMatching(query);
     }, [props.query]);
 
     React.useEffect(() => {
@@ -30,9 +30,7 @@ const SearchResults = React.forwardRef((props, ref) => {
 
         document.addEventListener("mousedown", handleClickOutside);
 
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        }
+        return () => document.removeEventListener("mousedown", handleClickOutside);
     });
 
     props.setResultAmount(productsMatching.length);
