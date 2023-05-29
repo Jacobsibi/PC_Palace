@@ -6,17 +6,17 @@ import { Layout } from '../components';
 import { DepartmentsContextProvider } from '@/context/DepartmentsContext';
 
 function myApp({ Component, pageProps }) {
-  return (
-    //pass data from stateContext qto every component 
-    <DepartmentsContextProvider>
-      <StateContext>
-        <Layout>
-          <Toaster />
-          <Component {...pageProps} />
-        </Layout>
-      </StateContext>
-    </DepartmentsContextProvider>
-  )
+	return (
+		//pass data from stateContext qto every component 
+		<DepartmentsContextProvider>
+			<StateContext>
+				<Layout>
+					<Toaster />
+					<Component {...pageProps} />
+				</Layout>
+			</StateContext>
+		</DepartmentsContextProvider>
+	)
 }
 
 export default myApp

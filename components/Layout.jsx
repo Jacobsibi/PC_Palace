@@ -5,24 +5,24 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 
 const Layout = ({ children }) => {
-  return (
-    <>
-      <Head>
-        <title>PC Palace</title>
-      </Head>
-      <header>
-        <Navbar />
-      </header>
-      <div className="layout">
-        <main className="main-container">
-          {children}
-        </main>
-        <footer>
-          <Footer />
-        </footer>
-      </div>
-    </>
-  )
+	return (
+		<>
+			<Head>
+				<title>PC Palace</title>
+			</Head>
+			<header>
+				<Navbar />
+			</header>
+			<div className="layout">
+				<main className="main-container">
+					{children}
+				</main>
+				<footer>
+					<Footer />
+				</footer>
+			</div>
+		</>
+	)
 }
 
 export default Layout
