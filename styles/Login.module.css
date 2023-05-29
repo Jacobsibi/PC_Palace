@@ -44,7 +44,6 @@
     right: 0;
     top: 0;
     z-index: 100;
-    /* will-change: transform; */
     transition: all 1s ease-in-out;
   
   }
@@ -69,4 +68,38 @@
     height: 200px;
     overflow: auto;
   }
+
+  .textArea {
+    background-color: #1a1a1a;
+    color: #ffffff;
+    text-align: left;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    font-family: "Calibri", sans-serif;
+  }
+  
+  .textArea p {
+    margin-bottom: 8px;
+  }
+  
+  .textArea .info {
+    font-weight: normal;
+    text-transform: none;
+  }
+  
+  .textArea .info:first-letter {
+    font-size: 100%;
+  }
+  
+  .textArea .info:not(:last-child) {
+    margin-bottom: 12px;
+  }
+  
+  .textArea .info span {
+    color: #00ffd8;
+  }
+  
+  
   

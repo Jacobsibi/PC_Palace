@@ -1,7 +1,9 @@
+import { useRouter } from "next/router";
 import swal from "sweetalert";
 import styles from "../styles/Support.module.css";
 import React, { useState, useEffect } from "react";
 import { auth } from "../configurations/firebase";
+import {signOut} from "firebase/auth";
 import { updateProfile, updateEmail, updatePassword } from "firebase/auth";
 
 const MyAccount = () => {
@@ -12,6 +14,8 @@ const MyAccount = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [newName, setNewName] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const router = useRouter();
+
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -52,6 +56,7 @@ const MyAccount = () => {
             //update name
             await updateProfile(auth.currentUser, { displayName: newName });
             await swal("Success", "Your name has been updated", "success");
+            await router.push('/');
           }
         }
 
@@ -59,6 +64,7 @@ const MyAccount = () => {
           //update email using firebase function
           await updateEmail(auth.currentUser, newEmail);
           await swal("Success", "Your email has been updated", "success");
+          await router.push('/');
         }
 
         if (newPassword !== "") {
@@ -74,6 +80,7 @@ const MyAccount = () => {
             //update password using firebase function
             await updatePassword(auth.currentUser, newPassword);
             await swal("Success", "Your password has been updated", "success");
+            await router.push('/');
           }
         }
 
@@ -87,9 +94,6 @@ const MyAccount = () => {
 
         // refresh the page
         refreshPage();
-
-        //SHOULD SUCCESS MESSAGE BE ONLY ONE ?
-        //await swal("Success", "Your details has been updated", "success");
       }
     } catch (error) {
       if (error.code === "auth/requires-recent-login") {
@@ -114,8 +118,35 @@ const MyAccount = () => {
         );
       } else {
         // Handle other errors
-        swal("Hey Bro", "Please try again", "error");
+        swal("Error", "Please try again", "error");
       }
+    }
+  };
+
+  //function: logout
+  const logOut = async () => {
+    try {
+      //check if there account is signed out already, give out a prompt
+      if (!auth?.currentUser) {
+        await swal(
+          "Already Logged Out",
+          "No user signed in at the moment",
+          "warning"
+        );
+      } else {
+        await signOut(auth);
+        await router.push('/');
+        await swal(
+          "Logged Out",
+          "You are logged out from your account",
+          "info"
+        );
+        //refresh the page
+        refreshPage();
+      }
+    } catch (error) {
+      swal("Error", "Please try again", "error");
+      console.log("baby girl: "+error);
     }
   };
 
@@ -128,10 +159,10 @@ const MyAccount = () => {
         icon: "warning",
         buttons: true,
         dangerMode: true,
-      })
-      .then(async (willDelete) => {
+      }).then(async (willDelete) => {
         if (willDelete) {
           await auth.currentUser.delete();
+          await router.push('/');
           swal("Account Deleted", "Your account has been deleted", "success", {
             icon: "success",
           });
@@ -139,18 +170,18 @@ const MyAccount = () => {
           swal("Account Is Not Deleted", "Your account is safe", "warning");
         }
       });
-
     } catch (error) {
-       if(error.code === "auth/requires-recent-login"){
+      if (error.code === "auth/requires-recent-login") {
         swal("Run Time Out", "Please relogin again to delete", "error");
-       } else{
+      } else if (error.code === "auth/network-request-failed"){
+        swal("Connection Error", "Please connect to internet", "error");
+      } else {
         swal("Error", "Cannot delete the account", "error");
-       }
+      }
     }
   };
 
   //output:
-
   if (isLoading) {
     return <div> Web is loading... </div>;
   }
@@ -161,7 +192,6 @@ const MyAccount = () => {
       <p>Enter your new details</p>
 
       <label class={styles.label}>New Name</label>
-      <p class={styles.info}>Current Name: {auth?.currentUser?.displayName}</p>
       <input
         class={styles.input}
         type="text"
@@ -177,7 +207,6 @@ const MyAccount = () => {
       />
 
       <label class={styles.label}>New Email </label>
-      <p class={styles.info}>Current Email: {auth?.currentUser?.email}</p>
       <input
         class={styles.input}
         type="email"
@@ -221,10 +250,16 @@ const MyAccount = () => {
         Update{" "}
       </button>
 
+      <button class={styles.btn} onClick={logOut}>
+        {" "}
+        Sign Out{" "}
+      </button>
+
       <button class={styles.btn} onClick={deleteAccount}>
         {" "}
         Delete This Account{" "}
       </button>
+
     </div>
   );
 };

@@ -7,7 +7,7 @@ export { default as Cart } from './Cart';
 export { default as AccountPopUp } from './AccountPopUp';
 export { default as Login } from './Login';
 export { default as LoginNewAccount } from './LoginNewAccount';
-export { default as MyAccount } from './MyAccount';
+export { default as UpdateDetails } from './UpdateDetails';
 export { default as Support } from './Support';
 export { default as SearchBar } from './SearchBar';
 export { default as ForgotPassword } from './ForgotPassword';
