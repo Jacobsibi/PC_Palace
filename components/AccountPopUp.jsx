@@ -81,9 +81,9 @@ const Account = () => {
 
                     <div className={styles.textArea}>
                       {/* Place your sccount detail contents here */}
-                      <p class={styles.info}>Account Details</p>
-                      <p class={styles.info}>Name: {auth?.currentUser?.displayName}</p>
-                      <p class={styles.info}>Email: {auth?.currentUser?.email}</p>
+                      <p className={styles.info}>Account Details</p>
+                      <p className={styles.info}>Name: {auth?.currentUser?.displayName}</p>
+                      <p className={styles.info}>Email: {auth?.currentUser?.email}</p>
                     </div>
 
                     <div className={styles.emptylogin}>

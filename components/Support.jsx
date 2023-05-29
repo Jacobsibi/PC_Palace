@@ -1,6 +1,9 @@
 import React, { useState, useRef } from "react";
 import emailjs from "@emailjs/browser";
 import styles from "../styles/Support.module.css";
+import ContactUs from "./ContactUs";
+import FAQs from "./FAQs";
+
 
 const Support = () => {
   const [name, setName] = useState("");
@@ -50,69 +53,14 @@ const Support = () => {
         <button class={styles.tabButton} onClick={() => setActiveTab("tab3")}>Reviews</button>
       </div>
 
-      {activeTab === "tab1" && (
-        <form class={styles.form} ref={form} onSubmit={sendEmail}>
-          <h1>Contact Us</h1>
-          <label class={styles.label}>Name</label>
-          <input
-            class={styles.input}
-            type="text"
-            name="user_name"
-            maxLength={20}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-          <label class={styles.label}>Email</label>
-          <input
-            class={styles.input}
-            type="email"
-            name="user_email"
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-          />
-          <label class={styles.label}> Message</label>
-          <textarea
-            class={styles.messageTextarea}
-            name="message"
-            onChange={(e) => setMessage(e.target.value)}
-            required
-          />
-          <input class={styles.input} type="submit" value="Send" />
-        </form>
-      )}
-      {activeTab === "tab2" && (
-        <div className={styles.faqs}>
-          <h3>PC Palace Shipping Times</h3>
-          <p>
-            On average, it should take about 5 days to process the order to
-            inventory after the purchase is made. Once the order is processed
-            through inventory, our current estimate for shipping the PC is 7-12
-            business days.
-          </p>
-          <p>
-            Please note: The days below are estimates that have not factored in
-            delays caused by supply or backlog.
-          </p>
-          <ul>
-            <li>Inventory processing: 1-5 days</li>
-            <li>Assembly of PC: 1-2 days</li>
-            <li>Testing and QA: 1-2 days</li>
-            <li>Quality Assurance: 1-2 days</li>
-            <li>Packaging and shipping: 1-2 days</li>
-          </ul>
-          <p>
-            Disclaimer: Shipping & Delivery times are subject to change
-            depending on FedEx schedules, weather delays, supply chain
-            disruptions, and the Holiday Season.
-          </p>
-          <p>
-            If you have any further questions or concerns regarding your order,
-            please contact one of our support agents to assist you via the
-            "Contact Us" option or email at support@pcpalace.com.
-          </p>
-        </div>
-      )}
+      {activeTab === "tab1" && (<ContactUs
+          form={form}
+          sendEmail={sendEmail}
+          setName={setName}
+          setEmail={setEmail}
+          setMessage={setMessage}
+        />)}
+      {activeTab === "tab2" && ( <FAQs />)}
       {activeTab === "tab3" && (
         <div>
           <h1>Reviews</h1>

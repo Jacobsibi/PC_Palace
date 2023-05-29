@@ -9,6 +9,8 @@ export { default as Login } from './Login';
 export { default as LoginNewAccount } from './LoginNewAccount';
 export { default as UpdateDetails } from './UpdateDetails';
 export { default as Support } from './Support';
+export { default as ContactUs } from './ContactUs';
+export { default as FAQs } from './FAQs';
 export { default as SearchBar } from './SearchBar';
 export { default as ForgotPassword } from './ForgotPassword';
 
