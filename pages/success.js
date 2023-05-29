@@ -7,16 +7,29 @@ import { runSuccessStars } from '@/LIB/utils';
 import styles from "../styles/Index.module.css";
 
 const Success = () => {
-  const { setCartItems, setTotalPrice, setTotalQuantities } = useStateContext();
+  const { cartItems, setCartItems, setTotalPrice, setTotalQuantities } = useStateContext();
   
+  //adding the cart items to local storage
+  const itemsToStore = cartItems.map((item) => {
+    return {
+      id: item._id,
+      name: item.name,
+      price: item.price,
+      quatity: item.quantity,
+      };
+    });
+
   //reset upon cart success checkout 
-  useEffect(() => {
-    localStorage.clear();
-    setCartItems([]);
-    setTotalPrice(0);
-    setTotalQuantities(0);
-    runSuccessStars();
-  }, []);
+  // useEffect(() => {
+  //   localStorage.clear();
+  //   setCartItems([]);
+  //   setTotalPrice(0);
+  //   setTotalQuantities(0);
+  //   runSuccessStars();
+  // }, []);
+
+
+
 
   return (
     <div className={styles.finalizeWrapper}>
@@ -32,6 +45,14 @@ const Success = () => {
             info@pcpalace.com
           </a>
         </p>
+
+        {/* I am adding reciepts here */}
+        <p> {itemsToStore.id} </p>
+        <p> {itemsToStore.name} </p>
+        <p> {itemsToStore.price} </p>
+        <p> {itemsToStore.quantity} </p>
+
+ 
         <Link href="/">
           <button type="button" width="300px" className="btn">
           Continue shopping with us
