@@ -115,3 +115,35 @@
   color: blue;
 }
 
+.tabButton {
+  display: inline-block;
+  background-color: opaque;
+  border: 1px solid #ffffff;
+  border-radius: 8px;
+  color: #000000;
+  font-size: 16px;
+  padding: 8px 16px;
+  margin-right: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.tabButton:focus {
+  outline: none;
+}
+
+.tabButton:hover {
+  background-color: #811d95;
+  color: #ffffff;
+}
+
+.tabButton.active {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.tabButtonContainer {
+  margin-bottom: 16px;
+}
+
+

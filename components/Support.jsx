@@ -6,47 +6,14 @@ const Support = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [activeTab, setActiveTab] = useState("tab1"); //add state for active tab
   const form = useRef();
-  const [activeTab, setActiveTab] = useState("tab1"); // Add state for active tab
+
 
   //function: refresh page
   function refreshPage() {
     window.location.reload(false);
   }
-  //function: send email
-  // const sendEmail = async (e) => {
-  //   e.preventDefault();
-  //   if (message.trim() === "") {
-  //     swal("Enter a message", "Message box cannot be left blank", "warning");
-  //   } else {
-  //     const { user_name, user_email } = e.target.elements; // Get the form field values
-  //     const templateParams = {
-  //       from_name: name,
-  //       from_email: email,
-  //       message: message.trim(),
-  //     };
-  //     emailjs
-  //       .sendForm(
-  //         "service_vds5qa2",
-  //         "template_36ltlst",
-  //         form.current,
-  //         "at1R64fRA37Jqwu7D"
-  //       )
-  //       .then(
-  //         async (result) => {
-  //           await swal(
-  //             "Message Sent",
-  //             "Our customer team will contact you soon",
-  //             "success"
-  //           );
-  //           refreshPage();
-  //         },
-  //         (error) => {
-  //           swal("Message Not Sent", "Please try again", "error");
-  //         }
-  //       );
-  //   }
-  // };
 
   //function: send email
   const sendEmail = async (e) => {
@@ -54,20 +21,6 @@ const Support = () => {
     if (message.trim() === "") {
       swal("Enter a message", "Message box cannot be left blank", "warning");
     } else {
-
-      // emailjs
-      //   .sendForm("service_vds5qa2", "template_36ltlst", templateParams, "at1R64fRA37Jqwu7D")
-      //   .then(
-      //     async (result) => {
-      //       await swal("Message Sent", "Our customer team will contact you soon", "success");
-      //       refreshPage();
-      //     },
-      //     (error) => {
-      //       swal("Message Not Sent", "Please try again", "error");
-      //     }
-      //   );
-      // }
-
       //using premade function from emailjs
       emailjs
       .send("service_vds5qa2","template_36ltlst",{
@@ -92,9 +45,9 @@ const Support = () => {
   return (
     <>
       <div>
-        <button onClick={() => setActiveTab("tab1")}>Contact Us</button>
-        <button onClick={() => setActiveTab("tab2")}>FAQs</button>
-        <button onClick={() => setActiveTab("tab3")}>Reviews</button>
+        <button class={styles.tabButton} onClick={() => setActiveTab("tab1")}>Contact Us</button>
+        <button class={styles.tabButton} onClick={() => setActiveTab("tab2")}>FAQs</button>
+        <button class={styles.tabButton} onClick={() => setActiveTab("tab3")}>Reviews</button>
       </div>
 
       {activeTab === "tab1" && (
