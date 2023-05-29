@@ -9,13 +9,35 @@ const ForgotPassword = () => {
   //email and password to be used as parameter for Firebase special function
   const [email, setEmail] = useState("");
 
-  //function: forgot password, when onclick send an email
+  //function: forgot password, when onclick send an email, with await
   const resetPassword = async () => {
     try {
-      sendPasswordResetEmail(auth, email);
+      await sendPasswordResetEmail(auth, email);
       swal("Magic Link Sent", "Please check your email", "success");
     } catch (error) {
-      swal("Error", "Cannot send the magic link", "error");
+      if (error.code === "auth/user-not-found") {
+        //handle user not found
+        swal("Account Not Existed", "Please enter correct email", "error");
+      } else if (error.code === "auth/invalid-email") {
+        //handle invalid email
+        swal("Invalid Email", "Please enter correct email", "error");
+      } else if (error.code === "auth/missing-email") {
+        //handle missing email
+        swal("Enter Email", "Please fill in email field", "warning");
+      } else if (error.code === "auth/user-disabled") {
+      } else if (error.code === "auth/operation-not-allowed") {
+      } else if (error.code === "auth/too-many-requests") {
+      } else if (error.code === "auth/network-request-failed") {
+      } else if (error.code === "auth/requires-recent-login") {
+      } else if (error.code === "auth/user-mismatch") {
+      } else if (error.code === "auth/weak-password") {
+      } else if (error.code === "auth/wrong-password") {
+      } else if (error.code === "auth/email-already-in-use") {
+      } else if (error.code === "auth/operation-not-allowed") {
+      } else {
+        //handle other errors
+        swal("Error", "Cannot send the magic link", "error");
+      }
     }
   };
 

@@ -180,8 +180,8 @@ const Login = () => {
       >
         Sign In
       </button>
-      <button class={styles.btn} onClick={signInWithFacebook}>
-        Sign In With Facebook
+      <button class={styles.btn} onClick={signInWithGoogle}>
+        Sign In With Google
       </button>
 
       {/* <button class={styles.btn} onClick={addEmailToDatabase}>
