@@ -62,14 +62,13 @@ const ProductsDisplay = props => {
         <div className={styles.computerParts}>
             {
                 props.pc.map((current, index) => {
-                    const [ currentPart, partValue ] = current;
-                    // console.log(current);
+                    const [ currentComponentName, currentComponentValue ] = current;
                     
                     return (
                         <div className={styles.singleItem} key={index}>
-                            <img src={urlFor(partValue[0].image[0])} width={200} height={200} alt={componentNameMapping[currentPart]} />
-                            <button className={styles.editComponent} onClick={() => editComponent(currentPart)}>Customize</button>
-                            <p>{partValue[0].name}</p>
+                            <img src={urlFor(currentComponentValue.image[0])} width={200} height={200} alt={componentNameMapping[currentComponentName]} />
+                            <button className={styles.editComponent} onClick={() => editComponent(currentComponentName)}>Customize</button>
+                            <p>{currentComponentValue.name}</p>
                         </div>
                     );
                 })
@@ -92,7 +91,8 @@ const BuildDetails = props => {
 }
 
 const Generate = props => {
-    if (Object.keys(props).length !== 9) {
+    if (Object.keys(props).length !== 7) {
+        console.log(Object.keys(props).length);
         return;
     }
 
@@ -107,20 +107,6 @@ const Generate = props => {
 export const getServerSideProps = async context => {
     const query = context?.query;
     let props = { };
-
-    // const exampleSlugs = {
-    //     cpu: "intel-core-i3-12100f",
-    //     gpu: "nvidia-geforce-gt-710",
-    //     mbd: "gigabyte-b760",
-    //     ram: "crucial-16gb-ram",
-    //     sto: "samsung-870-evo-1tb",
-    //     psu: "corsair-rm-series-rm1000x",
-    //     "case": "masterbox-mb600l-v2-black"
-    // };
-
-    // for (const component of Object.keys(exampleSlugs)) {
-    //     props[component] = await client.fetch(`*[_type == "product" && slug.current match "${exampleSlugs[component]}"]`);
-    // }
 
     const slugToComponentMapper = {
         cpuSlug: "cpu",
@@ -137,40 +123,13 @@ export const getServerSideProps = async context => {
     
     const build = builds[0]
     const componentSlugs = Object.keys(build).filter(key => key.toLowerCase().includes("slug") && key !== "buildSlug");
-    console.log(componentSlugs);
 
-    console.log("getting");
-    for (const slug in componentSlugs) {
-        props[slugToComponentMapper[slug]] = await client.fetch(`*[_type == "product" && slug.current match "${slug}"]`);
-        console.log(props[slugToComponentMapper[slug]]);
+    for (const slug of componentSlugs) {
+        const result = await client.fetch(`*[_type == "product" && slug.current match "${build[slug]}"]`);
+        props[slugToComponentMapper[slug]] = result[0];
     }
 
     return { props };
 }
 
 export default Generate;
-
-// {
-//     name: String
-//     slug: Slug 
-//     components: Slug[] 
-//         CPU slug: String 
-//         GPU slug: String 
-//         ...
-// }
-
-// fetch sanity for (build.slug) => build 
-
-// fetch sanity for builds components
-
-// gssp: {
-//     /pcbuilder/generate?pctype=lowendGaming
-//     fetch sanity inside the BUILDS schema for "lowendGaming"
-//         => the build and its components slugs
-    
-//     for each slug inside the build:
-//         fetch the item from PRODUCTS schema 
-//         construct the { props } object
-    
-//     return {props}
-// }
