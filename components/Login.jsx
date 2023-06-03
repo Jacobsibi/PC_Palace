@@ -3,13 +3,20 @@ import swal from "sweetalert";
 import styles from "../styles/Support.module.css";
 import React, { useState } from "react";
 import { useRouter } from "next/router";
-import { auth, authGoogle, authFacebook, database  } from "../configurations/firebase";
-import { signInWithEmailAndPassword, signInWithPopup} from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore"; 
-
+import {
+  auth,
+  authGoogle,
+  authFacebook,
+  database,
+} from "../configurations/firebase";
+import {
+  updateProfile,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+} from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
 
 const Login = () => {
-
   //email and password to be used as parameter for Firebase special function
   const router = useRouter();
   const [email, setEmail] = useState("");
@@ -28,8 +35,16 @@ const Login = () => {
         swal("Already Logged In", "Please sign out first", "warning");
       } else {
         await signInWithEmailAndPassword(auth, email, password);
+
+        // check if the photoURL exists, if not, set it to a default photo URL
+        if (!auth.currentUser.photoURL) {
+          const newPhotoURL =
+            "https://www.tenforums.com/geek/gars/images/2/types/thumb_14400082930User.png";
+          await updateProfile(auth.currentUser, { photoURL: newPhotoURL });
+        }
+
         //redirect to home
-        await router.push('/');
+        await router.push("/");
         await swal("Logged In", "You signed in with email", "success");
         //refresh the page
         await refreshPage();
@@ -63,6 +78,7 @@ const Login = () => {
       } else {
         // Handle other errors
         swal("Error", "Please try again", "error");
+        console.log("HAHAHA " + error);
       }
     }
   };
@@ -75,8 +91,14 @@ const Login = () => {
         await swal("Already Logged In", "Please sign out first", "warning");
       } else {
         await signInWithPopup(auth, authGoogle);
+        // check if the photoURL exists, if not, set it to a default photo URL
+        if (!auth.currentUser.photoURL) {
+          const newPhotoURL =
+            "https://www.tenforums.com/geek/gars/images/2/types/thumb_14400082930User.png";
+          await updateProfile(auth.currentUser, { photoURL: newPhotoURL });
+        }
         //redirect to home
-        await router.push('/');
+        await router.push("/");
         await swal("Logged In", "You signed in with Google", "success");
         //refresh the page
         await refreshPage();
@@ -96,7 +118,7 @@ const Login = () => {
       } else {
         await signInWithPopup(auth, authFacebook);
         //redirect to home
-        await router.push('/');
+        await router.push("/");
         await swal("Logged In", "You signed in with Facebook", "success");
         //refresh the page
         await refreshPage();
@@ -107,29 +129,6 @@ const Login = () => {
       swal("Error", "Please try again", "error");
     }
   };
-
-
-//DRAFT: I AM IMPLEMENTING THE ADDING EMAIL TO DATABASE
-//function: add email to database
-// const addEmailToDatabase = async () => {
-
-//   try(){
-
-//   }catch(error){
-//     console.log("Hey Bro " + error);
-//     swal("Error", "Please try again", "error");
-//   }
-
-
-// Add a new document in collection "cities"
-// await setDoc(doc(database, "cities", "LA"), {
-//   name: "Los Angeles",
-//   state: "CA",
-//   country: "USA"
-// });
-//}
-
-
 
 
   //the output
@@ -149,7 +148,7 @@ const Login = () => {
         type="email"
         onChange={(e) => setEmail(e.target.value)}
         onKeyDown={(e) => {
-          if (e.key === 'Enter') {
+          if (e.key === "Enter") {
             signIn();
           }
         }}
@@ -164,7 +163,7 @@ const Login = () => {
         type="password"
         onChange={(e) => setPassword(e.target.value)}
         onKeyDown={(e) => {
-          if (e.key === 'Enter') {
+          if (e.key === "Enter") {
             signIn();
           }
         }}
@@ -172,21 +171,15 @@ const Login = () => {
         required
       />
       <Link class={styles.highlightedLink} href="/forgotpasswordpage">
-          Forgot Password ?
+        Forgot Password ?
       </Link>
 
-      <button class={styles.btn} 
-              onClick={signIn} 
-      >
+      <button class={styles.btn} onClick={signIn}>
         Sign In
       </button>
       <button class={styles.btn} onClick={signInWithGoogle}>
         Sign In With Google
       </button>
-
-      {/* <button class={styles.btn} onClick={addEmailToDatabase}>
-       Test Button To Add Email To Database
-      </button> */}
 
     </div>
   );

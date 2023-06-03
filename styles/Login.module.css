@@ -58,6 +58,7 @@
   }
   .emptylogin{
     margin:40px;
+    margin-top: 0px;
     text-align:center;
   }
   .buttonsignuppage{
@@ -68,13 +69,12 @@
     height: 200px;
     overflow: auto;
   }
-
   .textArea {
     background-color: #1a1a1a;
     color: #ffffff;
     text-align: left;
     border-radius: 8px;
-    padding: 16px;
+    padding: 8px; /* Smaller padding */
     margin-bottom: 16px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     font-family: "Calibri", sans-serif;
@@ -100,6 +100,99 @@
   .textArea .info span {
     color: #00ffd8;
   }
+  
+
+  .info {
+    /* Other existing styles */
+    border-radius: 50%;
+    width: 100px; /* Adjust the width as per your requirements */
+    height: 100px; /* Adjust the height as per your requirements */
+    object-fit: cover; /* Ensure the image fills the container */
+  }
+
+  .roundImage {
+    border-radius: 50%;
+    width: 100px; /* Adjust the width as per your requirements */
+    height: 100px; /* Adjust the height as per your requirements */
+    object-fit: cover; /* Ensure the image fills the container */
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+  }
+
+
+  .container h1 {
+    margin-top: 70px;
+    margin-bottom: 10px;
+  }
+  
+  .container img {
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }  
+  
+  .container label {
+    margin-top: 10px;
+    margin-bottom: 10px; /* Add margin bottom to create spacing */
+  }
+  
+  .container input[type="file"] {
+    font-size: 16px;
+    padding: 10px 20px;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .container button {
+    font-size: 16px;
+    padding: 10px 20px;
+    background-color: purple;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    margin-bottom: 10px; /* Add margin bottom to create spacing */
+  }
+
+  .container button:hover {
+    background-color: darkpurple;
+  }
+
+  .image {
+    margin-top: 20px;
+    margin-bottom: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .image button {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .image button:focus {
+    outline: none;
+  }
+  
+
+  
+  
+  
+  
   
   
   

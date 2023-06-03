@@ -187,7 +187,8 @@ const MyAccount = () => {
   }
 
   return (
-    <div class={styles.form}>
+
+    <div class={styles.form}>                          
       <h1>Update Details</h1>
       <p>Enter your new details</p>
 
@@ -261,6 +262,7 @@ const MyAccount = () => {
       </button>
 
     </div>
+    
   );
 };
 export default MyAccount;
