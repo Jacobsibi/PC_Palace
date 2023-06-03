@@ -20,7 +20,7 @@ export default {
       }
     },
     {
-      name: 'gpuCardSlug',
+      name: 'gpuSlug',
       title: 'GPU',
       type: 'string',
     },
