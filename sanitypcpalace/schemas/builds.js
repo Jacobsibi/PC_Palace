@@ -10,16 +10,6 @@ export default {
       type: 'string',
     },
     {
-      name: 'brand',
-      title: 'Brand',
-      type: 'string',
-    },
-    {
-      name: 'price',
-      title: 'Price',
-      type: 'number',
-    },
-    {
       name: 'gpuCardSlug',
       title: 'GPU',
       type: 'string',
@@ -50,12 +40,12 @@ export default {
       type: 'string',
     },
     {
-      name: 'coolerCardSlug',
+      name: 'coolerSlug',
       title: 'Cooler',
       type: 'string',
     },
     {
-      name: 'psCardSlug',
+      name: 'psSlug',
       title: 'Power Supply',
       type: 'string',
     },
