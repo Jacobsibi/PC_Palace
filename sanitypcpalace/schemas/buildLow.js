@@ -10,338 +10,49 @@ export default {
       type: 'string',
     },
     {
-      name: 'brand',
-      title: 'Brand',
+      name: 'gpuCardSlug',
+      title: 'GPU',
       type: 'string',
     },
     {
-      name: 'price',
-      title: 'Price',
-      type: 'number',
+      name: 'cpuSlug',
+      title: 'CPU',
+      type: 'string',
     },
     {
-      name: 'graphicsCard',
-      title: 'Graphics Card',
-      type: 'object',
-      fields: [
-        {
-          name: 'name',
-          title: 'Name',
-          type: 'string',
-        },
-        { 
-          name: 'details',
-          title: 'Details',
-          type: 'string',
-        },
-        {
-          //url, unique name
-          name: 'gpuSlug',
-          title: 'Slug',
-          type: 'slug',
-          options: {
-            source: 'name',
-            maxLength: 90,
-          },
-        },
-        {
-          name: 'image',
-          title: 'Image',
-          type: 'array',
-          of: [{ type: 'image' }],
-          options: {
-            hotspot: true,
-          },
-        },
-      ],
+      name: 'mbSlug',
+      title: 'Mother Board',
+      type: 'string',
     },
     {
-      name: 'processor',
-      title: 'Processor',
-      type: 'object',
-      fields: [
-        {
-          name: 'name',
-          title: 'Name',
-          type: 'string',
-        },
-        { 
-          name: 'details',
-          title: 'Details',
-          type: 'string',
-        },
-        {
-          //url, unique name
-          name: 'cpuSlug',
-          title: 'Slug',
-          type: 'slug',
-          options: {
-            source: 'name',
-            maxLength: 90,
-          },
-        },
-        {
-          name: 'image',
-          title: 'Image',
-          type: 'array',
-          of: [{ type: 'image' }],
-          options: {
-            hotspot: true,
-          },
-        },
-      ],
+      name: 'ramSlug',
+      title: 'RAM',
+      type: 'string',
     },
     {
-      name: 'motherboard',
-      title: 'Motherboard',
-      type: 'object',
-      fields: [
-        {
-          name: 'name',
-          title: 'Name',
-          type: 'string',
-        },
-        { 
-          name: 'details',
-          title: 'Details',
-          type: 'string',
-        },
-        {
-          //url, unique name
-          name: 'mbSlug',
-          title: 'Slug',
-          type: 'slug',
-          options: {
-            source: 'name',
-            maxLength: 90,
-          },
-        },
-        {
-          name: 'image',
-          title: 'Image',
-          type: 'array',
-          of: [{ type: 'image' }],
-          options: {
-            hotspot: true,
-          },
-        },
-      ],
-    },
-    {
-      name: 'memory',
-      title: 'Memory',
-      type: 'object',
-      fields: [
-        {
-          name: 'name',
-          title: 'Name',
-          type: 'string',
-        },
-        { 
-          name: 'details',
-          title: 'Details',
-          type: 'string',
-        },
-        {
-          //url, unique name
-          name: 'ramSlug',
-          title: 'Slug',
-          type: 'slug',
-          options: {
-            source: 'name',
-            maxLength: 90,
-          },
-        },
-        {
-          name: 'image',
-          title: 'Image',
-          type: 'array',
-          of: [{ type: 'image' }],
-          options: {
-            hotspot: true,
-          },
-        },
-      ],
-    },
-    {
-      name: 'storage',
+      name: 'storageSlug',
       title: 'Storage',
-      type: 'object',
-      fields: [
-        {
-          name: 'name',
-          title: 'Name',
-          type: 'string',
-        },
-        { 
-          name: 'details',
-          title: 'Details',
-          type: 'string',
-        },
-        {
-          //url, unique name
-          name: 'storageSlug',
-          title: 'Slug',
-          type: 'slug',
-          options: {
-            source: 'name',
-            maxLength: 90,
-          },
-        },
-        {
-          name: 'image',
-          title: 'Image',
-          type: 'array',
-          of: [{ type: 'image' }],
-          options: {
-            hotspot: true,
-          },
-        },
-      ],
+      type: 'string',
     },
     {
-      name: 'cooler',
+      name: 'osSlug',
+      title: 'Operating System',
+      type: 'string',
+    },
+    {
+      name: 'coolerSlug',
       title: 'Cooler',
-      type: 'object',
-      fields: [
-        {
-          name: 'name',
-          title: 'Name',
-          type: 'string',
-        },
-        { 
-          name: 'details',
-          title: 'Details',
-          type: 'string',
-        },
-        {
-          //url, unique name
-          name: 'coolerSlug',
-          title: 'Slug',
-          type: 'slug',
-          options: {
-            source: 'name',
-            maxLength: 90,
-          },
-        },
-        {
-          name: 'image',
-          title: 'Image',
-          type: 'array',
-          of: [{ type: 'image' }],
-          options: {
-            hotspot: true,
-          },
-        },
-      ],
+      type: 'string',
     },
     {
-      name: 'windows',
-      title: 'Windows',
-      type: 'object',
-      fields: [
-        {
-          name: 'name',
-          title: 'Name',
-          type: 'string',
-        },
-        { 
-          name: 'details',
-          title: 'Details',
-          type: 'string',
-        },
-        {
-          //url, unique name
-          name: 'osSlug',
-          title: 'Slug',
-          type: 'slug',
-          options: {
-            source: 'name',
-            maxLength: 90,
-          },
-        },
-        {
-          name: 'image',
-          title: 'Image',
-          type: 'array',
-          of: [{ type: 'image' }],
-          options: {
-            hotspot: true,
-          },
-        },
-      ],
-    },
-    {
-      name: 'powerSupply',
+      name: 'psSlug',
       title: 'Power Supply',
-      type: 'object',
-      fields: [
-        {
-          name: 'name',
-          title: 'Name',
-          type: 'string',
-        },
-        { 
-          name: 'details',
-          title: 'Details',
-          type: 'string',
-        },
-        {
-          //url, unique name
-          name: 'psSlug',
-          title: 'Slug',
-          type: 'slug',
-          options: {
-            source: 'name',
-            maxLength: 90,
-          },
-        },
-        {
-          name: 'image',
-          title: 'Image',
-          type: 'array',
-          of: [{ type: 'image' }],
-          options: {
-            hotspot: true,
-          },
-        },
-      ],
+      type: 'string',
     },
     {
-      name: 'case',
+      name: 'caseSlug',
       title: 'Case',
-      type: 'object',
-      fields: [
-        {
-          name: 'name',
-          title: 'Name',
-          type: 'string',
-        },
-        { 
-          name: 'details',
-          title: 'Details',
-          type: 'string',
-        },
-        {
-          //url, unique name
-          name: 'caseSlug',
-          title: 'Slug',
-          type: 'slug',
-          options: {
-            source: 'name',
-            maxLength: 90,
-          },
-        },
-        {
-          name: 'image',
-          title: 'Image',
-          type: 'array',
-          of: [{ type: 'image' }],
-          options: {
-            hotspot: true,
-          },
-        },
-      ],
+      type: 'string',
     },
   ],
 };
