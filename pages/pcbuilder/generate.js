@@ -136,7 +136,8 @@ export const getServerSideProps = async context => {
     const builds = await client.fetch(`*[_type == "builds" && buildSlug.current match "${buildSlug}"]`);
     
     const build = builds[0]
-    const componentSlugs = Object.keys(build).filter(key => key.includes("Slug") && key !== "buildSlug");
+    const componentSlugs = Object.keys(build).filter(key => key.toLowerCase().includes("slug") && key !== "buildSlug");
+    console.log(componentSlugs);
 
     console.log("getting");
     for (const slug in componentSlugs) {
