@@ -11,28 +11,39 @@ const ComputerBuilder = () => {
   const [showStreamingPerformance, setShowStreamingPerformance] = useState(false); // Controls whether to show the gaming performance options
   const [selectedImages, setSelectedImages] = useState([]); // Stores the selected images
   const [sliderValue, setSliderValue] = useState(1800); // Stores the slider value
+  const router = useRouter();
+
 
   // Event handler for the "Generate" button click
   const handleGenerateClick = () => {
-    const router = useRouter();
+
     if (selectedOptions.includes('gaming')) {
       // If "Gaming" is selected
-      if (selectedOptions.includes('high-end')) {
+      if (selectedOptions.includes('high-end-gaming')) {
         // If "High-end" is selected, 
-        router.push('/generate.js?high-end');
-      } else if (selectedOptions.includes('medium')) {
+        router.push('/pcbuilder/generate?key=high-end-gaming');
+      } else if (selectedOptions.includes('medium-gaming')) {
         // If "Medium" is selected
-        router.push('/generate.js?medium');
-      } else if (selectedOptions.includes('low-end')) {
+        router.push('/pcbuilder/generate?key=medium-gaming');
+      } else if (selectedOptions.includes('low-end-gaming')) {
         // If "Low-end" is selected
-        router.push('/generate.js?low-end');
-      } else {
-        // If no gaming performance option is selected
-      }
-    } else {
-      // If "Gaming" is not selected, 
+        router.push('/pcbuilder/generate?key=low-end-gaming');
+      } 
+    } else if (selectedOptions.includes('streaming')){
+      // If "streaming" is selected, 
+      if (selectedOptions.includes('high-end-streaming')) {
+        // If "High-end" is selected, 
+        router.push('/pcbuilder/generate?key=high-end-streaming');
+      } else if (selectedOptions.includes('medium-streaming')) {
+        // If "Medium" is selected
+        router.push('/pcbuilder/generate?key=medium-streaming');
+      } else if (selectedOptions.includes('low-end-streaming')) {
+        // If "Low-end" is selected
+        router.push('/pcbuilder/generate?key=low-end-streaming');
+      } 
     }
   };
+
 
   function SelectableImage({ src, selected, onClick }) {
     return (
@@ -42,7 +53,7 @@ const ComputerBuilder = () => {
         onClick={onClick}
         alt="Selectable Image"
         width={150} height={150}
-        
+
       />
     );
   }
@@ -69,7 +80,7 @@ const ComputerBuilder = () => {
       }
     });
   };
-      
+
   const handleSliderChange = (event) => { // Slider for budget
     setSliderValue(event.target.value);
   };
@@ -141,31 +152,31 @@ const ComputerBuilder = () => {
         <>
           <label style={{ fontWeight: 'bold' }}>What is the desired gaming performance?</label>
           <p className={styles.radio} >
-            <input type="radio" className={styles.radio}  name="gamingPerformance" value="low-end-gaming" onChange={handleOptionChange} style={{ width: 25, height: 25, margin: 20 }}  />
-            Low-end 
-            <input type="radio" className={styles.radio} name="gamingPerformance" value="medium-gaming" onChange={handleOptionChange} style={{ width: 25, height: 25, margin: 20 }}  />
+            <input type="radio" className={styles.radio} name="gamingPerformance" value="low-end-gaming" onChange={handleOptionChange} style={{ width: 25, height: 25, margin: 20 }} />
+            Low-end
+            <input type="radio" className={styles.radio} name="gamingPerformance" value="medium-gaming" onChange={handleOptionChange} style={{ width: 25, height: 25, margin: 20 }} />
             Medium
-            <input type="radio" className={styles.radio}name="gamingPerformance" value="high-end-gaming" onChange={handleOptionChange} style={{ width: 25, height: 25, margin: 20 }} />
-            High-end 
-             
+            <input type="radio" className={styles.radio} name="gamingPerformance" value="high-end-gaming" onChange={handleOptionChange} style={{ width: 25, height: 25, margin: 20 }} />
+            High-end
+
           </p>
 
           <label style={{ fontWeight: 'bold', }}>which of these games will you likely play?</label>
-          <p> 
+          <p>
 
-          <SelectableImage src="/leagueoflegends.jpg" selected={selectedImages.includes("low1 ")} onClick={() => handleImageClick("low1 ")}/>
-          <SelectableImage src="/factorio1.jpg" selected={selectedImages.includes("low2 ")} onClick={() => handleImageClick("low2 ")}/>
-          <SelectableImage src="/csgo1.jpg" selected={selectedImages.includes("medium ")} onClick={() => handleImageClick("medium ")}/>
-          <SelectableImage src="/gtav.jpg" selected={selectedImages.includes("high ")} onClick={() => handleImageClick("high ")}/>
-          <SelectableImage src="/witcher3.jpg" selected={selectedImages.includes("ultra ")} onClick={() => handleImageClick("ultra ")}/>
-          
+            <SelectableImage src="/leagueoflegends.jpg" selected={selectedImages.includes("low1 ")} onClick={() => handleImageClick("low1 ")} />
+            <SelectableImage src="/factorio1.jpg" selected={selectedImages.includes("low2 ")} onClick={() => handleImageClick("low2 ")} />
+            <SelectableImage src="/csgo1.jpg" selected={selectedImages.includes("medium ")} onClick={() => handleImageClick("medium ")} />
+            <SelectableImage src="/gtav.jpg" selected={selectedImages.includes("high ")} onClick={() => handleImageClick("high ")} />
+            <SelectableImage src="/witcher3.jpg" selected={selectedImages.includes("ultra ")} onClick={() => handleImageClick("ultra ")} />
+
           </p>
-        </> 
+        </>
       )}
 
       {showGamingPerformance && (
         <>
-          
+
         </>
       )}
 
@@ -173,11 +184,11 @@ const ComputerBuilder = () => {
         <>
           <label style={{ fontWeight: 'bold' }}>What bitrate will you want to use when streaming?</label>
           <p>
-            <input type="radio" className={styles.radio} name="streamingPerformance" value="low-end-streaming" onChange={handleOptionChange} style={{ width: 25, height: 25, margin: 20 }}/>
+            <input type="radio" className={styles.radio} name="streamingPerformance" value="low-end-streaming" onChange={handleOptionChange} style={{ width: 25, height: 25, margin: 20 }} />
             Standard Definition (SD, 480p)
-            <input type="radio" className={styles.radio} name="streamingPerformance" value="medium-streaming" onChange={handleOptionChange} style={{ width: 25, height: 25, margin: 20 }}/>
+            <input type="radio" className={styles.radio} name="streamingPerformance" value="medium-streaming" onChange={handleOptionChange} style={{ width: 25, height: 25, margin: 20 }} />
             High Definition (HD, 720p)
-            <input type="radio" className={styles.radio} name="streamingPerformance" value="high-end-streaming" onChange={handleOptionChange} style={{ width: 25, height: 25, margin: 20 }}/>
+            <input type="radio" className={styles.radio} name="streamingPerformance" value="high-end-streaming" onChange={handleOptionChange} style={{ width: 25, height: 25, margin: 20 }} />
             Ultra High Definition (4K)
           </p>
         </>
@@ -185,22 +196,22 @@ const ComputerBuilder = () => {
 
       <label style={{ fontWeight: 'bold' }}>What is your desired budget?</label>
       <p style={{ fontSize: 20 }}>
-      <input type="range" min="1700" max="3000" value={sliderValue} onChange={handleSliderChange} style={{ width: 700, height: 20, margin: 10}} />
-      ${sliderValue}
+        <input type="range" min="1700" max="3000" value={sliderValue} onChange={handleSliderChange} style={{ width: 700, height: 20, margin: 10 }} />
+        ${sliderValue}
       </p>
-        
+
       <label style={{ fontWeight: 'bold' }}>What type of storage do you want for this pc?</label>
-          <p style={{  }}>
-            <input type="radio" className={styles.radio} name="storage" value="low-storage" onChange={handleOptionChange} style={{ width: 25, height: 25, margin: 10 }}/>
-            Hard Disk Drive (HDD), slowest and cheapest option <br   />
-            <input type="radio" className={styles.radio} name="storage" value="medium-storage" onChange={handleOptionChange} style={{ width: 25, height: 25, margin:10 }}/>
-            External Solid State Drive (SSD), portable and faster  <br  />
-            <input type="radio" className={styles.radio} name="storage" value="high-storage" onChange={handleOptionChange} style={{ width: 25, height: 25, margin: 10 }}/>
-            Internal Solid Statae Drive (SSD), fastest and most expensive  (Recommended)
-          </p>
+      <p style={{}}>
+        <input type="radio" className={styles.radio} name="storage" value="low-storage" onChange={handleOptionChange} style={{ width: 25, height: 25, margin: 10 }} />
+        Hard Disk Drive (HDD), slowest and cheapest option <br />
+        <input type="radio" className={styles.radio} name="storage" value="medium-storage" onChange={handleOptionChange} style={{ width: 25, height: 25, margin: 10 }} />
+        External Solid State Drive (SSD), portable and faster  <br />
+        <input type="radio" className={styles.radio} name="storage" value="high-storage" onChange={handleOptionChange} style={{ width: 25, height: 25, margin: 10 }} />
+        Internal Solid Statae Drive (SSD), fastest and most expensive  (Recommended)
+      </p>
 
 
-          
+
 
 
       <button onClick={handleGenerateClick} className={styles.btn} style={{ fontSize: 23, padding: '1rem', width: '100%' }}>
