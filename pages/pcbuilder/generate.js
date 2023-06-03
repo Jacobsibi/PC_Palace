@@ -1,35 +1,79 @@
-import { client } from "../../lib/client";
+import React from "react";
+import { client, urlFor } from "../../lib/client";
 import styles from "../../styles/Generate.module.css";
-import { Product } from "../../components/";
+import { DepartmentsContextProvider, useDepartmentsContext } from "../../context/DepartmentsContext";
+
+const componentNameMapping = {
+    "cpu": "CPU",
+    "gpu": "GPU",
+    "mbd": "Motherboard",
+    "ram": "Memory",
+    "sto": "Storage",
+    "psu": "Power Supply",
+    "case": "Case"
+};
+
+const ChooseProduct = props => {
+    return (
+        <div className={styles.chooseProduct}>
+
+        </div>
+    )
+}
 
 const ProductsDisplay = props => {
-    return (
+    const [ chooseProduct, setChooseProduct ] = React.useState(false);
+    const [ filterType, setFilterType ] = React.useState("");
+
+    const editComponent = part => {
+        setChooseProduct(true);
+        setFilterType(part);
+    }
+    
+    return (<>
         <div className={styles.computerParts}>
-            {/* <button>CPU</button>
-            <button>GPU</button>
-            <button>Motherboard</button>
-            <button>RAM</button>
-            <button>Storage</button>
-            <button>Power Supply</button>
-            <button>Cooling</button>
-            <button>Case</button> */}
             {
                 props.pc.map((current, index) => {
-                    <div className={styles.singleItem}>
-                        <Image src={current.image} />
-                        <button>Edit</button>
-                    </div>
+                    const [ currentPart, partValue ] = current;
+                    // console.log(partValue[0].image[0]);
+                    
+                    return (
+                        <div className={styles.singleItem} key={index}>
+                            <img src={urlFor(partValue[0].image[0])} width={200} height={200} alt={componentNameMapping[currentPart]} />
+                            <button className={styles.editComponent} onClick={() => editComponent(currentPart)}>Customize</button>
+                            <p>{partValue[0].name}</p>
+                        </div>
+                    );
                 })
             }
+        </div>
+        {chooseProduct && <ChooseProduct component={filterType} />}
+    </>);
+}
+
+const BuildDetails = props => {
+    return (
+        <div className={styles.buildinfo}>
+            <ul>
+                {Object.keys(props.pc.props).map((product, index) => (
+                    <li key={index}>{product}</li>
+                ))}
+            </ul>
         </div>
     );
 }
 
-const Generate = ({ props }) => {
+const Generate = props => {
+    if (Object.keys(props).length !== 7) {
+        return;
+    }
+
     return (
         <div className={styles.contentFixed}>
-            <h2>pc yay :)</h2>
-            <ProductsDisplay pc={[]} />
+            <DepartmentsContextProvider>
+                <ProductsDisplay pc={Object.keys(props).map(key => [key, props[key]])} />
+                <BuildDetails pc={{ props }} />
+            </DepartmentsContextProvider>
         </div>
     )
 }
@@ -37,15 +81,23 @@ const Generate = ({ props }) => {
 export const getServerSideProps = async context => {
     const query = context?.query;
 
-    // fetch PC from sanity
-
-    return {
-        props: {
-            generatedPC: {
-
-            }
-        } 
+    const exampleSlugs = {
+        cpu: "intel-core-i3-12100f",
+        gpu: "nvidia-geforce-gt-710",
+        mbd: "gigabyte-b760",
+        ram: "crucial-16gb-ram",
+        sto: "samsung-870-evo-1tb",
+        psu: "corsair-rm-series-rm1000x",
+        "case": "masterbox-mb600l-v2-black"
     };
+
+    let props = { };
+    
+    for (const component of Object.keys(exampleSlugs)) {
+        props[component] = await client.fetch(`*[_type == "product" && slug.current match "${exampleSlugs[component]}"]`);
+    }
+
+    return { props };
 }
 
 export default Generate;
