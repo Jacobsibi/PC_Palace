@@ -1,7 +1,7 @@
 import React from "react";
 import { client, urlFor } from "../../lib/client";
 import styles from "../../styles/Generate.module.css";
-import { DepartmentsContextProvider, useDepartmentsContext } from "../../context/DepartmentsContext";
+import { useDepartmentsContext } from "../../context/DepartmentsContext";
 
 const componentNameMapping = {
     "cpu": "CPU",
@@ -14,20 +14,48 @@ const componentNameMapping = {
 };
 
 const ChooseProduct = props => {
+    const [ matchingProducts, setMatchingProducts ] = React.useState([]);
+
+    React.useEffect(() => {
+        const fetchComponents = async componentType => {
+            const query = `*[_type == "product" && component match "${componentType}"]`;
+            const result = await fetch(`/api/sanity/query?query=${encodeURIComponent(query)}`).then(res => res.json()).catch(err => ([]));
+            setMatchingProducts(result);
+            console.log(matchingProducts);
+        }
+
+        fetchComponents(props.departmentsFilter);
+    }, []);
+
     return (
         <div className={styles.chooseProduct}>
-
+            {/* {
+                matchingProducts && matchingProducts.map((product, index) =>  {
+                    console.log(product);
+                })
+            } */}
         </div>
     )
 }
 
 const ProductsDisplay = props => {
     const [ chooseProduct, setChooseProduct ] = React.useState(false);
-    const [ filterType, setFilterType ] = React.useState("");
+    const { departmentsFilter, setDepartmentsFilter } = useDepartmentsContext();
 
     const editComponent = part => {
         setChooseProduct(true);
-        setFilterType(part);
+
+        const filterMapper = {
+            "cpu": "CPU",
+            "gpu": "GPU",
+            "mbd": "MBO",
+            "ram": "RAM",
+            "sto": "STO",
+            "psu": "PSU",
+            "case": "CASE"
+        };
+        
+        setDepartmentsFilter(filterMapper[part]);
     }
     
     return (<>
@@ -47,7 +75,7 @@ const ProductsDisplay = props => {
                 })
             }
         </div>
-        {chooseProduct && <ChooseProduct component={filterType} />}
+        {chooseProduct && <ChooseProduct component={departmentsFilter} />}
     </>);
 }
 
@@ -70,10 +98,8 @@ const Generate = props => {
 
     return (
         <div className={styles.contentFixed}>
-            <DepartmentsContextProvider>
-                <ProductsDisplay pc={Object.keys(props).map(key => [key, props[key]])} />
-                <BuildDetails pc={{ props }} />
-            </DepartmentsContextProvider>
+            <ProductsDisplay pc={Object.keys(props).map(key => [key, props[key]])} />
+            <BuildDetails pc={{ props }} />
         </div>
     )
 }
