@@ -92,7 +92,7 @@ const BuildDetails = props => {
 }
 
 const Generate = props => {
-    if (Object.keys(props).length !== 7) {
+    if (Object.keys(props).length !== 9) {
         return;
     }
 
@@ -106,21 +106,42 @@ const Generate = props => {
 
 export const getServerSideProps = async context => {
     const query = context?.query;
-
-    const exampleSlugs = {
-        cpu: "intel-core-i3-12100f",
-        gpu: "nvidia-geforce-gt-710",
-        mbd: "gigabyte-b760",
-        ram: "crucial-16gb-ram",
-        sto: "samsung-870-evo-1tb",
-        psu: "corsair-rm-series-rm1000x",
-        "case": "masterbox-mb600l-v2-black"
-    };
-
     let props = { };
 
-    for (const component of Object.keys(exampleSlugs)) {
-        props[component] = await client.fetch(`*[_type == "product" && slug.current match "${exampleSlugs[component]}"]`);
+    // const exampleSlugs = {
+    //     cpu: "intel-core-i3-12100f",
+    //     gpu: "nvidia-geforce-gt-710",
+    //     mbd: "gigabyte-b760",
+    //     ram: "crucial-16gb-ram",
+    //     sto: "samsung-870-evo-1tb",
+    //     psu: "corsair-rm-series-rm1000x",
+    //     "case": "masterbox-mb600l-v2-black"
+    // };
+
+    // for (const component of Object.keys(exampleSlugs)) {
+    //     props[component] = await client.fetch(`*[_type == "product" && slug.current match "${exampleSlugs[component]}"]`);
+    // }
+
+    const slugToComponentMapper = {
+        cpuSlug: "cpu",
+        gpuSlug: "gpu",
+        mbSlug: "mbd",
+        ramSlug: "ram",
+        storageSlug: "sto",
+        psSlug: "psu",
+        caseSlug: "case"
+    };
+
+    const buildSlug = "custom-build-1";
+    const builds = await client.fetch(`*[_type == "builds" && buildSlug.current match "${buildSlug}"]`);
+    
+    const build = builds[0]
+    const componentSlugs = Object.keys(build).filter(key => key.includes("Slug") && key !== "buildSlug");
+
+    console.log("getting");
+    for (const slug in componentSlugs) {
+        props[slugToComponentMapper[slug]] = await client.fetch(`*[_type == "product" && slug.current match "${slug}"]`);
+        console.log(props[slugToComponentMapper[slug]]);
     }
 
     return { props };
