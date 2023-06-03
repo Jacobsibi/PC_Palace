@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styles from '../../styles/Builder.module.css';
+import { useRouter } from 'next/router';
 
 
 const ComputerBuilder = () => {
@@ -8,30 +9,28 @@ const ComputerBuilder = () => {
   const [showGamingPerformance, setShowGamingPerformance] = useState(false); // Controls whether to show the gaming performance options
   const [showGamingOptions, setShowGamingOptions] = useState(false); // Controls whether to show the optional games
   const [showStreamingPerformance, setShowStreamingPerformance] = useState(false); // Controls whether to show the gaming performance options
-  const [generatedNumber, setGeneratedNumber] = useState(null); // Stores the generated number
   const [selectedImages, setSelectedImages] = useState([]); // Stores the selected images
   const [sliderValue, setSliderValue] = useState(1800); // Stores the slider value
 
   // Event handler for the "Generate" button click
   const handleGenerateClick = () => {
+    const router = useRouter();
     if (selectedOptions.includes('gaming')) {
       // If "Gaming" is selected
       if (selectedOptions.includes('high-end')) {
-        // If "High-end" is selected, set the generated number to 3500
-        setGeneratedNumber(3500);
+        // If "High-end" is selected, 
+        router.push('/generate.js?high-end');
       } else if (selectedOptions.includes('medium')) {
-        // If "Medium" is selected, set the generated number to 2500
-        setGeneratedNumber(2500);
+        // If "Medium" is selected
+        router.push('/generate.js?medium');
       } else if (selectedOptions.includes('low-end')) {
-        // If "Low-end" is selected, set the generated number to 1500
-        setGeneratedNumber(1500);
+        // If "Low-end" is selected
+        router.push('/generate.js?low-end');
       } else {
-        // If no gaming performance option is selected, reset the generated number
-        setGeneratedNumber(null);
+        // If no gaming performance option is selected
       }
     } else {
-      // If "Gaming" is not selected, reset the generated number
-      setGeneratedNumber(null);
+      // If "Gaming" is not selected, 
     }
   };
 
@@ -101,13 +100,13 @@ const ComputerBuilder = () => {
       setShowGamingOptions(false);
     }
 
-    if (!selectedOptions.includes('unsure') && showGamingOptions ) {    
-      // If "Gaming" is not selected and showGamingOptions is true, hide the gaming performance options
-      setShowGamingOptions(false);
-    } else if (selectedOptions.includes('unsure') && !showGamingOptions && selectedOptions.includes('gaming')) {  
-      // If "Gaming" is selected and showGamingOptions is false, show the gaming performance options
-      setShowGamingOptions(true);
-    }
+    // if (!selectedOptions.includes('unsure') && showGamingOptions ) {    
+    //   // If "Gaming" is not selected and showGamingOptions is true, hide the gaming performance options
+    //   setShowGamingOptions(false);
+    // } else if (selectedOptions.includes('unsure') && !showGamingOptions && selectedOptions.includes('gaming')) {  
+    //   // If "Gaming" is selected and showGamingOptions is false, show the gaming performance options
+    //   setShowGamingOptions(true);
+    // }
 
     if (!selectedOptions.includes('streaming') && showStreamingPerformance) {
       // If "Streaming" is not selected and showStreamingPerformance is true, hide the gaming performance options
@@ -211,12 +210,6 @@ const ComputerBuilder = () => {
       <button onClick={handleResetClick} className={styles.btn3} style={{ fontSize: 23, padding: '1rem', width: '100%', marginTop: '1rem' }}>
         Reset
       </button>
-
-      {generatedNumber !== null && (
-        <div>
-          <h2>Generated Number: ${generatedNumber}</h2>
-        </div>
-      )}
     </div>
   );
 };
