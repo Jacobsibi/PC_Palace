@@ -64,7 +64,7 @@ const BuildDetails = props => {
 }
 
 const Generate = props => {
-    if (Object.keys(props).length !== 7) {
+    if (Object.keys(props).length !== 8) {
         return;
     }
 
@@ -82,19 +82,20 @@ export const getServerSideProps = async context => {
     const query = context?.query;
 
     const exampleSlugs = {
-        cpu: "intel-core-i3-12100f",
-        gpu: "nvidia-geforce-gt-710",
-        mbd: "gigabyte-b760",
-        ram: "crucial-16gb-ram",
-        sto: "samsung-870-evo-1tb",
-        psu: "corsair-rm-series-rm1000x",
-        "case": "masterbox-mb600l-v2-black"
+        gpu: "stage-1-gpu",
+        cpu: "stage-1-cpu",
+        mbd: "stage-1-mb",
+        ram: "stage-1-ram",
+        sto: "stage-1-storage",
+        psu: "stage-1-ps",
+        os: "stage-1-os",
+        "case": "stage-1-case"
     };
 
     let props = { };
     
     for (const component of Object.keys(exampleSlugs)) {
-        props[component] = await client.fetch(`*[_type == "product" && slug.current match "${exampleSlugs[component]}"]`);
+        props[component] = await client.fetch(`*[_type == "buildLow" && slug.current match "${exampleSlugs[component]}"]`);
     }
 
     return { props };
