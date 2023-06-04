@@ -96,7 +96,7 @@ const Account = () => {
                     </div>
 
                     <div className={styles.textArea}>
-                      <h2 className={styles.textArea}>Account Details</h2>
+                      <h4 className={styles.textArea}>Account Details</h4>
 
                       {auth?.currentUser?.displayName && (
                       <p className={styles.textArea}>Name: {auth?.currentUser?.displayName}</p>                      

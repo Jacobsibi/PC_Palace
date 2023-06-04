@@ -10,14 +10,14 @@ const Success = () => {
   const { cartItems, setCartItems, setTotalPrice, setTotalQuantities } = useStateContext();
   
   //adding the cart items to local storage
-  const itemsToStore = cartItems.map((item) => {
-    return {
-      id: item._id,
-      name: item.name,
-      price: item.price,
-      quatity: item.quantity,
-      };
-    });
+  // const itemsToStore = cartItems.map((item) => {
+  //   return {
+  //     id: item._id,
+  //     name: item.name,
+  //     price: item.price,
+  //     quatity: item.quantity,
+  //     };
+  //   });
 
   //reset upon cart success checkout 
   // useEffect(() => {
@@ -46,13 +46,19 @@ const Success = () => {
           </a>
         </p>
 
-        {/* I am adding reciepts here */}
-        <p> {itemsToStore.id} </p>
-        <p> {itemsToStore.name} </p>
-        <p> {itemsToStore.price} </p>
-        <p> {itemsToStore.quantity} </p>
+        <p> Hello Worldssss</p>
 
- 
+    {/* Receipts */}
+    {cartItems.map((item) => (
+        <div key={item.id}>
+          <p>ID: {item.id}</p>
+          <p>Name: {item.name}</p>
+          <p>Price: {item.price}</p>
+          <p>Quantity: {item.quantity}</p>
+        </div>
+      ))}
+
+
         <Link href="/">
           <button type="button" width="300px" className="btn">
           Continue shopping with us
