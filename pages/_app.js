@@ -1,10 +1,12 @@
-import React from 'react';
+import {React} from 'react';
 import '@/styles/globals.css'
 import { StateContext } from '../context/StateContext';
 import { Toaster } from 'react-hot-toast';
 import { Layout } from '../components';
 
 function myApp({ Component, pageProps }) {
+
+
   return (
     //pass data from stateContext qto every component 
     <StateContext>

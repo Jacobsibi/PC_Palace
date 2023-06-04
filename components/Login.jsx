@@ -2,6 +2,7 @@ import Link from "next/link";
 import swal from "sweetalert";
 import styles from "../styles/Support.module.css";
 import React, { useState } from "react";
+import GoogleButton from "react-google-button";
 import { useRouter } from "next/router";
 import {
   auth,
@@ -130,7 +131,6 @@ const Login = () => {
     }
   };
 
-
   //the output
   return (
     <div class={styles.form}>
@@ -177,10 +177,20 @@ const Login = () => {
       <button class={styles.btn} onClick={signIn}>
         Sign In
       </button>
-      <button class={styles.btn} onClick={signInWithGoogle}>
-        Sign In With Google
-      </button>
 
+      <GoogleButton class={styles.btnGoogle}
+        onClick={() => {
+          signInWithGoogle();
+        }}
+      />
+
+      {/* <button class={styles.btn} onClick={signInWithGoogle}>
+        Sign In With Google
+      </button> */}
+
+      <button class={styles.btn} onClick={signInWithFacebook}>
+        Sign In With Facebook
+      </button>
     </div>
   );
 };
