@@ -3,6 +3,8 @@ import { client, urlFor } from "../../lib/client";
 import styles from "../../styles/Generate.module.css";
 import { useDepartmentsContext } from "../../context/DepartmentsContext";
 import { AiOutlineClose } from "react-icons/ai";
+import getStripe from '../../lib/getStripe';
+import toast from 'react-hot-toast';
 
 let allProducts = [];
 
@@ -170,7 +172,7 @@ const FunctionalityButtons = props => {
     return (<>
         <div className={styles.functionalityButtons}>
             <button style={{marginLeft: "auto"}} onClick={() => handleCustomizeBuildClick()}>Customize build</button>
-            <button>Complete build</button>
+            <button onClick={() => props.buildComplete()}>Complete build</button>
             <p>Total: {price}</p>
         </div>
         {customizeBuild && <ChooseProduct cancelChoose={() => setCustomizeBuild(false)} updateItem={(component, product) => updateBuild(component, product)}
@@ -193,6 +195,29 @@ const Generate = props => {
         setBuild(newBuild);
     }
 
+    const handleBuildComplete = async () => {
+        const stripe = await getStripe();
+
+        const cart = Object.values(build).map(product => ({
+            ...product,
+            quantity: 1
+        }));
+
+		const response = await fetch('/api/stripe', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(cart),
+		});
+
+		if (response.statusCode === 500) return;
+
+		const data = await response.json();
+		toast.loading('Redirecting...');
+		stripe.redirectToCheckout({ sessionId: data.id });
+    }
+
     return (
         <>
             <h1 className={styles.buildTitle}>{props.buildName}</h1>
@@ -200,7 +225,7 @@ const Generate = props => {
                 <ProductsDisplay pc={Object.keys(build).map(key => [key, build[key]])} changeBuild={(componentType, item) => handleBuildChange(componentType, item)} />
                 <BuildDetails pc={build} />
             </div>
-            <FunctionalityButtons build={build} changeBuild={(componentType, item) => handleBuildChange(componentType, item)} />
+            <FunctionalityButtons build={build} changeBuild={(componentType, item) => handleBuildChange(componentType, item)} buildComplete={() => handleBuildComplete()} />
         </>
     )
 }
