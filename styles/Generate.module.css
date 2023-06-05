@@ -119,3 +119,27 @@
     margin: auto;
     text-align: center;
 }
+
+.functionalityButtons {
+    display: flex;
+}
+
+.functionalityButtons * {
+    padding: 0.7% 0;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    background-color: black;
+    color: white;
+    width: 15%;
+    height: 100%;
+    border-radius: 7px;
+    transition: transform .4s ease;
+    margin: 1% 2% 0 0;
+}
+
+.functionalityButtons *:hover {
+    background-color: red;
+    transform: scale(1.02, 1.02);
+    cursor: pointer;
+}

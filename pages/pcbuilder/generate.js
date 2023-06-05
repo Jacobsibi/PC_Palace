@@ -121,6 +121,15 @@ const BuildDetails = props => {
     );
 }
 
+const FunctionalityButtons = () => {
+    return (
+        <div className={styles.functionalityButtons}>
+            <button style={{marginLeft: "auto"}}>Customize build</button>
+            <button>Complete build</button>
+        </div>
+    )
+}
+
 const Generate = props => {
     const [ build, setBuild ] = React.useState({});
 
@@ -144,6 +153,7 @@ const Generate = props => {
                 <ProductsDisplay pc={Object.keys(build).map(key => [key, build[key]])} changeBuild={(componentType, item) => handleBuildChange(componentType, item)} />
                 <BuildDetails pc={build} />
             </div>
+            <FunctionalityButtons />
         </>
     )
 }
