@@ -53,6 +53,26 @@
     cursor: pointer;
 }
 
+.productsListContainer {
+    display: flex;
+}
+
+.departmentsFilterer {
+    display: grid;
+}
+
+.departmentsFilterer button {
+    display: block;
+    width: 100%;
+    border: none;
+    text-align: left;
+    padding-left: 10%;
+}
+
+.departmentsFilterer button:hover {
+    background-color: gray;
+}
+
 .productsList {
     width: 100%;
     display: grid;
@@ -60,6 +80,7 @@
     overflow: auto;
     height: 55vh;
     justify-content: center;
+    margin-left: 2%;
 }
 
 .selectableProduct {

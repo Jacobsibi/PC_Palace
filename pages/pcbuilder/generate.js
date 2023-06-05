@@ -30,59 +30,31 @@ const componentSanityMapping = {
     "cooling": "COOLING"
 }
 
-// const ChooseProduct = props => {
-//     const [ matchingProducts, setMatchingProducts ] = React.useState([]);
-
-//     React.useEffect(() => {
-//         const result = allProducts.filter(product => product.component === props.component);
-//         setMatchingProducts(result);
-//     }, []);
-
-//     const handleItemUpdated = product => {
-//         props.updateItem(props.component, product);
-//     }
-
-//     return (
-//         <div className={styles.chooseProductContainer}>
-//             <div className={styles.chooseProduct}>
-//                 <div className={styles.chooseProductHeader}>
-//                     Choose your item
-//                     <button onClick={() => props.cancelChoose()}>
-//                         <AiOutlineClose size={20} />
-//                     </button>
-//                 </div>
-//                 {
-//                     matchingProducts && matchingProducts.map((product, index) => {
-//                         return (
-//                             <div key={index} className={styles.selectableProduct}>
-//                                 <img src={urlFor(product.image[0])} width={150} height={150} alt={product.name} />
-//                                 <p>{product.name}</p>
-//                                 <button onClick={() => handleItemUpdated(product)}>Select</button>
-//                             </div>
-//                         );
-//                     })
-//                 }
-//             </div>
-//         </div>
-//     );
-// }
-
 const ChooseProduct = props => {
     const [ matchingProducts, setMatchingProducts ] = React.useState([]);
+    const { departmentsFilter } = useDepartmentsContext();
+
+    React.useEffect(() => {
+        if (departmentsFilter === "") {
+            setMatchingProducts(allProducts);
+        } else {
+            const result = allProducts.filter(product => product.component === departmentsFilter);
+            setMatchingProducts(result);
+        }
+    }, []);
 
     const handleItemUpdated = product => {
-        props.updateItem(props.component, product);
+        props.updateItem(product.component, product);
     }
 
-    if (props.component === "") {
-        React.useEffect(() => {
+    const filterResults = type => {
+        if (type === "") {
             setMatchingProducts(allProducts);
-        }, []);
-    } else {
-        React.useEffect(() => {
-            const result = allProducts.filter(product => product.component === props.component);
+        } else {
+            const filter = componentSanityMapping[Object.keys(componentNameMapping).find(x => componentNameMapping[x] === type)];
+            const result = allProducts.filter(product => product.component === filter);
             setMatchingProducts(result);
-        }, []);
+        }
     }
 
     return (
@@ -94,17 +66,29 @@ const ChooseProduct = props => {
                         <AiOutlineClose size={20} />
                     </button>
                 </div>
-                <div className={styles.productsList}>
-                    {
-                        matchingProducts && matchingProducts.map((product, index) => {
-                        return (
-                            <div key={index} className={styles.selectableProduct}>
-                                <img src={urlFor(product.image[0])} width={150} height={150} alt={product.name} />
-                                <p>{product.name}</p>
-                                <button onClick={() => handleItemUpdated(product)}>Select</button>
-                            </div>
-                        );
-                    })}
+                <div className={styles.productsListContainer}>
+                    {props.customizeAll &&
+                    <div className={styles.departmentsFilterer}>
+                        {
+                            Object.values(componentNameMapping).map((type, index) => (
+                                <button key={index} onClick={() => filterResults(type)}>{type}</button>
+                            ))
+                        }
+                        <button onClick={() => filterResults("")}>All Departments</button>
+                    </div>
+                    }
+                    <div className={styles.productsList}>
+                        {
+                            matchingProducts && matchingProducts.map((product, index) => {
+                            return (
+                                <div key={index} className={styles.selectableProduct}>
+                                    <img src={urlFor(product.image[0])} width={150} height={150} alt={product.name} />
+                                    <p>{product.name}</p>
+                                    <button onClick={() => handleItemUpdated(product)}>Select</button>
+                                </div>
+                            );
+                        })}
+                    </div>
                 </div>
             </div>
         </div>
@@ -113,7 +97,7 @@ const ChooseProduct = props => {
 
 const ProductsDisplay = props => {
     const [ chooseProduct, setChooseProduct ] = React.useState(false);
-    const { departmentsFilter, setDepartmentsFilter } = useDepartmentsContext();
+    const { setDepartmentsFilter } = useDepartmentsContext();
 
     const editComponent = part => {        
         setChooseProduct(true);
@@ -143,7 +127,7 @@ const ProductsDisplay = props => {
                 })
             }
         </div>
-        {chooseProduct && <ChooseProduct component={departmentsFilter} cancelChoose={() => setChooseProduct(false)} 
+        {chooseProduct && <ChooseProduct cancelChoose={() => setChooseProduct(false)} 
             updateItem={(component, item) => updateBuild(component, item)} />}
     </>);
 }
@@ -169,16 +153,28 @@ const BuildDetails = props => {
 
 const FunctionalityButtons = props => {
     const [ customizeBuild, setCustomizeBuild ] = React.useState(false);
+    const { setDepartmentsFilter } = useDepartmentsContext();
 
-    const price =Object.values(Object.values(props)[0]).map(product => product.price).reduce((partialSum, curr) => partialSum + curr, 0);
+    const price = Object.values(Object.values(props)[0]).map(product => product.price).reduce((partialSum, curr) => partialSum + curr, 0);
+
+    const updateBuild = (component, item) => {
+        setCustomizeBuild(false);
+        props.changeBuild(component, item);
+    }
+
+    const handleCustomizeBuildClick = () => {
+        setCustomizeBuild(true);
+        setDepartmentsFilter("");
+    }
 
     return (<>
         <div className={styles.functionalityButtons}>
-            <button style={{marginLeft: "auto"}} onClick={() => setCustomizeBuild(true)}>Customize build</button>
+            <button style={{marginLeft: "auto"}} onClick={() => handleCustomizeBuildClick()}>Customize build</button>
             <button>Complete build</button>
             <p>Total: {price}</p>
         </div>
-        {customizeBuild && <ChooseProduct component={""} cancelChoose={() => setCustomizeBuild(false)} />}
+        {customizeBuild && <ChooseProduct cancelChoose={() => setCustomizeBuild(false)} updateItem={(component, product) => updateBuild(component, product)}
+            customizeAll={true} />}
     </>);
 }
 
@@ -204,7 +200,7 @@ const Generate = props => {
                 <ProductsDisplay pc={Object.keys(build).map(key => [key, build[key]])} changeBuild={(componentType, item) => handleBuildChange(componentType, item)} />
                 <BuildDetails pc={build} />
             </div>
-            <FunctionalityButtons build={build} />
+            <FunctionalityButtons build={build} changeBuild={(componentType, item) => handleBuildChange(componentType, item)} />
         </>
     )
 }
