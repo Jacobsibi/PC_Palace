@@ -122,9 +122,10 @@
 
 .functionalityButtons {
     display: flex;
+    align-items: center;
 }
 
-.functionalityButtons * {
+.functionalityButtons button {
     padding: 0.7% 0;
     font-size: 1rem;
     font-weight: bold;
@@ -138,8 +139,15 @@
     margin: 1% 2% 0 0;
 }
 
-.functionalityButtons *:hover {
+.functionalityButtons button:hover {
     background-color: red;
     transform: scale(1.02, 1.02);
     cursor: pointer;
+}
+
+.functionalityButtons p {
+    padding: 0.7% 0;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 1% 2% 0 0;
 }

@@ -121,11 +121,17 @@ const BuildDetails = props => {
     );
 }
 
-const FunctionalityButtons = () => {
+const FunctionalityButtons = props => {
+    // let price = Object.values(props).map(product => product.price).reduce((partialSum, curr) => partialSum + curr, 0);
+    // console.log(price);
+
+    let price =Object.values(Object.values(props)[0]).map(product => product.price).reduce((partialSum, curr) => partialSum + curr, 0);
+
     return (
         <div className={styles.functionalityButtons}>
             <button style={{marginLeft: "auto"}}>Customize build</button>
             <button>Complete build</button>
+            <p>Total: {price}</p>
         </div>
     )
 }
@@ -153,7 +159,7 @@ const Generate = props => {
                 <ProductsDisplay pc={Object.keys(build).map(key => [key, build[key]])} changeBuild={(componentType, item) => handleBuildChange(componentType, item)} />
                 <BuildDetails pc={build} />
             </div>
-            <FunctionalityButtons />
+            <FunctionalityButtons build={build} />
         </>
     )
 }
