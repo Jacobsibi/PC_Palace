@@ -2,6 +2,9 @@ import React from "react";
 import { client, urlFor } from "../../lib/client";
 import styles from "../../styles/Generate.module.css";
 import { useDepartmentsContext } from "../../context/DepartmentsContext";
+import { AiOutlineClose } from "react-icons/ai";
+
+let allProducts = [];
 
 const componentNameMapping = {
     "cpu": "CPU",
@@ -10,52 +13,72 @@ const componentNameMapping = {
     "ram": "Memory",
     "sto": "Storage",
     "psu": "Power Supply",
-    "case": "Case"
+    "case": "Case",
+    "os": "Operating System",
+    "cooling": "Cooler"
 };
+
+const componentSanityMapping = {
+    "cpu": "CPU",
+    "gpu": "GPU",
+    "mbd": "MB",
+    "ram": "RAM",
+    "sto": "STO",
+    "psu": "PSU",
+    "case": "CASE",
+    "os": "OS",
+    "cooling": "COOLING"
+}
 
 const ChooseProduct = props => {
     const [ matchingProducts, setMatchingProducts ] = React.useState([]);
 
     React.useEffect(() => {
-        const fetchComponents = async componentType => {
-            const query = `*[_type == "product" && component match "${componentType}"]`;
-            const result = await fetch(`/api/sanity/query?query=${encodeURIComponent(query)}`).then(res => res.json()).catch(err => ([]));
-            setMatchingProducts(result);
-            console.log(matchingProducts);
-        }
-
-        fetchComponents(props.component);
+        const result = allProducts.filter(product => product.component === props.component);
+        setMatchingProducts(result);
     }, []);
 
+    const handleItemUpdated = product => {
+        props.updateItem(props.component, product);
+    }
+
     return (
-        <div className={styles.chooseProduct}>
-            {/* {
-                matchingProducts && matchingProducts.map((product, index) =>  {
-                    console.log(product);
-                })
-            } */}
+        <div className={styles.chooseProductContainer}>
+            <div className={styles.chooseProduct}>
+                <div className={styles.chooseProductHeader}>
+                    Choose your item
+                    <button onClick={() => props.cancelChoose()}>
+                        <AiOutlineClose size={20} />
+                    </button>
+                </div>
+                {
+                    matchingProducts && matchingProducts.map((product, index) => {
+                        return (
+                            <div key={index} className={styles.selectableProduct}>
+                                <img src={urlFor(product.image[0])} width={150} height={150} alt={product.name} />
+                                <p>{product.name}</p>
+                                <button onClick={() => handleItemUpdated(product)}>Select</button>
+                            </div>
+                        );
+                    })
+                }
+            </div>
         </div>
-    )
+    );
 }
 
 const ProductsDisplay = props => {
     const [ chooseProduct, setChooseProduct ] = React.useState(false);
     const { departmentsFilter, setDepartmentsFilter } = useDepartmentsContext();
 
-    const editComponent = part => {
+    const editComponent = part => {        
         setChooseProduct(true);
+        setDepartmentsFilter(componentSanityMapping[part]);
+    }
 
-        const filterMapper = {
-            "cpu": "CPU",
-            "gpu": "GPU",
-            "mbd": "MBO",
-            "ram": "RAM",
-            "sto": "STO",
-            "psu": "PSU",
-            "case": "CASE"
-        };
-        
-        setDepartmentsFilter(filterMapper[part]);
+    const updateBuild = (component, item) => {
+        setChooseProduct(false);
+        props.changeBuild(component, item);
     }
     
     return (<>
@@ -74,7 +97,8 @@ const ProductsDisplay = props => {
                 })
             }
         </div>
-        {chooseProduct && <ChooseProduct component={departmentsFilter} />}
+        {chooseProduct && <ChooseProduct component={departmentsFilter} cancelChoose={() => setChooseProduct(false)} 
+            updateItem={(component, item) => updateBuild(component, item)} />}
     </>);
 }
 
@@ -82,31 +106,51 @@ const BuildDetails = props => {
     return (
         <div className={styles.buildinfo}>
             <ul>
-                {Object.keys(props.pc.props).map((product, index) => (
-                    <li key={index}>{product}</li>
-                ))}
+                {props.pc && Object.values(props.pc).map((product, index) => {
+                    const componentTypeMatching = Object.keys(props.pc).find(key => props.pc[key] === product);
+                    
+                    return (
+                        <li key={index}>
+                            <b>{componentNameMapping[componentTypeMatching]}</b>: {product.name}<br></br>
+                            <b>${product.price}</b>
+                        </li>
+                    );
+                })}
             </ul>
         </div>
     );
 }
 
 const Generate = props => {
-    if (Object.keys(props).length !== 7) {
-        console.log(Object.keys(props).length);
-        return;
+    const [ build, setBuild ] = React.useState({});
+
+    // fetch all the products after the page has loaded for quicker page render and quicker list-by-component choosing process
+    React.useMemo(() => {
+        setBuild(props.build);
+        allProducts = props.allProducts;
+    }, []);
+
+    const handleBuildChange = (componentType, item) => {
+        const newBuild = JSON.parse(JSON.stringify(build));
+        const componentTypeMatching = Object.keys(componentSanityMapping).find(key => componentSanityMapping[key] === componentType);
+        newBuild[componentTypeMatching] = item;
+        setBuild(newBuild);
     }
 
     return (
-        <div className={styles.contentFixed}>
-            <ProductsDisplay pc={Object.keys(props).map(key => [key, props[key]])} />
-            <BuildDetails pc={{ props }} />
-        </div>
+        <>
+            <h1 className={styles.buildTitle}>{props.buildName}</h1>
+            <div className={styles.contentFixed}>
+                <ProductsDisplay pc={Object.keys(build).map(key => [key, build[key]])} changeBuild={(componentType, item) => handleBuildChange(componentType, item)} />
+                <BuildDetails pc={build} />
+            </div>
+        </>
     )
 }
 
 export const getServerSideProps = async context => {
     const query = context?.query;
-    let props = { };
+    let props = { build: { }, allProducts: { }, buildName: "" };
 
     const slugToComponentMapper = {
         cpuSlug: "cpu",
@@ -115,19 +159,25 @@ export const getServerSideProps = async context => {
         ramSlug: "ram",
         storageSlug: "sto",
         psSlug: "psu",
-        caseSlug: "case"
+        caseSlug: "case",
+        osSlug: "os",
+        coolerSlug: "cooling"
     };
 
-    const buildSlug = "custom-build-1";
+    const buildSlug = "low-end-gaming";
     const builds = await client.fetch(`*[_type == "builds" && buildSlug.current match "${buildSlug}"]`);
     
-    const build = builds[0]
-    const componentSlugs = Object.keys(build).filter(key => key.toLowerCase().includes("slug") && key !== "buildSlug");
+    const build = builds[0];
+    const componentSlugs = Object.keys(build).filter(key => key.toLowerCase().includes("slug") && key !== "buildSlug").sort();
 
     for (const slug of componentSlugs) {
         const result = await client.fetch(`*[_type == "product" && slug.current match "${build[slug]}"]`);
         props[slugToComponentMapper[slug]] = result[0];
+        props.build[slugToComponentMapper[slug]] = result[0];
     }
+
+    props.allProducts = await client.fetch('*[_type == "product"]');
+    props.buildName = build.name;
 
     return { props };
 }
