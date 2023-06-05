@@ -310,11 +310,11 @@ export const getServerSideProps = async context => {
         coolerSlug: "cooling"
     };
 
-    // example slug for a build (for development purposes)
-    const buildSlug = "low-end-gaming";
-    const builds = await client.fetch(`*[_type == "builds" && buildSlug.current match "${buildSlug}"]`);
-    
+    const defaultBuildSlug = "low-end-gaming";
+
+    const builds = await client.fetch(`*[_type == "builds" && buildSlug.current match"${query?.build ? query?.build : defaultBuildSlug}"]`)
     const build = builds[0];
+    
     const componentSlugs = Object.keys(build).filter(key => key.toLowerCase().includes("slug") && key !== "buildSlug").sort();
 
     for (const slug of componentSlugs) {
