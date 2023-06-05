@@ -178,7 +178,7 @@ const FunctionalityButtons = props => {
         <div className={styles.functionalityButtons}>
             <button style={{marginLeft: "auto"}} onClick={() => handleCustomizeBuildClick()}>Customize build</button>
             <button onClick={() => props.buildComplete()}>Complete build</button>
-            <p>Total: {price}</p>
+            <p>Total: {(Math.round(price * 100) / 100).toFixed(2)}</p>
         </div>
         {customizeBuild && <ChooseProduct cancelChoose={() => setCustomizeBuild(false)} updateItem={(component, product) => updateBuild(component, product)}
             customizeAll={true} />}
