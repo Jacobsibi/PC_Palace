@@ -148,6 +148,7 @@ const BuildDetails = props => (
                     <li key={index}>
                         <b>{componentNameMapping[componentTypeMatching]}</b>: {product.name}<br></br>
                         <b>${product.price}</b>
+                        {index < Object.values(props.pc).length - 1 && <hr></hr>}
                     </li>
                 );
             })}

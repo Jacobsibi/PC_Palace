@@ -118,7 +118,11 @@
 }
 
 .buildinfo li {
-    padding: 5% 4% 5% 4%;
+    padding: 1% 4%;
+}
+
+.buildinfo hr {
+    margin-top: 5%;
 }
 
 .computerParts button {
