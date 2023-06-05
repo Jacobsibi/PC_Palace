@@ -38,6 +38,7 @@ const ChooseProduct = props => {
     const [ matchingProducts, setMatchingProducts ] = React.useState([]);
     const { departmentsFilter } = useDepartmentsContext();
 
+    // Set initial state for matching products
     React.useEffect(() => {
         if (departmentsFilter === "") {
             setMatchingProducts(allProducts);
@@ -51,6 +52,7 @@ const ChooseProduct = props => {
         props.updateItem(product.component, product);
     }
 
+    // Filter the results based on the type selected
     const filterResults = type => {
         if (type === "") {
             setMatchingProducts(allProducts);
@@ -71,7 +73,7 @@ const ChooseProduct = props => {
                     </button>
                 </div>
                 <div className={styles.productsListContainer}>
-                    {props.customizeAll &&
+                    {props.customizeAll && /* Only render the filterer if customizeAll flag is set to true */
                     <div className={styles.departmentsFilterer}>
                         {
                             Object.values(componentNameMapping).map((type, index) => (
@@ -136,24 +138,22 @@ const ProductsDisplay = props => {
     </>);
 }
 
-const BuildDetails = props => {
-    return (
-        <div className={styles.buildinfo}>
-            <ul>
-                {props.pc && Object.values(props.pc).map((product, index) => {
-                    const componentTypeMatching = Object.keys(props.pc).find(key => props.pc[key] === product);
-                    
-                    return (
-                        <li key={index}>
-                            <b>{componentNameMapping[componentTypeMatching]}</b>: {product.name}<br></br>
-                            <b>${product.price}</b>
-                        </li>
-                    );
-                })}
-            </ul>
-        </div>
-    );
-}
+const BuildDetails = props => (
+    <div className={styles.buildinfo}>
+        <ul>
+            {props.pc && Object.values(props.pc).map((product, index) => {
+                const componentTypeMatching = Object.keys(props.pc).find(key => props.pc[key] === product);
+                
+                return (
+                    <li key={index}>
+                        <b>{componentNameMapping[componentTypeMatching]}</b>: {product.name}<br></br>
+                        <b>${product.price}</b>
+                    </li>
+                );
+            })}
+        </ul>
+    </div>
+);
 
 const FunctionalityButtons = props => {
     const [ customizeBuild, setCustomizeBuild ] = React.useState(false);
@@ -183,6 +183,7 @@ const FunctionalityButtons = props => {
 }
 
 const OrderCompleteOverlay = props => {    
+    // If the checkout step 2 flag is set to true (proceed to checkout was clicked) then render "purchase with/without cart"
     if (props.checkoutStep2) {
         return (
             <div className={styles.orderCompleteContainer}>
@@ -197,6 +198,7 @@ const OrderCompleteOverlay = props => {
         );
     }
 
+    // Render "continue shopping" / "proceed to checkout"
     return (
         <div className={styles.orderCompleteContainer}>
             <div className={styles.orderCompleteOverlay}>
@@ -224,6 +226,7 @@ const Generate = props => {
     }, []);
 
     const handleBuildChange = (componentType, item) => {
+        // update the part inside the build with the matching component type to the selected item
         const newBuild = JSON.parse(JSON.stringify(build));
         const componentTypeMatching = Object.keys(componentSanityMapping).find(key => componentSanityMapping[key] === componentType);
         newBuild[componentTypeMatching] = item;
@@ -234,6 +237,7 @@ const Generate = props => {
         setOrderComplete(true);
     }
 
+    // Checkout with stripe (similar to in Cart.jsx)
     const handleCheckout = async combineCart => {
         const stripe = await getStripe();
 
@@ -242,6 +246,7 @@ const Generate = props => {
             quantity: 1
         }));
 
+        // Combine the cart and the builds
         if (combineCart) {
             cart = cart.concat(cartItems);
         }
@@ -261,6 +266,7 @@ const Generate = props => {
 		stripe.redirectToCheckout({ sessionId: data.id });
     }
 
+    // Add all the products into the cart and return to home page
     const continueShopping = () => {
         for (const product of Object.values(build)) {
             onAdd(product, 1);
@@ -284,9 +290,11 @@ const Generate = props => {
 }
 
 export const getServerSideProps = async context => {
+    // the querys from the URL
     const query = context?.query;
     let props = { build: { }, allProducts: { }, buildName: "" };
 
+    // maps a slug to a component name
     const slugToComponentMapper = {
         cpuSlug: "cpu",
         gpuSlug: "gpu",
@@ -299,6 +307,7 @@ export const getServerSideProps = async context => {
         coolerSlug: "cooling"
     };
 
+    // example slug for a build (for development purposes)
     const buildSlug = "low-end-gaming";
     const builds = await client.fetch(`*[_type == "builds" && buildSlug.current match "${buildSlug}"]`);
     
@@ -306,6 +315,7 @@ export const getServerSideProps = async context => {
     const componentSlugs = Object.keys(build).filter(key => key.toLowerCase().includes("slug") && key !== "buildSlug").sort();
 
     for (const slug of componentSlugs) {
+        // Get the object of each product from the build
         const result = await client.fetch(`*[_type == "product" && slug.current match "${build[slug]}"]`);
         props[slugToComponentMapper[slug]] = result[0];
         props.build[slugToComponentMapper[slug]] = result[0];
