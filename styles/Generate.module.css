@@ -1,3 +1,7 @@
+.page button {
+    cursor: pointer;
+}
+
 .contentFixed {
     display: grid;
     grid-template-columns: 4fr 1fr;
@@ -94,8 +98,19 @@
     display: block;
 }
 
-.selectableProduct button {
-    width: 100%;
+.chooseProductButton {
+    width: 85%;
+    background-color: black;
+    color: white;
+    padding: 1.5% 0;
+    border: none;
+    border-radius: 10px;
+    transition: transform .4s ease;
+}
+
+.chooseProductButton:hover {
+    background-color: red;
+    transform: scale(1.03, 1.03);
 }
 
 .selectableProduct * {
@@ -226,4 +241,11 @@
     width: 30%;
     padding: 2% 0;
     border-radius: 15px;
+    border: none;
+    transition: transform .4s ease;
+}
+
+.orderCompleteButtons button:hover {
+    background-color: red;
+    transform: scale(1.03, 1.03);
 }

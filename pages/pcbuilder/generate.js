@@ -88,9 +88,11 @@ const ChooseProduct = props => {
                             matchingProducts && matchingProducts.map((product, index) => {
                             return (
                                 <div key={index} className={styles.selectableProduct}>
-                                    <img src={urlFor(product.image[0])} width={150} height={150} alt={product.name} />
+                                    <a href={`/product/${product.slug.current}`} target="_blank">
+                                        <img src={urlFor(product.image[0])} width={150} height={150} alt={product.name} />
+                                    </a>
                                     <p>{product.name}</p>
-                                    <button onClick={() => handleItemUpdated(product)}>Select</button>
+                                    <button className={styles.chooseProductButton} onClick={() => handleItemUpdated(product)}>Select</button>
                                 </div>
                             );
                         })}
@@ -277,7 +279,7 @@ const Generate = props => {
     }
 
     return (
-        <>
+        <div className={styles.page}>
             <h1 className={styles.buildTitle}>{props.buildName}</h1>
             <div className={styles.contentFixed}>
                 <ProductsDisplay pc={Object.keys(build).map(key => [key, build[key]])} changeBuild={(componentType, item) => handleBuildChange(componentType, item)} />
@@ -286,7 +288,7 @@ const Generate = props => {
             <FunctionalityButtons build={build} changeBuild={(componentType, item) => handleBuildChange(componentType, item)} buildComplete={() => handleBuildComplete()} />
             {checkout && <OrderCompleteOverlay checkoutStep2={true} purchaseWithCart={combineCart => handleCheckout(combineCart)} />}
             {!checkout && orderComplete && <OrderCompleteOverlay continueShopping={() => continueShopping()} checkout={() => setCheckout(true)} />}
-        </>
+        </div>
     )
 }
 
