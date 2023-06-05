@@ -2,9 +2,11 @@ import React from "react";
 import { client, urlFor } from "../../lib/client";
 import styles from "../../styles/Generate.module.css";
 import { useDepartmentsContext } from "../../context/DepartmentsContext";
+import { useStateContext } from "../../context/StateContext";
 import { AiOutlineClose } from "react-icons/ai";
 import getStripe from '../../lib/getStripe';
 import toast from 'react-hot-toast';
+import { useRouter } from "next/router";
 
 let allProducts = [];
 
@@ -180,8 +182,41 @@ const FunctionalityButtons = props => {
     </>);
 }
 
+const OrderCompleteOverlay = props => {    
+    if (props.checkoutStep2) {
+        return (
+            <div className={styles.orderCompleteContainer}>
+                <div className={styles.orderCompleteOverlay}>
+                    <h1>Would you like to purchase with your cart items as well?</h1>
+                    <div className={styles.orderCompleteButtons}>
+                        <button onClick={() => props.purchaseWithCart(true)}>Purchase with cart</button>
+                        <button onClick={() => props.purchaseWithCart(false)}>Purchase without cart</button>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    return (
+        <div className={styles.orderCompleteContainer}>
+            <div className={styles.orderCompleteOverlay}>
+                <h1>Your build has been complete!</h1>
+                <h4>Thank you for building with PC Palace!</h4>
+                <div className={styles.orderCompleteButtons}>
+                    <button onClick={() => props.continueShopping()}>Continue shopping</button>
+                    <button onClick={() => props.checkout()}>Proceed to checkout</button>
+                </div>
+            </div>
+        </div>
+    )
+}
+
 const Generate = props => {
     const [ build, setBuild ] = React.useState({});
+    const [ orderComplete, setOrderComplete ] = React.useState(false);
+    const [ checkout, setCheckout ] = React.useState(false);
+    const { onAdd, cartItems } = useStateContext();
+    const router = useRouter();
 
     React.useMemo(() => {
         setBuild(props.build);
@@ -195,13 +230,21 @@ const Generate = props => {
         setBuild(newBuild);
     }
 
-    const handleBuildComplete = async () => {
+    const handleBuildComplete = () => {
+        setOrderComplete(true);
+    }
+
+    const handleCheckout = async combineCart => {
         const stripe = await getStripe();
 
-        const cart = Object.values(build).map(product => ({
+        let cart = Object.values(build).map(product => ({
             ...product,
             quantity: 1
         }));
+
+        if (combineCart) {
+            cart = cart.concat(cartItems);
+        }
 
 		const response = await fetch('/api/stripe', {
 			method: 'POST',
@@ -218,6 +261,14 @@ const Generate = props => {
 		stripe.redirectToCheckout({ sessionId: data.id });
     }
 
+    const continueShopping = () => {
+        for (const product of Object.values(build)) {
+            onAdd(product, 1);
+        }
+
+        router.push("/");
+    }
+
     return (
         <>
             <h1 className={styles.buildTitle}>{props.buildName}</h1>
@@ -226,6 +277,8 @@ const Generate = props => {
                 <BuildDetails pc={build} />
             </div>
             <FunctionalityButtons build={build} changeBuild={(componentType, item) => handleBuildChange(componentType, item)} buildComplete={() => handleBuildComplete()} />
+            {checkout && <OrderCompleteOverlay checkoutStep2={true} purchaseWithCart={combineCart => handleCheckout(combineCart)} />}
+            {!checkout && orderComplete && <OrderCompleteOverlay continueShopping={() => continueShopping()} checkout={() => setCheckout(true)} />}
         </>
     )
 }
