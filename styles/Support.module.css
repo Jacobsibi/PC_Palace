@@ -93,13 +93,13 @@
 }
 
 .btn{
-  width: 50%;
+  width: 30%;
   max-width: 350px;
   padding: 8px 10px;
   border-radius: 15px;
   border: none;
   font-size: 18px;
-  margin-top: 10px;
+  margin-top: 20px;
   margin-bottom: 10px;
   text-transform: uppercase;
   background-color: #811d95;
@@ -113,8 +113,9 @@
 }
 
 .btnGoogle{
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 30%;
   cursor: pointer;
   transform: scale(1, 1);
 transition: transform 0.5s ease;
