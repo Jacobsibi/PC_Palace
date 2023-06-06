@@ -6,7 +6,7 @@ export { default as Banner } from './Banner';
 export { default as Cart } from './Cart';
 export { default as AccountPopUp } from './AccountPopUp';
 export { default as Login } from './Login';
-export { default as LoginNewAccount } from './LoginNewAccount';
+export { default as Register } from './Register';
 export { default as UpdateDetails } from './UpdateDetails';
 export { default as Support } from './Support';
 export { default as ContactUs } from './ContactUs';
