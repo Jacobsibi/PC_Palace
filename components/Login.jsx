@@ -7,15 +7,12 @@ import { useRouter } from "next/router";
 import {
   auth,
   authGoogle,
-  authFacebook,
-  database,
 } from "../configurations/firebase";
 import {
   updateProfile,
   signInWithEmailAndPassword,
   signInWithPopup,
 } from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
 
 const Login = () => {
   //email and password to be used as parameter for Firebase special function
@@ -52,32 +49,32 @@ const Login = () => {
       }
     } catch (error) {
       if (error.code === "auth/wrong-password") {
-        // Handle the wrong passwrod
+        //handle the wrong passwrod
         swal("Wrong Password", "Please enter correct password", "error");
       } else if (error.code === "auth/user-not-found") {
-        // Handle user not found
+        //handle user not found
         swal(
           "Account Not Existed",
           "Please enter correct email or password",
           "error"
         );
       } else if (error.code === "auth/invalid-email") {
-        // Handle invalid email but correct password
+        //handle invalid email but correct password
         swal(
           "Account Not Existed",
           "Please enter correct email or password",
           "error"
         );
       } else if (error.code === "auth/missing-email") {
-        // Handle the email field is empty
+        //handle the email field is empty
         swal("Enter Email", "Please fill in email field", "warning");
         setEmail("");
       } else if (error.code === "auth/missing-password") {
-        // Handle the password field is empty
+        //handle the password field is empty
         swal("Enter Password", "Please fill in password field", "warning");
         setPassword("");
       } else {
-        // Handle other errors
+        //handle other errors
         swal("Error", "Please try again", "error");
         console.log("HAHAHA " + error);
       }
@@ -109,27 +106,7 @@ const Login = () => {
     }
   };
 
-  //DRAFT, MAYBE IMPLEMENT THIS IF I HAVE TIME, I AM ALMOST DONE?
-  //function: sign in with facebook for both new and existing customer
-  const signInWithFacebook = async () => {
-    try {
-      //check if there is an account is signed in, prompt to sign out first to continue action
-      if (auth?.currentUser) {
-        await swal("Already Logged In", "Please sign out first", "warning");
-      } else {
-        await signInWithPopup(auth, authFacebook);
-        //redirect to home
-        await router.push("/");
-        await swal("Logged In", "You signed in with Facebook", "success");
-        //refresh the page
-        await refreshPage();
-      }
-    } catch (error) {
-      //CONSOLE LOG
-      console.log("Hey Bro " + error);
-      swal("Error", "Please try again", "error");
-    }
-  };
+
 
   //the output
   return (
@@ -183,14 +160,6 @@ const Login = () => {
           signInWithGoogle();
         }}
       />
-
-      {/* <button class={styles.btn} onClick={signInWithGoogle}>
-        Sign In With Google
-      </button> */}
-
-      <button class={styles.btn} onClick={signInWithFacebook}>
-        Sign In With Facebook
-      </button>
     </div>
   );
 };

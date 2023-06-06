@@ -60,11 +60,6 @@ const Support = () => {
           setMessage={setMessage}
         />)}
       {activeTab === "tab2" && ( <FAQs />)}
-      {activeTab === "tab3" && (
-        <div>
-          <h1>Reviews</h1>
-        </div>
-      )}
     </>
   );
 };
