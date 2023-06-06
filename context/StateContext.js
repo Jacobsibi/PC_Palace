@@ -12,6 +12,37 @@ export const StateContext = ({ children }) => {
 	let foundProduct;
 	let index;
 
+	const addBuild = build => {
+		// Create copy of the cart
+		let newCart = JSON.parse(JSON.stringify(cartItems));
+		let quantity = totalQuantities;
+		let price = totalPrice;
+
+		Object.values(build).forEach(product => {
+			// Extract the existing IDs from the cart
+			const existingIds = newCart.map(x => x._id);
+			// Get the ID of the productID (positive if found, -1 if not found)
+			const index = existingIds.indexOf(product._id);
+
+			if (index >= 0) {
+				// Update quantity
+				newCart[index].quantity++;
+			} else {
+				// Add item with quantity 1
+				product.quantity = 1;
+				newCart.push(product);
+			}
+
+			toast.success(`1 ${product.name} added to cart!`);
+			quantity++;
+			price += product.price;
+		});
+
+		setCartItems(newCart);
+		setTotalQuantities(quantity);
+		setTotalPrice(price);
+	}
+
 	const onAdd = (product, quantity) => {
 		//check if product is already in the cart
 		const checkProductInCart = cartItems.find((item) => item._id === product._id);
@@ -103,7 +134,8 @@ export const StateContext = ({ children }) => {
 				onRemove,
 				setCartItems,
 				setTotalPrice,
-				setTotalQuantities
+				setTotalQuantities,
+				addBuild
 			}}
 		>
 			{children}
