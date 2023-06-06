@@ -7,6 +7,7 @@ import {signOut} from "firebase/auth";
 import { updateProfile, updateEmail, updatePassword } from "firebase/auth";
 
 const MyAccount = () => {
+  
   //email and password to be used as parameter for Firebase special function
   //name to update user's name when create an account via email, becuase it is not done automatically
   const [newEmail, setNewEmail] = useState("");

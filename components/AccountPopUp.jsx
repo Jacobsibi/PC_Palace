@@ -9,18 +9,6 @@ import { auth, collectionDB } from "../configurations/firebase";
 import { getDoc } from "firebase/firestore";
 
 const Account = () => {
-  //TEMPORARY TO BE PLACED HERE:
-
-  //function: write data into firestore
-  // getDoc(collectionDB)
-  //   .then(() => {
-  //     console.log(snapshot);
-  //     swal("Success write into Firebase", "Please see the data on console log", "success");
-  //   })
-  //   .catch( (error) => {
-  //     console.log(error);
-  //     swal("Error at getDoc(collection)", "Please check the console log", "error");
-  //   })
 
   //state: configurations
   const accountReg = useRef();
