@@ -234,6 +234,12 @@ const Generate = props => {
         }
     })
 
+    React.useEffect(() => {
+        if (Object.keys(props.build).length !== 9) {
+            router.push("/pcbuilder/build");
+        }
+    })
+
     const handleBuildChange = (componentType, item) => {
         // update the part inside the build with the matching component type to the selected item
         const newBuild = JSON.parse(JSON.stringify(build));
