@@ -155,8 +155,8 @@ const MyAccount = () => {
   }
 
   return (
+    <>
 
-    <div class={styles.form}>                          
       <h1>Update Details</h1>
       <p>Enter your new details</p>
 
@@ -224,8 +224,7 @@ const MyAccount = () => {
         Delete This Account{" "}
       </button>
 
-    </div>
-    
+</>    
   );
 };
 export default MyAccount;
