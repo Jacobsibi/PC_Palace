@@ -24,16 +24,21 @@ const ForgotPassword = () => {
       } else if (error.code === "auth/missing-email") {
         //handle missing email
         swal("Enter Email", "Please fill in email field", "warning");
+        //handle user is disabled
       } else if (error.code === "auth/user-disabled") {
-      } else if (error.code === "auth/operation-not-allowed") {
+        swal("User disabled", "Please create new account", "error");
+        //handle error from too many requests
       } else if (error.code === "auth/too-many-requests") {
+        swal("Too many request", "Please try again later", "error");
+        //handle error from network request failed
       } else if (error.code === "auth/network-request-failed") {
+        swal("Request Failed", "Please try again", "warning");
+        //handle error from requires recent login
       } else if (error.code === "auth/requires-recent-login") {
+        swal("Require Recent Login", "Please sign in again", "error");
+        //handle error from user mismatch
       } else if (error.code === "auth/user-mismatch") {
-      } else if (error.code === "auth/weak-password") {
-      } else if (error.code === "auth/wrong-password") {
-      } else if (error.code === "auth/email-already-in-use") {
-      } else if (error.code === "auth/operation-not-allowed") {
+        swal("Enter Email", "Please fill in email field", "error");
       } else {
         //handle other errors
         swal("Error", "Cannot send the magic link", "error");

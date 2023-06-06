@@ -50,7 +50,6 @@ const Support = () => {
       <div>
         <button class={styles.tabButton} onClick={() => setActiveTab("tab1")}>Contact Us</button>
         <button class={styles.tabButton} onClick={() => setActiveTab("tab2")}>FAQs</button>
-        <button class={styles.tabButton} onClick={() => setActiveTab("tab3")}>Reviews</button>
       </div>
 
       {activeTab === "tab1" && (<ContactUs
