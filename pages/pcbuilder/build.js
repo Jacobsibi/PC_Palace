@@ -131,7 +131,7 @@ const ComputerBuilder = () => {
   return (
     <div style={{ textAlign: 'left', marginLeft: 300, marginRight: 300 }}>
       <h1>Computer Builder</h1>
-      <p>To get started, answer a few simple questions to help us understand what type of computer best fits you!</p> {selectedImages}
+      <p>To get started, answer a few simple questions to help us understand what type of computer best fits you!</p>
       <br />
 
       <label style={{ fontWeight: 'bold' }}>What will you be using the computer for?</label>
@@ -150,7 +150,7 @@ const ComputerBuilder = () => {
 
       {showGamingPerformance && (
         <>
-          <label style={{ fontWeight: 'bold' }}>What is the desired gaming performance?</label>
+          <label style={{ fontWeight: 'bold' }}>Select Gaming Performance Level</label>
           <p className={styles.radio} >
             <input type="radio" className={styles.radio} name="gamingPerformance" value="low-end-gaming" onChange={handleOptionChange} style={{ width: 25, height: 25, margin: 20 }} />
             Low-end
@@ -161,14 +161,23 @@ const ComputerBuilder = () => {
 
           </p>
 
-          <label style={{ fontWeight: 'bold', }}>which of these games will you likely play?</label>
+          <label style={{ fontWeight: 'bold', }}>Select Your Top Games</label>
           <p>
 
-            <SelectableImage src="/leagueoflegends.jpg" selected={selectedImages.includes("low1 ")} onClick={() => handleImageClick("low1 ")} />
+            <SelectableImage src="/battlefield2042.jpeg" selected={selectedImages.includes("ultra4 ")} onClick={() => handleImageClick("ultra4 ")} />
+            <SelectableImage src="/overwatch.jpeg" selected={selectedImages.includes("medium3 ")} onClick={() => handleImageClick("medium3 ")} />
+            <SelectableImage src="/rust.webp" selected={selectedImages.includes("high3 ")} onClick={() => handleImageClick("high3 ")} />
+            <SelectableImage src="/fortnite.jpeg" selected={selectedImages.includes("low3 ")} onClick={() => handleImageClick("low3 ")} />
+            <SelectableImage src="/leagueoflegends.jpg" selected={selectedImages.includes("low1 ")} style={{ fontColour: 'white' }} onClick={() => handleImageClick("low1 ")} />
             <SelectableImage src="/factorio1.jpg" selected={selectedImages.includes("low2 ")} onClick={() => handleImageClick("low2 ")} />
             <SelectableImage src="/csgo1.jpg" selected={selectedImages.includes("medium ")} onClick={() => handleImageClick("medium ")} />
             <SelectableImage src="/gtav.jpg" selected={selectedImages.includes("high ")} onClick={() => handleImageClick("high ")} />
             <SelectableImage src="/witcher3.jpg" selected={selectedImages.includes("ultra ")} onClick={() => handleImageClick("ultra ")} />
+            <SelectableImage src="/cyberpunk.jpeg" selected={selectedImages.includes("ultra2 ")} onClick={() => handleImageClick("ultra2 ")} />
+            <SelectableImage src="/valorant.jpeg" selected={selectedImages.includes("medium2 ")} onClick={() => handleImageClick("medium2 ")} />
+            <SelectableImage src="/warzone.png" selected={selectedImages.includes("high2 ")} onClick={() => handleImageClick("high2 ")} />
+            <SelectableImage src="/rainbowsix.jpeg" selected={selectedImages.includes("ultra3 ")} onClick={() => handleImageClick("ultra3 ")} />
+            
 
           </p>
         </>
@@ -182,7 +191,7 @@ const ComputerBuilder = () => {
 
       {showStreamingPerformance && (
         <>
-          <label style={{ fontWeight: 'bold' }}>What bitrate will you want to use when streaming?</label>
+          <label style={{ fontWeight: 'bold' }}>Select Bitrate Level For Streaming</label>
           <p>
             <input type="radio" className={styles.radio} name="streamingPerformance" value="low-end-streaming" onChange={handleOptionChange} style={{ width: 25, height: 25, margin: 20 }} />
             Standard Definition (SD, 480p)
@@ -194,13 +203,15 @@ const ComputerBuilder = () => {
         </>
       )}
 
-      <label style={{ fontWeight: 'bold' }}>What is your desired budget?</label>
+
+      <label style={{ fontWeight: 'bold' }}>Select Budget Range</label>
       <p style={{ fontSize: 20 }}>
-        <input type="range" min="1700" max="3000" value={sliderValue} onChange={handleSliderChange} style={{ width: 700, height: 20, margin: 10 }} />
+        <input type="range" min="1700" max="10000" value={sliderValue} onChange={handleSliderChange} style={{ width: 700, height: 20, margin: 10 }} />
         ${sliderValue}
       </p>
 
-      <label style={{ fontWeight: 'bold' }}>What type of storage do you want for this pc?</label>
+{/* 
+      <label style={{ fontWeight: 'bold' }}>Select Ideal Storage Type</label>
       <p style={{}}>
         <input type="radio" className={styles.radio} name="storage" value="low-storage" onChange={handleOptionChange} style={{ width: 25, height: 25, margin: 10 }} />
         Hard Disk Drive (HDD), slowest and cheapest option <br />
@@ -208,7 +219,7 @@ const ComputerBuilder = () => {
         External Solid State Drive (SSD), portable and faster  <br />
         <input type="radio" className={styles.radio} name="storage" value="high-storage" onChange={handleOptionChange} style={{ width: 25, height: 25, margin: 10 }} />
         Internal Solid Statae Drive (SSD), fastest and most expensive  (Recommended)
-      </p>
+      </p> */}
 
 
 
