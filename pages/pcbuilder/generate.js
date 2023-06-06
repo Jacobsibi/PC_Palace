@@ -79,26 +79,31 @@ const Generate = props => {
 }
 
 export const getServerSideProps = async context => {
-    const query = context?.query;
+  const query = context?.query;
+  let props = { };
 
-    const exampleSlugs = {
-        gpu: "stage-1-gpu",
-        cpu: "stage-1-cpu",
-        mbd: "stage-1-mb",
-        ram: "stage-1-ram",
-        sto: "stage-1-storage",
-        psu: "stage-1-ps",
-        os: "stage-1-os",
-        "case": "stage-1-case"
-    };
+  const slugToComponentMapper = {
+      cpuSlug: "cpu",
+      gpuSlug: "gpu",
+      mbSlug: "mbd",
+      ramSlug: "ram",
+      storageSlug: "sto",
+      psSlug: "psu",
+      caseSlug: "case"
+  };
 
-    let props = { };
-    
-    for (const component of Object.keys(exampleSlugs)) {
-        props[component] = await client.fetch(`*[_type == "buildLow" && slug.current match "${exampleSlugs[component]}"]`);
-    }
+  const buildSlug = "custom-build-1";
+  const builds = await client.fetch(`*[_type == "builds" && buildSlug.current match "${buildSlug}"]`);
+  
+  const build = builds[0]
+  const componentSlugs = Object.keys(build).filter(key => key.toLowerCase().includes("slug") && key !== "buildSlug");
 
-    return { props };
+  for (const slug of componentSlugs) {
+      const result = await client.fetch(`*[_type == "product" && slug.current match "${build[slug]}"]`);
+      props[slugToComponentMapper[slug]] = result[0];
+  }
+
+  return { props };
 }
 
 export default Generate;
