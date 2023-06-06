@@ -31,8 +31,7 @@ const Support = () => {
         .then(
           async (result) => {
             await swal("Message Sent", "Our customer team will contact you soon", "success");
-
-            
+         
             setName("");
             setEmail("");
             setMessage("");
