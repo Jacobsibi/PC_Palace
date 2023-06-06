@@ -115,8 +115,6 @@ const Login = () => {
     }
   };
 
-
-
   //the output
   return (
     <div class={styles.form}>
