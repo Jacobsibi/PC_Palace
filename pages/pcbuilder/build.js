@@ -19,28 +19,32 @@ const ComputerBuilder = () => {
 
     if (selectedOptions.includes('gaming')) {
       // If "Gaming" is selected
-      if (selectedOptions.includes('high-end-gaming')) {
+      if (selectedOptions.includes('high-gaming')) {
         // If "High-end" is selected, 
-        router.push('/pcbuilder/generate?key=high-end-gaming');
+        router.push('/pcbuilder/generate?key=high-gaming');
       } else if (selectedOptions.includes('medium-gaming')) {
         // If "Medium" is selected
         router.push('/pcbuilder/generate?key=medium-gaming');
-      } else if (selectedOptions.includes('low-end-gaming')) {
+      } else if (selectedOptions.includes('low-gaming')) {
         // If "Low-end" is selected
-        router.push('/pcbuilder/generate?key=low-end-gaming');
+        router.push('/pcbuilder/generate?key=low-gaming');
       } 
     } else if (selectedOptions.includes('streaming')){
       // If "streaming" is selected, 
-      if (selectedOptions.includes('high-end-streaming')) {
+      if (selectedOptions.includes('high-streaming')) {
         // If "High-end" is selected, 
-        router.push('/pcbuilder/generate?key=high-end-streaming');
+        router.push('/pcbuilder/generate?key=high-streaming');
       } else if (selectedOptions.includes('medium-streaming')) {
         // If "Medium" is selected
         router.push('/pcbuilder/generate?key=medium-streaming');
-      } else if (selectedOptions.includes('low-end-streaming')) {
+      } else if (selectedOptions.includes('standard-streaming')) {
         // If "Low-end" is selected
-        router.push('/pcbuilder/generate?key=low-end-streaming');
+        router.push('/pcbuilder/generate?key=low-streaming');
       } 
+    }
+    else if (selectedOptions.includes('workstation')) {
+      // If "workstation" is selected
+      router.push('/pcbuilder/generate?key=med-workstation');
     }
   };
 
@@ -85,13 +89,10 @@ const ComputerBuilder = () => {
     setSliderValue(event.target.value);
   };
 
-
+// DO THIS REMINDER::
   // Reset to clear state & refresh page a result. 
   const handleResetClick = () => {
-    setSelectedOptions([]);
-    setShowGamingPerformance(false);
-    setGeneratedNumber(null);
-    window.location.reload();
+    router.push('/pcbuilder/generate?key=template-build'); ////////////////////DO THIS ERMINDER/////////////////////////////////////////
   };
 
   // Effect hook to handle changes in selectedOptions and showGamingPerformance
@@ -110,14 +111,6 @@ const ComputerBuilder = () => {
       // If "Gaming" is not selected and showGamingOptions is true, hide the gaming performance options
       setShowGamingOptions(false);
     }
-
-    // if (!selectedOptions.includes('unsure') && showGamingOptions ) {    
-    //   // If "Gaming" is not selected and showGamingOptions is true, hide the gaming performance options
-    //   setShowGamingOptions(false);
-    // } else if (selectedOptions.includes('unsure') && !showGamingOptions && selectedOptions.includes('gaming')) {  
-    //   // If "Gaming" is selected and showGamingOptions is false, show the gaming performance options
-    //   setShowGamingOptions(true);
-    // }
 
     if (!selectedOptions.includes('streaming') && showStreamingPerformance) {
       // If "Streaming" is not selected and showStreamingPerformance is true, hide the gaming performance options
@@ -144,20 +137,20 @@ const ComputerBuilder = () => {
         Streaming
         <input type="checkbox" name="myCheckbox" value="workstation" style={{ width: 25, height: 25, margin: 20 }} onChange={handleOptionChange} />
         Workstation
-        <input type="checkbox" name="myCheckbox" value="server" style={{ width: 25, height: 25, margin: 20 }} onChange={handleOptionChange} />
-        Server Hosting
+        {/* <input type="checkbox" name="myCheckbox" value="server" style={{ width: 25, height: 25, margin: 20 }} onChange={handleOptionChange} />
+        Server Hosting */}
       </p>
 
       {showGamingPerformance && (
         <>
           <label style={{ fontWeight: 'bold' }}>Select Gaming Performance Level</label>
           <p className={styles.radio} >
-            <input type="radio" className={styles.radio} name="gamingPerformance" value="low-end-gaming" onChange={handleOptionChange} style={{ width: 25, height: 25, margin: 20 }} />
-            Low-end
+            <input type="radio" className={styles.radio} name="gamingPerformance" value="low-gaming" onChange={handleOptionChange} style={{ width: 25, height: 25, margin: 20 }} />
+            Low Performance 
             <input type="radio" className={styles.radio} name="gamingPerformance" value="medium-gaming" onChange={handleOptionChange} style={{ width: 25, height: 25, margin: 20 }} />
-            Medium
-            <input type="radio" className={styles.radio} name="gamingPerformance" value="high-end-gaming" onChange={handleOptionChange} style={{ width: 25, height: 25, margin: 20 }} />
-            High-end
+            Medium Performance
+            <input type="radio" className={styles.radio} name="gamingPerformance" value="high-gaming" onChange={handleOptionChange} style={{ width: 25, height: 25, margin: 20 }} />
+            High Performance
 
           </p>
 
@@ -193,11 +186,11 @@ const ComputerBuilder = () => {
         <>
           <label style={{ fontWeight: 'bold' }}>Select Bitrate Level For Streaming</label>
           <p>
-            <input type="radio" className={styles.radio} name="streamingPerformance" value="low-end-streaming" onChange={handleOptionChange} style={{ width: 25, height: 25, margin: 20 }} />
+            <input type="radio" className={styles.radio} name="streamingPerformance" value="standard-streaming" onChange={handleOptionChange} style={{ width: 25, height: 25, margin: 20 }} />
             Standard Definition (SD, 480p)
-            <input type="radio" className={styles.radio} name="streamingPerformance" value="medium-streaming" onChange={handleOptionChange} style={{ width: 25, height: 25, margin: 20 }} />
+            <input type="radio" className={styles.radio} name="streamingPerformance" value="high-streaming" onChange={handleOptionChange} style={{ width: 25, height: 25, margin: 20 }} />
             High Definition (HD, 720p)
-            <input type="radio" className={styles.radio} name="streamingPerformance" value="high-end-streaming" onChange={handleOptionChange} style={{ width: 25, height: 25, margin: 20 }} />
+            <input type="radio" className={styles.radio} name="streamingPerformance" value="ultra-streaming" onChange={handleOptionChange} style={{ width: 25, height: 25, margin: 20 }} />
             Ultra High Definition (4K)
           </p>
         </>
@@ -230,7 +223,7 @@ const ComputerBuilder = () => {
       </button>
 
       <button onClick={handleResetClick} className={styles.btn3} style={{ fontSize: 23, padding: '1rem', width: '100%', marginTop: '1rem' }}>
-        Reset
+        CUSTOM BUILDER
       </button>
     </div>
   );
