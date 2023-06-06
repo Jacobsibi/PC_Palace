@@ -20,10 +20,6 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  //function: refresh the page
-  function refreshPage() {
-    window.location.reload(false);
-  }
 
   //function: log in with existed account only
   const signIn = async () => {
@@ -44,8 +40,6 @@ const Login = () => {
         //redirect to home
         await router.push("/");
         await swal("Logged In", "You signed in with email", "success");
-        //refresh the page
-        await refreshPage();
       }
     } catch (error) {
       if (error.code === "auth/wrong-password") {
@@ -98,8 +92,7 @@ const Login = () => {
         //redirect to home
         await router.push("/");
         await swal("Logged In", "You signed in with Google", "success");
-        //refresh the page
-        await refreshPage();
+
       }
     } catch (error) {
       //handle if account has different credentials

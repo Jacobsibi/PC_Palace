@@ -13,10 +13,7 @@ const Support = () => {
   const form = useRef();
 
 
-  //function: refresh page
-  function refreshPage() {
-    window.location.reload(false);
-  }
+
 
   //function: send email
   const sendEmail = async (e) => {
@@ -34,7 +31,9 @@ const Support = () => {
         .then(
           async (result) => {
             await swal("Message Sent", "Our customer team will contact you soon", "success");
-            refreshPage();
+            setName("");
+            setEmail("");
+            setMessage("");
           },
           (error) => {
             swal("Message Not Sent", "Please try again", "error");

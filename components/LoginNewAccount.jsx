@@ -16,10 +16,7 @@ const LoginNewAccount = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [fullName, setFullName] = useState("");
 
-  //function: refresh the page
-  function refreshPage() {
-    window.location.reload(false);
-  }
+
 
   //function: create new account via email and password
   const createAccount = async () => {
@@ -52,8 +49,7 @@ const LoginNewAccount = () => {
         // redirect to home
         await router.push("/");
         await swal("Welcome", "You created new account", "success");
-        //refresh the page
-        await refreshPage();
+
       }
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {

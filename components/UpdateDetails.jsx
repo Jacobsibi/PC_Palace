@@ -32,10 +32,6 @@ const MyAccount = () => {
     };
   }, []);
 
-  //function: refresh the page
-  function refreshPage() {
-    window.location.reload(false);
-  }
 
   //function: update old account for user registered via email and password
   const updateAccount = async () => {
@@ -92,9 +88,6 @@ const MyAccount = () => {
             "warning"
           );
         }
-
-        // refresh the page
-        refreshPage();
       }
     } catch (error) {
       if (error.code === "auth/requires-recent-login") {
@@ -142,8 +135,7 @@ const MyAccount = () => {
           "You are logged out from your account",
           "info"
         );
-        //refresh the page
-        refreshPage();
+
       }
     } catch (error) {
       swal("Error", "Please try again", "error");

@@ -1,23 +1,17 @@
 import Link from "next/link";
 import swal from "sweetalert";
 import styles from "../styles/Login.module.css";
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { AiOutlineLeft } from "react-icons/ai";
 import { useStateContext } from "../context/StateContext";
 import { signOut } from "firebase/auth";
-import { auth, collectionDB } from "../configurations/firebase";
-import { getDoc } from "firebase/firestore";
+import { auth } from "../configurations/firebase";
 
 const Account = () => {
 
   //state: configurations
   const accountReg = useRef();
   const { setShowAccountPopUp } = useStateContext();
-
-  //function: refresh page
-  function refreshPage() {
-    window.location.reload(false);
-  }
 
   //function: logout
   const logOut = async () => {
@@ -36,8 +30,6 @@ const Account = () => {
           "You are logged out from your account",
           "info"
         );
-        //refresh the page
-        refreshPage();
       }
     } catch (error) {
       swal("Error", "Please try again", "error");
