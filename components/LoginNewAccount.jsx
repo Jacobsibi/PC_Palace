@@ -156,7 +156,7 @@ const LoginNewAccount = () => {
         onChange={(e) => setConfirmPassword(e.target.value)}
         onKeyDown={(e) => {
           if (e.key === "Enter") {
-            updateAccount();
+            createAccount();
           }
         }}
         name="confirm_password"
