@@ -52,7 +52,7 @@ const ForgotPassword = () => {
       <h1>Reset Your Password</h1>
       <p>
         New member?{" "}
-        <Link class={styles.highlightedLink} href="/loginnewaccountpage">
+        <Link class={styles.highlightedLink} href="/registerpage">
           Create New Account
         </Link>
       </p>
