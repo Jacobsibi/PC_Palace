@@ -220,7 +220,7 @@ const Generate = props => {
     const [ build, setBuild ] = React.useState({});
     const [ orderComplete, setOrderComplete ] = React.useState(false);
     const [ checkout, setCheckout ] = React.useState(false);
-    const { onAdd, cartItems } = useStateContext();
+    const { addBuild, cartItems } = useStateContext();
     const router = useRouter();
 
     React.useMemo(() => {
@@ -271,10 +271,7 @@ const Generate = props => {
 
     // Add all the products into the cart and return to home page
     const continueShopping = () => {
-        for (const product of Object.values(build)) {
-            onAdd(product, 1);
-        }
-
+        addBuild(build);
         router.push("/");
     }
 
