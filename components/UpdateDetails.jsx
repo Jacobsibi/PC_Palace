@@ -117,31 +117,6 @@ const MyAccount = () => {
     }
   };
 
-  //function: logout
-  const logOut = async () => {
-    try {
-      //check if there account is signed out already, give out a prompt
-      if (!auth?.currentUser) {
-        await swal(
-          "Already Logged Out",
-          "No user signed in at the moment",
-          "warning"
-        );
-      } else {
-        await signOut(auth);
-        await router.push('/');
-        await swal(
-          "Logged Out",
-          "You are logged out from your account",
-          "info"
-        );
-
-      }
-    } catch (error) {
-      swal("Error", "Please try again", "error");
-      console.log("baby girl: "+error);
-    }
-  };
 
   //function: delete account
   const deleteAccount = async () => {
@@ -242,11 +217,6 @@ const MyAccount = () => {
       <button class={styles.btn} onClick={updateAccount}>
         {" "}
         Update{" "}
-      </button>
-
-      <button class={styles.btn} onClick={logOut}>
-        {" "}
-        Sign Out{" "}
       </button>
 
       <button class={styles.btn} onClick={deleteAccount}>
