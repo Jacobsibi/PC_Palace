@@ -70,7 +70,6 @@ const Login = () => {
       } else {
         //handle other errors
         swal("Error", "Please try again", "error");
-        console.log("HAHAHA " + error);
       }
     }
   };
@@ -114,7 +113,7 @@ const Login = () => {
       <h1>Sign In</h1>
       <p>
         New member?{" "}
-        <Link class={styles.highlightedLink} href="/loginnewaccountpage">
+        <Link class={styles.highlightedLink} href="/registerpage">
           Create New Account
         </Link>
       </p>

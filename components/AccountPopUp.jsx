@@ -141,7 +141,7 @@ const Account = () => {
                         Sign In
                       </button>
                     </Link>
-                    <Link href="/loginnewaccountpage">
+                    <Link href="/registerpage">
                       <button
                         type="button"
                         onClick={() => setShowAccountPopUp(false)}

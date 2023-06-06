@@ -7,7 +7,7 @@ import { auth } from "../configurations/firebase";
 import { updateProfile } from "firebase/auth";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 
-const LoginNewAccount = () => {
+const Register = () => {
   //email and password to be used as parameter for Firebase special function
   //name to update user's name when create an account via email, becuase it is not done automatically
   const router = useRouter();
@@ -47,23 +47,35 @@ const LoginNewAccount = () => {
           password,
           fullName
         }
+        
+        //create new account, simultaneously update user's name, an also set picture to default:
+        await createUserWithEmailAndPassword(auth, email, password);
+        await updateProfile(auth.currentUser, { displayName: fullName });
+                // check if the photoURL exists, if not, set it to a default photo URL
+                if (!auth.currentUser.photoURL) {
+                  const newPhotoURL =
+                    "https://www.tenforums.com/geek/gars/images/2/types/thumb_14400082930User.png";
+                  await updateProfile(auth.currentUser, { photoURL: newPhotoURL });
+                }
 
-        const registerRequest = await fetch("/api/account/register", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(parameters)
-        });
+        //create api request to create new user in database
+        // const registerRequest = await fetch("/api/account/register", {
+        //   method: "POST",
+        //   headers: {
+        //     "Content-Type": "application/json"
+        //   },
+        //   body: JSON.stringify(parameters)
+        // });
 
-        if (registerRequest.status === 400) {
-          swal("error creating account");
-          return;
-        }
+        // if (registerRequest.status === 400) {
+        //   swal("error creating account");
+        //   return;
+        // }
 
         // redirect to home
         await router.push("/");
         await swal("Welcome", "You created new account", "success");
+        console.log(auth.currentUser);
 
       }
     } catch (error) {
@@ -180,4 +192,4 @@ const LoginNewAccount = () => {
   );
 };
 
-export default LoginNewAccount;
+export default Register;
