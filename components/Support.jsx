@@ -4,16 +4,12 @@ import styles from "../styles/Support.module.css";
 import ContactUs from "./ContactUs";
 import FAQs from "./FAQs";
 
-
 const Support = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [activeTab, setActiveTab] = useState("tab1"); //add state for active tab
   const form = useRef();
-
-
-
 
   //function: send email
   const sendEmail = async (e) => {
@@ -35,6 +31,7 @@ const Support = () => {
             setName("");
             setEmail("");
             setMessage("");
+
           },
           (error) => {
             swal("Message Not Sent", "Please try again", "error");
