@@ -112,7 +112,6 @@ const Login = () => {
         //handle other errors
         swal("Error", "Please try again", "error");
       }
-      console.log("HAHAHA " + error);
     }
   };
 
