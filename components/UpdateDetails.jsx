@@ -1,13 +1,12 @@
 import { useRouter } from "next/router";
 import swal from "sweetalert";
-import styles from "../styles/Support.module.css";
+import styles from "../styles/UpdateDetails.module.css";
 import React, { useState, useEffect } from "react";
 import { auth } from "../configurations/firebase";
-import {signOut} from "firebase/auth";
+import { signOut } from "firebase/auth";
 import { updateProfile, updateEmail, updatePassword } from "firebase/auth";
 
 const MyAccount = () => {
-  
   //email and password to be used as parameter for Firebase special function
   //name to update user's name when create an account via email, becuase it is not done automatically
   const [newEmail, setNewEmail] = useState("");
@@ -15,8 +14,8 @@ const MyAccount = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [newName, setNewName] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const [activeField, setActiveField] = useState(""); //add state for active field
   const router = useRouter();
-
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -31,7 +30,6 @@ const MyAccount = () => {
       unsubscribe();
     };
   }, []);
-
 
   //function: update old account for user registered via email and password
   const updateAccount = async () => {
@@ -53,7 +51,7 @@ const MyAccount = () => {
             //update name
             await updateProfile(auth.currentUser, { displayName: newName });
             await swal("Success", "Your name has been updated", "success");
-            await router.push('/');
+            await router.push("/");
           }
         }
 
@@ -61,7 +59,7 @@ const MyAccount = () => {
           //update email using firebase function
           await updateEmail(auth.currentUser, newEmail);
           await swal("Success", "Your email has been updated", "success");
-          await router.push('/');
+          await router.push("/");
         }
 
         if (newPassword !== "") {
@@ -77,7 +75,7 @@ const MyAccount = () => {
             //update password using firebase function
             await updatePassword(auth.currentUser, newPassword);
             await swal("Success", "Your password has been updated", "success");
-            await router.push('/');
+            await router.push("/");
           }
         }
 
@@ -117,7 +115,6 @@ const MyAccount = () => {
     }
   };
 
-
   //function: delete account
   const deleteAccount = async () => {
     try {
@@ -130,7 +127,7 @@ const MyAccount = () => {
       }).then(async (willDelete) => {
         if (willDelete) {
           await auth.currentUser.delete();
-          await router.push('/');
+          await router.push("/");
           swal("Account Deleted", "Your account has been deleted", "success", {
             icon: "success",
           });
@@ -141,7 +138,7 @@ const MyAccount = () => {
     } catch (error) {
       if (error.code === "auth/requires-recent-login") {
         swal("Run Time Out", "Please relogin again to delete", "error");
-      } else if (error.code === "auth/network-request-failed"){
+      } else if (error.code === "auth/network-request-failed") {
         swal("Connection Error", "Please connect to internet", "error");
       } else {
         swal("Error", "Cannot delete the account", "error");
@@ -156,75 +153,132 @@ const MyAccount = () => {
 
   return (
     <>
+      <div className={styles.container}>
+        <h1>Update Details</h1>
+        <p className={styles.p}>Enter your new details</p>
 
-      <h1>Update Details</h1>
-      <p>Enter your new details</p>
+        <div className={styles.inputGroup}>
+          <label className={styles.label}>
+            <button
+              className={styles.smallBtn}
+              onClick={() => setActiveField("showName")}
+            >
+              Edit Name
+            </button>
+          </label>
+        </div>
 
-      <label class={styles.label}>New Name</label>
-      <input
-        class={styles.input}
-        type="text"
-        maxLength={20}
-        onChange={(e) => setNewName(e.target.value)}
-        onKeyDown={(e) => {
-          if (e.key === "Enter") {
-            updateAccount();
-          }
-        }}
-        name="user_name"
-        max-length={20}
-      />
+        <div className={styles.inputGroup}>
+          <label className={styles.label}>
+            <button
+              className={styles.smallBtn}
+              onClick={() => setActiveField("showEmail")}
+            >
+              Edit Email
+            </button>
+          </label>
+        </div>
 
-      <label class={styles.label}>New Email </label>
-      <input
-        class={styles.input}
-        type="email"
-        onChange={(e) => setNewEmail(e.target.value)}
-        onKeyDown={(e) => {
-          if (e.key === "Enter") {
-            updateAccount();
-          }
-        }}
-        name="user_email"
-        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-      />
+        <div className={styles.inputGroup}>
+          <label className={styles.label}>
+            <button
+              className={styles.smallBtn}
+              onClick={() => setActiveField("showPasswords")}
+            >
+              Edit Password
+            </button>
+          </label>
+        </div>
+      </div>
 
-      <label class={styles.label}>New Password </label>
-      <input
-        class={styles.input}
-        type="password"
-        onChange={(e) => setNewPassword(e.target.value)}
-        onKeyDown={(e) => {
-          if (e.key === "Enter") {
-            updateAccount();
-          }
-        }}
-        name="user_password"
-      />
-      <label class={styles.label}>Confirm Password</label>
-      <input
-        class={styles.input}
-        type="password"
-        onChange={(e) => setConfirmPassword(e.target.value)}
-        onKeyDown={(e) => {
-          if (e.key === "Enter") {
-            updateAccount();
-          }
-        }}
-        name="confirm_password"
-      />
+      {activeField === "showName" && (
+        <div className={styles.inputGroup}>
+          <label className={styles.label}>New Name</label>
+          <input
+            className={styles.input}
+            type="text"
+            maxLength={20}
+            onChange={(e) => setNewName(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                updateAccount();
+              }
+            }}
+            name="user_name"
+          />
+          <button className={styles.btn} onClick={updateAccount}>
+            Update
+          </button>
+        </div>
+      )}
+      {activeField === "showEmail" && (
+        <div className={styles.inputGroup}>
+          <label className={styles.label}>New Email</label>
+          <input
+            className={styles.input}
+            type="email"
+            onChange={(e) => setNewEmail(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                updateAccount();
+              }
+            }}
+            name="user_email"
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+          />
+          <button className={styles.btn} onClick={updateAccount}>
+            Update
+          </button>
+        </div>
+      )}
+      {activeField === "showPasswords" && (
+        <div>
+        
+          {" "}
+          <div className={styles.inputGroup}>
+            <label className={styles.label}>New Password</label>
+            <input
+              className={styles.input}
+              type="password"
+              onChange={(e) => setNewPassword(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  updateAccount();
+                }
+              }}
+              name="user_password"
+            />
+          </div>
+          <div className={styles.inputGroup}>
+            <label className={styles.label}>Confirm Password</label>
+            <input
+              className={styles.input}
+              type="password"
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  updateAccount();
+                }
+              }}
+              name="confirm_password"
+            />
+            <button className={styles.btn} onClick={updateAccount}>
+              Update
+            </button>
+          </div>{" "}
+        </div>
+      )}
 
-      <button class={styles.btn} onClick={updateAccount}>
-        {" "}
-        Update{" "}
-      </button>
 
-      <button class={styles.btn} onClick={deleteAccount}>
-        {" "}
-        Delete This Account{" "}
-      </button>
 
-</>    
+        <div className={styles.inputGroup}>
+        <button className={styles.btn} onClick={deleteAccount}>
+          Delete This Account
+        </button>
+        </div>
+
+
+    </>
   );
 };
 export default MyAccount;
