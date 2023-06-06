@@ -2,6 +2,10 @@
     cursor: pointer;
 }
 
+.page button:hover {
+    background-color: #811d95;
+}
+
 .contentFixed {
     display: grid;
     grid-template-columns: 4fr 1fr;
@@ -55,6 +59,7 @@
 .chooseProductHeader button:hover {
     transform: scale(1.1, 1.1);
     cursor: pointer;
+    background-color: rgba(0, 0, 0, 0);
 }
 
 .productsListContainer {
@@ -109,7 +114,6 @@
 }
 
 .chooseProductButton:hover {
-    background-color: red;
     transform: scale(1.03, 1.03);
 }
 
@@ -165,7 +169,6 @@
 }
 
 .editComponent:hover {
-    background-color: red;
     transform: scale(1.02, 1.02);
     cursor: pointer;
 }
@@ -190,7 +193,6 @@
 }
 
 .functionalityButtons button:hover {
-    background-color: red;
     transform: scale(1.02, 1.02);
     cursor: pointer;
 }
@@ -246,6 +248,5 @@
 }
 
 .orderCompleteButtons button:hover {
-    background-color: red;
     transform: scale(1.03, 1.03);
 }
