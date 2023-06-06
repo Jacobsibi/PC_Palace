@@ -8,9 +8,7 @@ export const StateContext = ({ children }) => {
 	const [totalPrice, setTotalPrice] = useState(0);
 	const [totalQuantities, setTotalQuantities] = useState(0);
 	const [qty, setQty] = useState(1);
-
-	let foundProduct;
-	let index;
+	const [showCart, setShowCart] = useState(false);
 
 	const addBuild = build => {
 		// Create copy of the cart
@@ -122,21 +120,22 @@ export const StateContext = ({ children }) => {
 
 	return (
 		<Context.Provider
-			value={{
-				cartItems,
-				totalPrice,
-				totalQuantities,
-				qty,
-				incQty,
-				decQty,
-				onAdd,
-				toggleCartItemQuantity,
-				onRemove,
-				setCartItems,
-				setTotalPrice,
-				setTotalQuantities,
-				addBuild
-			}}
+		value={{
+			showCart,
+			setShowCart,
+			cartItems,
+			totalPrice,
+			totalQuantities,
+			qty,
+			incQty,
+			decQty,
+			onAdd,
+			toggleCartItemQuantity,
+			onRemove,
+			setCartItems,
+			setTotalPrice,
+			setTotalQuantities
+		  }}
 		>
 			{children}
 		</Context.Provider>

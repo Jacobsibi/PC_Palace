@@ -1,6 +1,5 @@
 import Support from "../components/Support"
 
-
 const SupportPage = () => {
 	return (
 		<Support />

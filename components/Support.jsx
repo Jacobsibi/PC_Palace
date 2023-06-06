@@ -1,38 +1,64 @@
-import React, { useRef } from 'react';
-import emailjs from '@emailjs/browser';
-import styles from '../styles/Support.module.css';
+import React, { useState, useRef } from "react";
+import emailjs from "@emailjs/browser";
+import styles from "../styles/Support.module.css";
+import ContactUs from "./ContactUs";
+import FAQs from "./FAQs";
 
 const Support = () => {
-	const form = useRef();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [activeTab, setActiveTab] = useState("tab1"); //add state for active tab
+  const form = useRef();
 
-	//Functinon: send mail using emailJs
-	const sendEmail = (e) => {
-		e.preventDefault();
+  //function: send email
+  const sendEmail = async (e) => {
+    e.preventDefault();
+    if (message.trim() === "") {
+      swal("Enter a message", "Message box cannot be left blank", "warning");
+    } else {
+      //using premade function from emailjs
+      emailjs
+      .send("service_vds5qa2","template_36ltlst",{
+        from_name: name,
+        from_email: email,
+        message: message,
+        }, "at1R64fRA37Jqwu7D" )
+        .then(
+          async (result) => {
+            await swal("Message Sent", "Our customer team will contact you soon", "success");
+         
+            setName("");
+            setEmail("");
+            setMessage("");
 
+          },
+          (error) => {
+            swal("Message Not Sent", "Please try again", "error");
+          }
+        );
+        }
 
-		// using the imported function to send form, with the address configurations set up
-		emailjs.sendForm('service_vds5qa2', 'template_36ltlst', form.current, 'at1R64fRA37Jqwu7D')
-			.then((result) => {
-				swal("Message Sent", "Our customer team will contact you soon", "success");
-			}, (error) => {
-				swal("Message Not Sent", "Please try again", "error");
-			});
-	};
+  };
+  
 
-	//output
-	return (
+  return (
+    <>
+      <div>
+        <button class={styles.tabButton} onClick={() => setActiveTab("tab1")}>Contact Us</button>
+        <button class={styles.tabButton} onClick={() => setActiveTab("tab2")}>FAQs</button>
+      </div>
 
-		<form class={styles.form} ref={form} onSubmit={sendEmail}>
-			<label class={styles.label} >Name</label>
-			<input class={styles.input} type="text" name="user_name" required />
-			<label class={styles.label} >Email</label>
-			<input class={styles.input} type="email" name="user_email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" />
-			<label class={styles.label}> Message</label>
-			<textarea class={styles.messageTextarea} name="message" required />
-			<input class={styles.input} type="submit" value="Send" />
-		</form>
-
-	);
+      {activeTab === "tab1" && (<ContactUs
+          form={form}
+          sendEmail={sendEmail}
+          setName={setName}
+          setEmail={setEmail}
+          setMessage={setMessage}
+        />)}
+      {activeTab === "tab2" && ( <FAQs />)}
+    </>
+  );
 };
 
 export default Support;

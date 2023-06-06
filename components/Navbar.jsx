@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import Link from 'next/link';
 import { AiOutlineSearch, AiOutlineShopping, AiOutlineUser } from 'react-icons/ai'
-import { Cart, Login, SearchBar } from './index';
+import { AccountPopUp, Cart, Login, SearchBar } from './index';
 import { useStateContext } from '../context/StateContext';
 import styles from "../styles/Navbar.module.css";
 import Image from "next/image";
@@ -149,7 +149,7 @@ const Navbar = () => {
 		{showSearch && <SearchBar />}
 		{showDepartments && <Departments hideDepartments={() => setShowDepartments(false)} />}
 		{showCart && <Cart setShowCart={e => setShowCart(e)} />}
-		{showLogin && <Login setShowLogin={e => setShowLogin(e)} />}
+		{showLogin && <AccountPopUp setShowLogin={e => setShowLogin(e)} />}
 	</>);
 }
 

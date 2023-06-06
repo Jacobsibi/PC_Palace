@@ -1,4 +1,4 @@
-import React from 'react';
+import {React} from 'react';
 import '@/styles/globals.css'
 import { StateContext } from '../context/StateContext';
 import { Toaster } from 'react-hot-toast';

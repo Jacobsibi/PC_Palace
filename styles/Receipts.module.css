@@ -1,0 +1,43 @@
+.receipt {
+    width: 300px;
+    margin: 0 auto;
+    font-family: Courier, monospace;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  
+  .header {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  .logo {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+  }
+  
+  .storeinfo {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  .customerinfo {
+    margin-bottom: 10px;
+  }
+  
+  .items {
+    margin-bottom: 10px;
+  }
+  
+  .itemrow {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+  }
+  
+  .total {
+    text-align: right;
+    font-weight: bold;
+  }
+  
