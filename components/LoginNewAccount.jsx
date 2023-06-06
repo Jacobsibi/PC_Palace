@@ -45,10 +45,25 @@ const LoginNewAccount = () => {
         );
         return;
       } else {
-        //create new user
-        await createUserWithEmailAndPassword(auth, email, password);
-        //update user's fullname once account is created because login with email does not create name automatically
-        await updateProfile(auth.currentUser, { displayName: fullName });
+        const parameters = {
+          email,
+          password,
+          fullName
+        }
+
+        const registerRequest = await fetch("/api/account/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(parameters)
+        });
+
+        if (registerRequest.status === 400) {
+          swal("error creating account");
+          return;
+        }
+
         // redirect to home
         await router.push("/");
         await swal("Welcome", "You created new account", "success");
