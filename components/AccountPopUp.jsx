@@ -3,15 +3,13 @@ import swal from "sweetalert";
 import styles from "../styles/Login.module.css";
 import React, { useRef } from "react";
 import { AiOutlineLeft } from "react-icons/ai";
-import { useStateContext } from "../context/StateContext";
 import { signOut } from "firebase/auth";
 import { auth } from "../configurations/firebase";
 
-const Account = () => {
+const Account = props => {
 
   //state: configurations
   const accountReg = useRef();
-  const { setShowAccountPopUp } = useStateContext();
 
   //function: logout
   const logOut = async () => {
@@ -47,7 +45,7 @@ const Account = () => {
                 <button
                   type="button"
                   className="cart-heading"
-                  onClick={() => setShowAccountPopUp(false)}
+                  onClick={() => props.setShowLogin(false)}
                 >
                   <AiOutlineLeft />
                   <span className="heading">Back</span>
@@ -59,7 +57,7 @@ const Account = () => {
                       <Link href="/updateimage">
                         <button
                           type="button"
-                          onClick={() => setShowAccountPopUp(false)}
+                          onClick={() => props.setShowLogin(false)}
                         >
                           <img
                             className={`${styles.info} ${styles.roundImage}`}
@@ -95,7 +93,7 @@ const Account = () => {
                       <Link href="/updatedetailspage">
                         <button
                           type="button"
-                          onClick={() => setShowAccountPopUp(false)}
+                          onClick={() => props.setShowLogin(false)}
                           className="btn"
                         >
                           Update Details
@@ -122,7 +120,7 @@ const Account = () => {
                 <button
                   type="button"
                   className="cart-heading"
-                  onClick={() => setShowAccountPopUp(false)}
+                  onClick={() => props.setShowLogin(false)}
                 >
                   <AiOutlineLeft />
                   <span className="heading">Back</span>
@@ -135,7 +133,7 @@ const Account = () => {
                     <Link href="/loginpage">
                       <button
                         type="button"
-                        onClick={() => setShowAccountPopUp(false)}
+                        onClick={() => props.setShowLogin(false)}
                         className="btn"
                       >
                         Sign In
@@ -144,7 +142,7 @@ const Account = () => {
                     <Link href="/registerpage">
                       <button
                         type="button"
-                        onClick={() => setShowAccountPopUp(false)}
+                        onClick={() => props.setShowLogin(false)}
                         className="btn"
                       >
                         Create New Account
