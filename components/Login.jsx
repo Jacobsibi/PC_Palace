@@ -102,7 +102,17 @@ const Login = () => {
         await refreshPage();
       }
     } catch (error) {
-      swal("Error", "Please try again", "error");
+      //handle if account has different credentials
+      if (error.code === "auth/account-exists-with-different-credential") {
+        swal("Error: Different Credentials", "Please try again", "error");
+        //handle if user closes the popup, no message output needed
+      } else if (error.code === "auth/popup-closed-by-user") {  
+      }
+      else {
+        //handle other errors
+        swal("Error", "Please try again", "error");
+      }
+      console.log("HAHAHA " + error);
     }
   };
 
