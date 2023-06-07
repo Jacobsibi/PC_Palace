@@ -174,8 +174,14 @@
 }
 
 .functionalityButtons {
-    display: flex;
+    display: grid;
     align-items: center;
+    grid-template-columns: 4fr 1fr;
+}
+
+.functionalityButtons {
+    text-align: right;
+    transform: translateX(0.5%);
 }
 
 .functionalityButtons button {
@@ -198,10 +204,11 @@
 }
 
 .functionalityButtons p {
+    text-align: left;
     padding: 0.7% 0;
     font-size: 1.5rem;
     font-weight: bold;
-    margin: 1% 2% 0 0;
+    margin: 1% 0% 0 6%;
 }
 
 .orderCompleteContainer {
