@@ -16,6 +16,11 @@ const ProductsContainer = React.forwardRef((props, ref) => {
 
 const Home = ({ products, bannerData }) => {
 	const containerRef = React.createRef();
+	const { setDepartmentsFilter } = useDepartmentsContext();
+
+	React.useMemo(() => {
+		setDepartmentsFilter("");
+	}, []);
 
 	return (
 		<div>
