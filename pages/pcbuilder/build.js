@@ -44,7 +44,7 @@ const ComputerBuilder = () => {
     }
     else if (selectedOptions.includes('workstation')) {
       // If "workstation" is selected
-      router.push('/pcbuilder/generate?key=med-workstation');
+      router.push('/pcbuilder/generate?key=workstation');
     }
   };
 
