@@ -47,39 +47,20 @@ const Departments = props => {
 	const onClick = event => {
 		let chosen = event.target.textContent;
 
-		switch (chosen) {
-			case "CPUs": {
-				setDepartmentsFilter("CPU");
-			} break;
+		const mapper = {
+			"CPUs": "CPU",
+			"Graphics Cards": "GPU",
+			"Motherboards": "MB",
+			"Memory": "RAM",
+			"Storage": "STO",
+			"Power Supply": "PSU",
+			"Case": "CASE",
+			"Cooling": "COOLING",
+			"Operating System": "OS",
+			"All departments": ""
+		};
 
-			case "Graphics Cards": {
-				setDepartmentsFilter("GPU");
-			} break;
-
-			case "Motherboards": { 
-				setDepartmentsFilter("MB");
-			} break;
-
-			case "Memory": {
-				setDepartmentsFilter("RAM");
-			} break;
-
-			case "Storage": {
-				setDepartmentsFilter("STO");
-			} break;
-
-			case "Power Supply": {
-				setDepartmentsFilter("PSU");
-			} break;
-
-			case "Case": {
-				setDepartmentsFilter("CASE");
-			} break;
-
-			case "All departments": {
-				setDepartmentsFilter("");
-			} break;
-		}
+		setDepartmentsFilter(mapper[chosen]);
 
 		if (router.pathname !== "/") {
 			router.push("/");
@@ -96,6 +77,8 @@ const Departments = props => {
 				<li onClick={e => onClick(e)}><div>Storage</div></li>
 				<li onClick={e => onClick(e)}><div>Power Supply</div></li>
 				<li onClick={e => onClick(e)}><div>Case</div></li>
+				<li onClick={e => onClick(e)}><div>Cooling</div></li>
+				<li onClick={e => onClick(e)}><div>Operating System</div></li>
 				<li onClick={e => onClick(e)}><div>All departments</div></li>
 			</ul>
 		</div>
