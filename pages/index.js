@@ -1,70 +1,54 @@
 import React from 'react';
-import { client } from '../LIB/client';
+import { client } from '../lib/client';
 import { Product, Banner } from '../components'
+import { useDepartmentsContext } from '@/context/DepartmentsContext';
 
 const ProductsContainer = React.forwardRef((props, ref) => {
-  return (
-    <div className="products-container" ref={ref}>
-      {props.products?.map(product => <Product key={product._id} product={product} />)}
-    </div>
-  );
+	const { departmentsFilter } = useDepartmentsContext();
+	const products = props.products?.filter(item => (departmentsFilter === "" ? true : item.component === departmentsFilter));
+
+	return (
+		<div className="products-container" ref={ref}>
+			{products?.map(product => <Product key={product._id} product={product} />)}
+		</div>
+	);
 });
 
-const Home = ({ products, bannerData, hasFilter }) => {
-  const containerRef = React.createRef();
+const Home = ({ products, bannerData }) => {
+	const containerRef = React.createRef();
+	const { setDepartmentsFilter } = useDepartmentsContext();
 
-  // React.useEffect(() => {
-  //   console.log(hasFilter);
+	React.useMemo(() => {
+		setDepartmentsFilter("");
+	}, []);
 
-  //   if (hasFilter) {
-  //     let element = containerRef.current;
-  //     if (element) {
-  //       let { top } = element.getBoundingClientRect(); 
-  
-  //       window.scrollTo({
-  //         top: top - 180 - window.scrollY,
-  //         behavior: "smooth"
-  //       })
-  //     }
-  //   }
-  // }, []);
+	return (
+		<div>
+			<Banner banner={bannerData && bannerData[0]} />
 
-  return (
-    <div>
-      {/* <HeroBanner heroBanner={bannerData.length && bannerData[0]}/> */}
-      <Banner banner={bannerData && bannerData[0]}/>
+			<div className="products-heading">
+				<h2>Best Selling Products</h2>
+				<p>PC Components of many variations</p>
+			</div>
 
-      <div className="products-heading">
-        <h2>Best Selling Products</h2>
-        <p>PC Components of many variations</p>
-      </div>
+			<ProductsContainer products={products} ref={containerRef} />
 
-      <ProductsContainer products={products} ref={containerRef} />
-
-
-      <Banner banner={bannerData && bannerData[0]}/>
-    </div>
-  );
+			<Banner banner={bannerData && bannerData[0]} />
+		</div>
+	);
 }
 
-export const getServerSideProps = async context => {
-  let filter = context.query.filter;
+export const getServerSideProps = async () => {
+	let query = '*[_type == "product"]';
 
-  let query = "";
-  if (!filter) {
-    query = '*[_type == "product"]';
-  } else {
-    query = `*[_type == "product" && component match "${filter}"]`;
-  }
+	const products = await client.fetch(query);
 
-  const products = await client.fetch(query);
+	const bannerQuery = '*[_type == "banner"]';
+	const bannerData = await client.fetch(bannerQuery);
 
-  const bannerQuery = '*[_type == "banner"]';
-  const bannerData = await client.fetch(bannerQuery);
-
-  return {
-    props: { products, bannerData, hasFilter: filter !== undefined }
-  }
+	return {
+		props: { products, bannerData }
+	}
 }
 
 export default Home;

@@ -1,10 +1,9 @@
 import Support from "../components/Support"
 
-
 const SupportPage = () => {
-  return(
-   <Support/>
-  );
+	return (
+		<Support />
+	);
 }
 
 export default SupportPage;

@@ -7,108 +7,108 @@ import { useStateContext } from '../context/StateContext';
 import { urlFor } from '../lib/client';
 import getStripe from '../lib/getStripe';
 
-const Cart = () => {
-  const cartRef = useRef();
-  const { totalPrice, totalQuantities, cartItems, setShowCart, toggleCartItemQuantity, onRemove} = useStateContext();
-  
-  const handleCheckout = async () => {
-    const stripe = await getStripe();
+const Cart = props => {
+	const cartRef = useRef();
+	const { totalPrice, totalQuantities, cartItems, toggleCartItemQuantity, onRemove } = useStateContext();
 
-    const response = await fetch('/api/stripe', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      //passing all products inside cart
-      body: JSON.stringify(cartItems),
-    });
+	const handleCheckout = async () => {
+		const stripe = await getStripe();
 
-    // error handle
-    if(response.statusCode === 500) return;
-    
-    const data = await response.json();
+		const response = await fetch('/api/stripe', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			//passing all products inside cart
+			body: JSON.stringify(cartItems),
+		});
 
-    //redirect message to user if data is present
-    toast.loading('Redirecting...');
+		// error handle
+		if (response.statusCode === 500) return;
 
-    //created a single instance of a checkout for a single user & saved in backend so customer may return to complete checkout
-    stripe.redirectToCheckout({ sessionId: data.id });
-  }
-  
-  return (
-    <div className="cart-wrapper" ref={cartRef}>
-      <div className="cart-container">
-        <button
-          type="button"
-          className="cart-heading"
-          onClick={() => setShowCart(false)}>
-          <AiOutlineLeft />
-          <span className="heading">Your Cart</span>
-          <span className="cart-num-items">({totalQuantities} items)</span>
-        </button>
+		const data = await response.json();
 
-        {cartItems.length < 1 && (
-          <div className="empty-cart">
-            <AiOutlineShopping size={150} />
-            <h3>Your shopping cart is empty</h3>
-            <Link href="/">
-              <button
-                type="button"
-                onClick={() => setShowCart(false)}
-                className="btn"
-              >
-                Continue Shopping
-              </button>
-            </Link>
-          </div>
-        )}
+		//redirect message to user if data is present
+		toast.loading('Redirecting...');
 
-        <div className="product-container">
-          {cartItems.length >= 1 && cartItems.map((item, index) => (
-            <div className="product" key={item._id}>
-              <img src={urlFor(item?.image[0])} className="cart-product-image" />
-              <div className="item-desc">
-                <div className="flex-top">
-                  <h5>{item.name}</h5>
-                  <h4>${item.price}</h4>
-                </div>
-                <div className="flex bottom">
-                  <div>
-                    <p className="quantity-desc">
-                      <span className="minus" onClick={() => toggleCartItemQuantity(item._id, 'dec')}><AiOutlineMinus /></span>
-                      <span className="num" onClick="">{item.quantity}</span>
-                      <span className="plus" onClick={() => toggleCartItemQuantity(item._id, 'inc')}><AiOutlinePlus /></span>
-                    </p>
-                  </div>
-                  <button
-                    type="button"
-                    className="remove-item"
-                    onClick={() => onRemove(item)}
-                  >
-                    <TiDeleteOutline />
-                  </button>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-        {cartItems.length >= 1 && (
-          <div className="cart-bottom">
-            <div className="total">
-              <h3>Subtotal:</h3>
-              <h3>${totalPrice}</h3>
-            </div>
-            <div className="btn-container">
-              <button type="button" className="btn" onClick={handleCheckout}>
-                Pay Now!
-              </button>
-            </div>
+		//created a single instance of a checkout for a single user & saved in backend so customer may return to complete checkout
+		stripe.redirectToCheckout({ sessionId: data.id });
+	}
 
-          </div>
-        )}
-      </div>
-    </div>
-  )
+	return (
+		<div className="cart-wrapper" ref={cartRef}>
+			<div className="cart-container">
+				<button
+					type="button"
+					className="cart-heading"
+					onClick={() => props.setShowCart(false)}>
+					<AiOutlineLeft />
+					<span className="heading">Your Cart</span>
+					<span className="cart-num-items">({totalQuantities} items)</span>
+				</button>
+
+				{cartItems.length < 1 && (
+					<div className="empty-cart">
+						<AiOutlineShopping size={150} />
+						<h3>Your shopping cart is empty</h3>
+						<Link href="/">
+							<button
+								type="button"
+								onClick={() => props.setShowCart(false)}
+								className="btn"
+							>
+								Continue Shopping
+							</button>
+						</Link>
+					</div>
+				)}
+
+				<div className="product-container">
+					{cartItems.length >= 1 && cartItems.map((item, index) => (
+						<div className="product" key={item._id}>
+							<img src={urlFor(item?.image[0])} className="cart-product-image" />
+							<div className="item-desc">
+								<div className="flex-top">
+									<h5>{item.name}</h5>
+									<h4>${item.price}</h4>
+								</div>
+								<div className="flex bottom">
+									<div>
+										<p className="quantity-desc">
+											<span className="minus" onClick={() => toggleCartItemQuantity(item._id, 'dec')}><AiOutlineMinus /></span>
+											<span className="num" onClick="">{item.quantity}</span>
+											<span className="plus" onClick={() => toggleCartItemQuantity(item._id, 'inc')}><AiOutlinePlus /></span>
+										</p>
+									</div>
+									<button
+										type="button"
+										className="remove-item"
+										onClick={() => onRemove(item)}
+									>
+										<TiDeleteOutline />
+									</button>
+								</div>
+							</div>
+						</div>
+					))}
+				</div>
+				{cartItems.length >= 1 && (
+					<div className="cart-bottom">
+						<div className="total">
+							<h3>Subtotal:</h3>
+							<h3>${totalPrice}</h3>
+						</div>
+						<div className="btn-container">
+							<button type="button" className="btn" onClick={handleCheckout}>
+								Pay Now!
+							</button>
+						</div>
+
+					</div>
+				)}
+			</div>
+		</div>
+	)
 }
 
 export default Cart
